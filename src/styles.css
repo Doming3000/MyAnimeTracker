@@ -1,1 +1,110 @@
-/* You can add global styles to this file, and also import other style files */
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Fira Sans', sans-serif;
+}
+
+/* Keyframes */
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-5px);
+    }
+    20%, 40%, 60%, 80% {
+        transform: translateX(5px);
+    }
+}
+
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes warning {
+    0% {
+        opacity: 0;
+        top: 2rem;
+    }
+    5% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+        top: 4rem;
+    }
+}  
+
+header, footer {
+    align-items: center;
+    background-color: lightcoral;
+    display: flex;
+    height: 50px;
+}
+
+.title a {
+    color: white;
+    font-size: 25px;
+    margin: 20px;
+    text-decoration: none;
+}
+
+body {
+    background-color: #EEE;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+main {
+    flex: 1;
+}
+
+.GitHubLogo {
+    color: white;
+    font-size: 35px;
+    margin-left: auto;
+    margin-right: 15px;
+}
+
+/* Custom scroll bar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Alertas */

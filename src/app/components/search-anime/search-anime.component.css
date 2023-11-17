@@ -1,0 +1,44 @@
+/* Menú de búsqueda */
+form {
+    display: flex;
+    margin: 20px;
+    margin-left: auto;
+    max-width: 500px;
+}
+
+form input {
+    appearance: none;
+    background: white;
+    border: none;
+    color: #888;
+    display: block;
+    font-size: 15px;
+    outline: none;
+    padding: 10px;
+    user-select: none;
+    width: 100%;
+}
+
+.shake-placeholder {
+    animation: shake 0.5s;
+}
+
+.searchButton {
+    background-color: lightcoral;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    font-size: 15px;
+    padding: 10px;
+    transition: all linear 200ms;
+    user-select: none;
+}
+
+.searchButton:hover {
+    background-color: pink;
+}
+
+.searchButton i {
+    margin-right: 5px;
+}

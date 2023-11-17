@@ -1,0 +1,106 @@
+.modal-backdrop {
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+/* Contenido del modal */
+.modal-content {
+    width: 550px; 
+    margin-top: 45px;
+    margin-left: auto;
+    animation: fadeInDown 1s;
+}
+
+/* Resultados de búsqueda */
+.noResultsText {
+    border: 1px solid #ccc;
+    color: #555;
+    margin: 1rem;
+    padding: 1rem;
+    text-align: center;
+}
+
+.searchResults {
+    background-color: white;
+    border-radius: 2px;
+    margin: 20px;
+    max-height: 600px;
+    max-width: 500px;
+    overflow-y: scroll;
+}
+
+.resultsHeader {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+.resultsHeader h3 {
+    margin-left: 5px;
+    color: #555;
+    font-size: 16px;
+}
+
+.resultsHeader button, .addButton {
+    background-color: lightcoral;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+    user-select: none;
+    transition: all linear 200ms;
+    margin-left: auto;
+}
+
+.addButton i {
+    margin-right: 5px;
+}
+
+.resultsHeader button i {
+    margin-right: 5px;
+}
+
+.resultsHeader button:hover, .addButton:hover {
+    background-color: pink;
+}
+
+.result {
+    display: flex;
+    margin: 1rem;
+    padding: 1rem;
+    border: 1px solid #ccc;
+}
+
+.result img {
+    width: 100px;
+    border-radius: 0.5rem;
+    user-select: none;
+    margin-right: 1rem;
+}
+
+.details {
+    flex: 1 1 0%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.details h3 {
+    color: #555;
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.details p {
+    color: #555;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+    text-align: justify;
+}

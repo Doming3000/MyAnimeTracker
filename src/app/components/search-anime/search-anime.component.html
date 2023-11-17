@@ -1,0 +1,8 @@
+<form (ngSubmit)="search()" novalidate [ngClass]="{'searching': searching}">
+    <input type="text" [(ngModel)]="searchTerm" placeholder="Realiza una búsqueda..." name="search" required [ngClass]="{'input-error': inputEmpty}">
+    
+    <button class="searchButton" (click)="search()">
+        <i class="fa-solid fa-magnifying-glass"></i> {{ searchButtonText }}
+    </button>
+
+</form>

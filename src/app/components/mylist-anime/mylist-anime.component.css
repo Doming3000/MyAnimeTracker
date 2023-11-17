@@ -1,0 +1,203 @@
+.listHeader {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.listHeader h2 {
+    color: #888;
+    font-size: 20px;
+    margin-left: 20px;
+    user-select: none;
+}
+
+hr {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.noElements {
+    align-items: center;
+    color: #888;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    text-align: center;
+    user-select: none;
+}
+
+.mylist {
+    display: grid;
+    grid-gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    margin: 20px;
+}
+
+.anime {
+    align-items: center;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    flex-direction: column;
+    justify-content: center;
+    padding: 1rem;
+    transition: all linear 200ms;
+}
+
+.anime:hover {
+    background-color: lightgray;
+    transform: scale(1.1);
+}
+
+.anime img {
+    border-radius: 0.5rem;
+    cursor: pointer;
+    display: block;
+    height: 220px;
+    margin: 0 auto;
+    width: 190px;
+    user-select: none;
+}
+
+.anime h3 {
+    color: #888;
+    font-size: 14px;
+    height: 30px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    text-align: center;
+    transition: all linear 200ms;
+}
+
+.episodeCount {
+    margin-right: auto;
+}
+
+.episodeCountText, .ViewCheckText {
+    align-items: center;
+    color: #555;
+    display: flex;
+    font-size: 15px;
+    height: 100%;
+    justify-content: center;
+    margin-left: 3px;
+    margin-right: 3px;
+    user-select: none;
+}
+
+/* ----- Botones ----- */
+.collapseButton {
+    border: none;
+    color: #555;
+    font-size: 20px;
+    margin-left: 5px;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: flex-end;
+    visibility: hidden;
+}
+
+.increaseButton, .decreaseButton {
+    background: none;
+    border: none;
+    height: 25px;
+    width: 15px;
+    text-align: center;
+}
+
+.anime:hover .buttonContainer {
+    background: none;
+    visibility: visible;
+}
+
+.viewButton, .editButton, .delButton {
+    align-items: flex-end;
+    border-radius: 0.2rem;
+    border: none;
+    color: white;
+    text-align: center;
+    height: 25px;
+    width: 25px;
+}
+
+.viewButton:hover, .editButton:hover, .delButton:hover, .increaseButton:hover, .decreaseButton:hover, .collapseButton:hover {
+    cursor: pointer;
+}
+
+.viewButton {
+    background-color: lightgreen;
+    margin-right: 5px;
+}
+
+.editButton{
+    background-color: lightskyblue;
+    margin-right: 5px;
+}
+
+.delButton {
+    background-color: lightsalmon;
+}
+
+/* ----- Tooltips ----- */
+
+/* Contenedor del tooltip */
+.episodeTipContainer, .DelAnimeTip, .EditAnimeTip, .ViewAnimeTip, .collapsileTip {
+    display: inline-block;
+    position: relative;
+}
+
+/* Texto del tooltip */
+.episodeCountTipText, .DelAnimeTipText, .EditAnimeTipText, .ViewAnimeTipText, .collapsileTipText {
+    background-color: #555;
+    border-radius: 6px;
+    color: white;
+    font-size: 12px;
+    padding: 5px 5px;
+    text-align: center;
+    user-select: none;
+    visibility: hidden;
+    
+    /* Posición del texto */
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* Ajustes individuales (texto del tooltip) */
+.collapsileTipText {
+    width: 125px;
+}
+
+.episodeCountTipText, .DelAnimeTipText {
+    width: 120px;
+}
+
+.EditAnimeTipText, .ViewAnimeTipText {
+    width: 115px;
+}
+
+/* Tooltip arrow */
+.episodeCountTipText::after, .DelAnimeTipText::after, .EditAnimeTipText::after, .ViewAnimeTipText::after, .collapsileTipText::after {
+    border-color: #555 transparent transparent transparent;
+    border-style: solid;
+    border-width: 5px;
+    content: "";
+    left: 50%;
+    margin-left: -5px;
+    position: absolute;
+    top: 100%;
+}
+
+/* Mostrar el tooltip (hover) */
+.episodeTipContainer:hover .episodeCountTipText, .DelAnimeTip:hover .DelAnimeTipText, .EditAnimeTip:hover .EditAnimeTipText, .ViewAnimeTip:hover .ViewAnimeTipText, .collapsileTip:hover .collapsileTipText {
+    animation: fadeInDown 0.5s;
+    opacity: 1;
+    visibility: visible;
+}
