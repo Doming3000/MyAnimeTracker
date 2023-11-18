@@ -4,7 +4,7 @@ import { AnimeService } from 'src/app/services/anime.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-selected-anime',
+  selector: 'app-mylist-anime',
   templateUrl: './mylist-anime.component.html',
   styleUrls: ['./mylist-anime.component.css']
 })
