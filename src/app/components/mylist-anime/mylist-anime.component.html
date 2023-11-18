@@ -52,10 +52,10 @@
                     <span class="ViewAnimeTipText">{{ anime.markedAsViewed ? 'Marcar como no visto' : 'Marcar como visto' }}</span>
                 </div>
                 
-                <!-- Botón editar enlace -->
+                <!-- Botón editar/enlace -->
                 <div class="EditAnimeTip">
-                    <button (click)="EditAnime(anime)" class="editButton"><i class="fa-regular fa-pen-to-square"></i></button>
-                    <span class="EditAnimeTipText">Editar enlace</span>
+                    <button (click)="EditAnime(anime)" class="editButton"><i class="fa-regular" [ngClass]="{'fa-pen-to-square': anime.link, 'fa-square-plus': !anime.link}"></i></button>
+                    <span class="EditAnimeTipText">{{ anime.link ? 'Editar URL' : 'Añadir una URL' }}</span>
                 </div>
                 
                 <!-- Botón para eliminar de la lista -->
