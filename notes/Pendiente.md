@@ -1,6 +1,7 @@
 # Pendiente
 
 - Arreglar los efectos de desplazamiento del contendor de resultados.
+- Cambiar icono del botón "Añadir una URL"
 - Hacer que el texto "No se han encontrado resultados" aparezca cuando no hay resultados.
 - Mejorar el diseño del buscador para que combine con los resultados.
 - Impedir el desplazamiento de la página cuando el contenedor de resultados está visible.
