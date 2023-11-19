@@ -1,0 +1,38 @@
+<!-- Formulario de búsqueda -->
+<form (ngSubmit)="search()" novalidate [ngClass]="{'searching': searching}">
+    <input class="searchInput" type="text" [(ngModel)]="searchTerm" placeholder="Realiza una búsqueda..." name="search" required [ngClass]="{'input-error': inputEmpty}">
+    
+    <button class="searchButton" (click)="search()">
+        <i class="fa-solid fa-magnifying-glass"></i> {{ searchButtonText }}
+    </button>
+</form>
+
+<!-- Contenedor de resultados -->
+<div class="overlay" *ngIf="anime_results.length > 0" (click)="clearResults()"></div>
+
+<div class="results-container">
+    <div *ngIf="anime_results && anime_results.length > 0">
+        <div class="resultsHeader">
+            <h3>Resultados de búsqueda:</h3>
+            <button (click)="clearResults()"><i class="fa-solid fa-xmark"></i>Cerrar</button>
+        </div>
+        
+        <ng-container *ngIf="anime_results.length > 0">
+            
+            <div *ngFor="let anime of anime_results" class="result">
+                <img [src]="anime.images['jpg'].image_url" />
+                <div class="details">
+                    <h3>{{ anime.title }}</h3>
+                    <p *ngIf="anime.synopsis" [title]="anime.synopsis">{{ anime.synopsis.slice(0, 200) }}...</p>
+                    <button class="addButton" (click)="addAnime(anime)"><i class="fa-regular fa-bookmark"></i>Añadir a mi lista</button>
+                </div>
+            </div>
+            
+        </ng-container>
+        
+        <div *ngIf="noResultsFound">
+            <p class="noResultsText">No se han encontrado resultados.</p>
+        </div>
+        
+    </div>
+</div>

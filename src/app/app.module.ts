@@ -7,14 +7,12 @@ import { HttpClientModule } from "@angular/common/http";
 
 // Componentes
 import { AppComponent } from './app.component';
-import { ResultsAnimeComponent } from './components/results-anime/results-anime.component';
-import { SearchAnimeComponent } from './components/search-anime/search-anime.component';
+import { SearchAnimeComponent } from './components/searchresults-anime/searchresults-anime.component';
 import { MylistAnimeComponent } from './components/mylist-anime/mylist-anime.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ResultsAnimeComponent,
     SearchAnimeComponent,
     MylistAnimeComponent,
   ],

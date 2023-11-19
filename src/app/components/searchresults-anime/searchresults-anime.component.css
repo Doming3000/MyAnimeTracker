@@ -1,24 +1,65 @@
-.modal-backdrop {
-    background: rgba(0, 0, 0, 0.5);
+/* Menú de búsqueda */
+form {
     display: flex;
-    height: 100%;
-    left: 0;
-    position: fixed;
-    top: 0;
+    margin: 20px;
+    margin-left: auto;
+    max-width: 500px;
+}
+
+form input {
+    appearance: none;
+    background: white;
+    border: none;
+    color: #888;
+    display: block;
+    font-size: 15px;
+    outline: none;
+    padding: 10px;
+    user-select: none;
     width: 100%;
+}
+
+.searchButton, .searchInput {
     z-index: 1000;
 }
 
-/* Contenido del modal */
-.modal-content {
-    width: 550px; 
-    margin-top: 45px;
-    margin-left: auto;
-    animation: fadeInDown 1s;
+.shake-placeholder {
+    animation: shake 0.5s;
+}
+
+.searchButton {
+    background-color: lightcoral;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    font-size: 15px;
+    padding: 10px;
+    transition: all linear 200ms;
+    user-select: none;
+}
+
+.searchButton:hover {
+    background-color: pink;
+}
+
+.searchButton i {
+    margin-right: 5px;
 }
 
 /* Resultados de búsqueda */
-.noResultsText {
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: block;
+}
+
+.noResultsText { /* Esto necesita arreglo, no aparece.*/
     border: 1px solid #ccc;
     color: #555;
     margin: 1rem;
@@ -26,13 +67,15 @@
     text-align: center;
 }
 
-.searchResults {
+.results-container {
     background-color: white;
     border-radius: 2px;
-    margin: 20px;
-    max-height: 600px;
+    max-height: 550px;
     max-width: 500px;
     overflow-y: scroll;
+    z-index: 9999;
+    right: 20px;
+    position: fixed;
 }
 
 .resultsHeader {

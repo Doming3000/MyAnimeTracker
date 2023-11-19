@@ -1,24 +1,24 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SearchAnimeComponent } from './search-anime.component';
+import { MylistAnimeComponent } from './mylist-anime.component';
 
-describe('SearchAnimeComponent', () => {
-  let component: SearchAnimeComponent;
-  let fixture: ComponentFixture<SearchAnimeComponent>;
-  
+describe('MylistAnimeComponent', () => {
+  let component: MylistAnimeComponent;
+  let fixture: ComponentFixture<MylistAnimeComponent>;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SearchAnimeComponent ]
+      declarations: [ MylistAnimeComponent ]
     })
     .compileComponents();
   });
-  
+
   beforeEach(() => {
-    fixture = TestBed.createComponent(SearchAnimeComponent);
+    fixture = TestBed.createComponent(MylistAnimeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-  
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });

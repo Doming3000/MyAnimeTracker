@@ -1,21 +1,26 @@
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { Anime, MyAnime } from "src/app/interfaces/api-movies";
 import { AnimeService } from "src/app/services/anime.service";
+import { Component, OnInit} from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Subscription } from "rxjs";
 
 @Component({
-  selector: "app-search-anime",
-  templateUrl: "./search-anime.component.html",
-  styleUrls: ["./search-anime.component.css"],
+  selector: "app-searchresults-anime",
+  templateUrl: "./searchresults-anime.component.html",
+  styleUrls: ["./searchresults-anime.component.css"],
 })
+
 export class SearchAnimeComponent implements OnInit {
-  @Output() searchClicked: EventEmitter<void> = new EventEmitter<void>();
   
-  searchTerm: string = "";
+  anime_results: any[] = [];
+  animeSuscription!: Subscription;
   inputEmpty: boolean = false;
-  searching: boolean = false;
-  searchCompleted: boolean = false;
+  noResultsFound: boolean = false;
   searchButtonText: string = "Buscar";
+  searchCompleted: boolean = false;
   searchForm: FormGroup;
+  searching: boolean = false;
+  searchTerm: string = "";
   
   constructor(private animeService: AnimeService, private formBuilder: FormBuilder) {
     this.searchForm = this.formBuilder.group({
@@ -23,8 +28,18 @@ export class SearchAnimeComponent implements OnInit {
     });
   }
   
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.animeSuscription = this.animeService.getResultAnime().subscribe((result) => {
+      this.noResultsFound = this.anime_results.length === 0;
+      this.anime_results = result;
+    });
+  }  
   
+  ngOnDestroy(): void {
+    this.animeSuscription.unsubscribe();
+  }
+  
+  // Búsqueda
   search() {
     if (this.searchTerm.trim() !== "") {
       this.searching = true;
@@ -39,7 +54,6 @@ export class SearchAnimeComponent implements OnInit {
         this.searchTerm = "";
         this.searching = false;
         this.searchCompleted = true;
-        this.searchClicked.emit();
         
         this.searchButtonText = "Buscar";
         document.body.style.cursor = 'default';
@@ -57,5 +71,27 @@ export class SearchAnimeComponent implements OnInit {
           placeholder.classList.remove("shake-placeholder");
         }, 500);
       }
+    }
+    
+    clearResults() {
+      this.anime_results = [];
+      this.searchTerm = "";
+    }
+    
+    //Añadir a la lista
+    addAnime(anime: Anime) {
+      const addAnime: MyAnime = {
+        id: anime.mal_id,
+        title: anime.title,
+        imagen: anime.images["jpg"].image_url,
+        total_episodes: anime.episodes,
+        watched_episodes: 0,
+        markedAsViewed: false,
+        link: '',
+      };
+      
+      this.animeService.animeSelected(addAnime);
+      this.anime_results = [];
+      this.searchTerm = "";
     }
   }
