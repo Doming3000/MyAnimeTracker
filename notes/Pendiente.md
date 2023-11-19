@@ -1,6 +1,9 @@
 # Pendiente
 
-- Efecto de desplazamiento para los resultados de búsqueda cuando estos se cierren
+- Arreglar los efectos de desplazamiento del contendor de resultados.
+- Hacer que el texto "No se han encontrado resultados" aparezca cuando no hay resultados.
+- Mejorar el diseño del buscador para que combine con los resultados.
+- Impedir el desplazamiento de la página cuando el contenedor de resultados está visible.
 - Mejorar los diseños de las alertas
 - Nombre y fuentes para el sitio
 - Reglas media
