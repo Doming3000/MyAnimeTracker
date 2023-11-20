@@ -54,7 +54,7 @@
                 
                 <!-- Botón "añadir/editar URL" -->
                 <div class="EditAnimeTip">
-                    <button (click)="EditAnime(anime)" class="editButton"><i class="fa-regular" [ngClass]="{'fa-pen-to-square': anime.link, 'fa-square-plus': !anime.link}"></i></button>
+                    <button (click)="EditAnime(anime)" class="editButton"><i class="fa-regular" [ngClass]="{'fa-pen-to-square': anime.link, 'fa-hard-drive': !anime.link}"></i></button>
                     <span class="EditAnimeTipText">{{ anime.link ? 'Editar URL' : 'Añadir una URL' }}</span>
                 </div>
                 
