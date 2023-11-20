@@ -1,6 +1,6 @@
 import { Anime, MyAnime } from "src/app/interfaces/api-movies";
 import { AnimeService } from "src/app/services/anime.service";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Subscription } from "rxjs";
 
@@ -10,7 +10,9 @@ import { Subscription } from "rxjs";
   styleUrls: ["./searchresults-anime.component.css"],
 })
 
-export class SearchAnimeComponent implements OnInit {
+export class SearchAnimeComponent implements OnInit, AfterViewInit {
+  @ViewChild('resultsContainer') resultsContainer!: ElementRef;
+  
   anime_results: any[] = [];
   animeSuscription!: Subscription;
   inputEmpty: boolean = false;
@@ -27,6 +29,9 @@ export class SearchAnimeComponent implements OnInit {
       this.searchForm = this.formBuilder.group({
         searchTerm: ["", Validators.required],
       });
+    }
+    ngAfterViewInit(): void {
+      this.resultsContainer.nativeElement.addEventListener('scroll', this.onContainerScroll);
     }
     
     ngOnInit(): void {
@@ -95,5 +100,22 @@ export class SearchAnimeComponent implements OnInit {
         this.animeService.animeSelected(addAnime);
         this.anime_results = [];
         this.searchTerm = "";
+      }
+      
+      // Efecto de desplazamiento horizontal del contenedor de resultados
+      onContainerScroll = (event: Event) => {
+        this.myFunction();
+      }
+      
+      myFunction() {
+        const container = this.resultsContainer.nativeElement;
+        const winScroll = container.scrollTop || document.documentElement.scrollTop || document.body.scrollTop;
+        const height = container.scrollHeight - container.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        const myBar = document.getElementById("myBar");
+        
+        if (myBar) {
+          myBar.style.width = scrolled + "%";
+        }
       }
     }

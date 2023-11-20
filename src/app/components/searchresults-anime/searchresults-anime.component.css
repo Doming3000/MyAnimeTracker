@@ -64,6 +64,7 @@ form input {
     max-height: 0;
     max-width: 500px;
     margin-top: -20px;
+    overflow-x: hidden;
     overflow-y: scroll;
     position: fixed;
     right: 20px;
@@ -99,6 +100,21 @@ form input {
     transition: all linear 200ms;
     margin-left: auto;
     margin-right: 6px;
+}
+
+.progress-container {
+    width: 500px;
+    height: 8px;
+    background: #ccc;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.progress-bar {
+    height: 8px;
+    background: lightcoral;
+    width: 0%;
 }
 
 .addButton i {
