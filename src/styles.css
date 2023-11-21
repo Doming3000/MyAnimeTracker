@@ -30,29 +30,6 @@
     }
 }
 
-@keyframes fadeOut {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
-}
-
-@keyframes warning {
-    0% {
-        opacity: 0;
-        top: 2rem;
-    }
-    5% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-        top: 4rem;
-    }
-}  
-
 header, footer {
     align-items: center;
     background-color: #434979;
@@ -81,7 +58,7 @@ main {
     flex: 1;
 }
 
-.wrapper{
+.wrapper {
     display: inline-flex;
     margin-left: auto;
 }
