@@ -55,7 +55,7 @@
 
 header, footer {
     align-items: center;
-    background-color: lightcoral;
+    background-color: #434979;
     display: flex;
     height: 50px;
 }
@@ -65,6 +65,7 @@ header, footer {
     font-size: 25px;
     margin: 20px;
     text-decoration: none;
+    font-family: 'Poppins', sans-serif;
 }
 
 body {
@@ -80,11 +81,9 @@ main {
     flex: 1;
 }
 
-.GitHubLogo {
-    color: white;
-    font-size: 35px;
+.wrapper{
+    display: inline-flex;
     margin-left: auto;
-    margin-right: 15px;
 }
 
 /* Custom scroll bar */
@@ -107,4 +106,30 @@ main {
     background: #a8a8a8;
 }
 
-/* Alertas */
+/* pendiente: */
+
+.wrapper {
+    background: white;
+    height: 40px;
+    width: 40px;
+    display: block;
+    box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+    border-radius: 50%;
+    text-align: center;
+    margin-right: 10px;
+    transition: all 200ms;
+}
+
+.githubIcon a {
+    color: black;
+    text-decoration: none;
+    margin: 0 20px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+}
+
+.wrapper:hover {
+    cursor: pointer;
+    background: #2c2b2b;
+}
