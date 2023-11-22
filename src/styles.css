@@ -30,6 +30,7 @@
     }
 }
 
+/* Página */
 header, footer {
     align-items: center;
     background-color: #434979;
@@ -39,10 +40,10 @@ header, footer {
 
 .title a {
     color: white;
+    font-family: 'Poppins', sans-serif;
     font-size: 25px;
     margin: 20px;
     text-decoration: none;
-    font-family: 'Poppins', sans-serif;
 }
 
 body {
@@ -60,7 +61,36 @@ main {
 
 .wrapper {
     display: inline-flex;
+    margin: 20px;
     margin-left: auto;
+}
+
+.github {
+    color:#fff;
+    background: #DB6E82;
+    border-radius:4px;
+    text-align:center;
+    text-decoration:none;
+    font-family:fontawesome;
+    position: relative;
+    display: inline-block;
+    width:40px;
+    height:28px;
+    padding-top:12px;
+    margin:0 2px;
+    -o-transition:all .5s;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    transition: all .5s;
+    -webkit-font-smoothing: antialiased;
+}
+
+.github:hover {
+    background: #ef92a3;
+}
+
+.github:before {
+    content:'\f113';
 }
 
 /* Custom scroll bar */
@@ -81,32 +111,4 @@ main {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #a8a8a8;
-}
-
-/* pendiente: */
-
-.wrapper {
-    background: white;
-    height: 40px;
-    width: 40px;
-    display: block;
-    box-shadow: 0 10px 10px rgba(0,0,0,0.1);
-    border-radius: 50%;
-    text-align: center;
-    margin-right: 10px;
-    transition: all 200ms;
-}
-
-.githubIcon a {
-    color: black;
-    text-decoration: none;
-    margin: 0 20px;
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-}
-
-.wrapper:hover {
-    cursor: pointer;
-    background: #2c2b2b;
 }
