@@ -60,38 +60,34 @@ main {
 }
 
 .wrapper {
-    display: inline-flex;
-    margin: 20px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: 10px;
     margin-left: auto;
 }
 
 .github {
-    color:#fff;
+    align-items: center;
     background: #DB6E82;
-    border-radius:4px;
-    text-align:center;
-    text-decoration:none;
-    font-family:fontawesome;
-    position: relative;
-    display: inline-block;
-    width:40px;
-    height:28px;
-    padding-top:12px;
-    margin:0 2px;
-    -o-transition:all .5s;
-    -webkit-transition: all .5s;
-    -moz-transition: all .5s;
-    transition: all .5s;
-    -webkit-font-smoothing: antialiased;
+    border-radius: 5px;
+    color: white;
+    display: flex;
+    font-size: 20px;
+    height: 35px;
+    justify-content: center;
+    text-decoration: none;
+    transition: all linear 200ms;
+    width: 35px;
 }
 
 .github:hover {
-    background: #ef92a3;
+    background: pink;
 }
 
-.github:before {
-    content:'\f113';
-}
+
+
+
 
 /* Custom scroll bar */
 ::-webkit-scrollbar {
