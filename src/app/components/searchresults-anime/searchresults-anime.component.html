@@ -1,10 +1,12 @@
 <!-- Formulario de búsqueda -->
-<form (ngSubmit)="search()" novalidate [ngClass]="{'searching': searching}">
-    
-    <input class="searchInput" type="text" name="search" [(ngModel)]="searchTerm" placeholder="Realiza una búsqueda..." required [ngClass]="{'input-error': inputEmpty}">
-    <button class="searchButton" (click)="search()"><i class="fa-solid fa-magnifying-glass"></i> {{ searchButtonText }}</button>
-    
-</form>
+<section>
+    <form (ngSubmit)="search()" novalidate [ngClass]="{'searching': searching}">
+        
+        <input class="searchInput" type="text" name="search" [(ngModel)]="searchTerm" placeholder="Realiza una búsqueda..." required [ngClass]="{'input-error': inputEmpty}">
+        <button class="searchButton" (click)="search()"><i class="fa-solid fa-magnifying-glass"></i> {{ searchButtonText }}</button>
+        
+    </form>
+</section>
 
 <!-- Contenedor de resultados -->
 <div class="overlay" *ngIf="anime_results.length > 0" (click)="clearResults()"></div>
