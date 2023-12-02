@@ -34,3 +34,5 @@ export class AnimeService {
     return this.anime_selected$.asObservable();
   }
 }
+
+//no
