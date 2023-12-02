@@ -29,4 +29,3 @@ describe('AppComponent', () => {
     expect(compiled.querySelector('.content span')?.textContent).toContain('anime app is running!');
   });
 });
-// si
