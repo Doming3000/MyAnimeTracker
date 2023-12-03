@@ -1,60 +1,95 @@
 /* Menú de búsqueda */
-section {
-    align-items: center;
-    display: flex;
-    margin-bottom: 20px;
-    margin-left: auto;
-    margin-top: 20px;
-    background-color: #616aaf;
-    border-radius: 30px 0 0 30px;
-    height: 60px;
-    width: 500px;
-}
-
 form {
-    border-radius: 25px 25px 25px 25px;
-    display: flex;
-    margin: 20px;
+    background: white;
+    border-radius: 40px;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    height: 40px;
     margin-left: auto;
-    width: 300px;
+    margin-right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 350px;
 }
 
 form input {
-    background: white;
+    background: none;
     border: none;
-    border-radius: 25px 0px 0px 25px;
     color: #888;
-    font-size: 15px;
+    font-size: 14px;
+    height: 20px;
+    left: 40px;
     outline: none;
-    padding: 10px 15px;
-    user-select: none;
-    width: 100%;
+    position: absolute;
+    top: 10px;
+    width: 250px;
 }
 
 .searchButton {
-    background-color: lightcoral;
+    background: none;
     border: none;
-    border-radius: 25px 25px 25px 25px;
-    color: white;
+    color: #555;
     cursor: pointer;
-    display: flex;
-    font-size: 15px;
-    padding: 10px;
-    transition: all linear 200ms;
-    user-select: none;
+    font-size: 16px;
+    height: 20px;
+    left: 15px;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 10px;
+    width: 20px;
 }
 
-.searchButton:hover {
-    background-color: pink;
+.searchOptions {
+    position: absolute;
+    right: 15px;
+    text-align: right;
+    top: 10px;
 }
 
-.searchButton i {
-    margin-right: 5px;
+.searchOptions div {
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 1px;
+    position: relative;
 }
 
-.searchButton, .searchInput {
-    z-index: 1000;
+.searchOptions input {
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    top: 0;
 }
+
+label {
+    display: block;
+    cursor: pointer;
+}
+
+i {
+    height: 20px;
+    width: 20px;
+    color: #888;
+    transition: all 0.2s ease-in-out;
+    pointer-events: none;
+}
+
+input:checked + label i {
+    color: #e24040;
+}
+
+input:checked + label span {
+    background: #e24040;
+    
+    &::after {
+        border-top-color: #e24040;
+    }
+}
+
+
+
+
+
+
 
 .shake-placeholder {
     animation: shake 0.5s;

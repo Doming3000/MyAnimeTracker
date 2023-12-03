@@ -1,18 +1,25 @@
 <!-- Formulario de búsqueda -->
-<section>
-    <form (ngSubmit)="search()" novalidate [ngClass]="{'searching': searching}">
+<form (ngSubmit)="search()" novalidate [ngClass]="{'searching': searching}">
+    <input class="searchInput" type="text" name="search" [(ngModel)]="searchTerm" placeholder="Realiza una búsqueda..." required [ngClass]="{'input-error': inputEmpty}">
+    <button class="searchButton" (click)="search()"><i class="fa-solid fa-magnifying-glass"></i></button>
+    
+    <div class="searchOptions">
+        <div>
+            <input name="type" type="radio" value="type-anime" id="type-anime">
+            <label for="type-anime"><i class="fa-solid fa-film"></i></label>
+        </div>
         
-        <input class="searchInput" type="text" name="search" [(ngModel)]="searchTerm" placeholder="Realiza una búsqueda..." required [ngClass]="{'input-error': inputEmpty}">
-        <button class="searchButton" (click)="search()"><i class="fa-solid fa-magnifying-glass"></i> {{ searchButtonText }}</button>
-        
-    </form>
-</section>
+        <div>
+            <input name="type" type="radio" value="type-manga" id="type-manga">
+            <label for="type-manga"><i class="fa-regular fa-comment-dots"></i></label>
+        </div>
+    </div>
+</form>
 
 <!-- Contenedor de resultados -->
 <div class="overlay" *ngIf="anime_results.length > 0" (click)="clearResults()"></div>
 
 <div class="results-container" #resultsContainer id="results-container" [ngClass]="{'results-visible': anime_results.length > 0}">
-    
     <div class="progress-container">
         <div class="progress-bar" id="myBar"></div>
     </div>
@@ -23,7 +30,6 @@
     </div>
     
     <ng-container *ngIf="anime_results.length > 0">
-        
         <div class="result" *ngFor="let anime of anime_results">
             <img [src]="anime.images['jpg'].image_url" />
             <div class="details">
@@ -32,6 +38,5 @@
                 <button class="addButton" (click)="addAnime(anime)"><i class="fa-regular fa-bookmark"></i>Añadir a mi lista</button>
             </div>
         </div>
-        
     </ng-container>    
 </div>
