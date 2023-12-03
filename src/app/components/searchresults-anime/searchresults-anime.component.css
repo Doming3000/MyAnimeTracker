@@ -6,9 +6,12 @@ form {
     height: 40px;
     margin-left: auto;
     margin-right: 20px;
-    top: 50%;
+    position: fixed;
+    right: 0;
+    top: 50px;
     transform: translateY(-50%);
-    width: 350px;
+    width: 350px;  
+    z-index: 10000;
 }
 
 form input {
@@ -21,6 +24,7 @@ form input {
     outline: none;
     position: absolute;
     top: 10px;
+    user-select: none;
     width: 290px;
 }
 
@@ -36,6 +40,7 @@ form input {
     padding: 0;
     position: absolute;
     top: 10px;
+    user-select: none;
     width: 20px;
 }
 
@@ -58,9 +63,9 @@ form input {
 .results-container {
     background-color: white;
     border-radius: 2px;
+    margin-top: 30px;
     max-height: 0;
     max-width: 500px;
-    margin-top: -20px;
     overflow-x: hidden;
     overflow-y: scroll;
     position: fixed;
