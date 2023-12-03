@@ -5,16 +5,16 @@
 </form>
 
 <!-- Contenedor de resultados -->
-<div class="overlay" *ngIf="anime_results.length > 0" (click)="clearResults()"></div>
+<div class="overlay" *ngIf="anime_results.length > 0" (click)="closeResultsContainer()"></div>
 
-<div class="results-container" #resultsContainer id="results-container" [ngClass]="{'results-visible': anime_results.length > 0}">
+<div class="results-container" #resultsContainer id="results-container" [ngClass]="{'results-visible': anime_results.length > 0, 'animate-closing': animateClosing}">
     <div class="progress-container">
         <div class="progress-bar" id="myBar"></div>
     </div>
     
     <div class="resultsHeader">
         <h3>Resultados de búsqueda:</h3>
-        <button (click)="clearResults()"><i class="fa-solid fa-xmark"></i>Cerrar</button>
+        <button (click)="closeResultsContainer()"><i class="fa-solid fa-xmark"></i>Cerrar</button>
     </div>
     
     <ng-container *ngIf="anime_results.length > 0">

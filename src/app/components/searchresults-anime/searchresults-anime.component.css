@@ -70,13 +70,16 @@ form input {
     overflow-y: scroll;
     position: fixed;
     right: 20px;
-    transition: max-height 300ms ease-out;
     z-index: 9999;
 }
 
 .results-visible {
     max-height: 605px;
-    transition: max-height 300ms ease-in-out;
+    transition: max-height 200ms ease-in-out;
+}
+
+.animate-closing {
+    max-height: 0;
 }
 
 .resultsHeader {

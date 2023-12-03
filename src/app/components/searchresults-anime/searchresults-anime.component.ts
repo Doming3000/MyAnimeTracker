@@ -13,9 +13,11 @@ import { Subscription } from "rxjs";
 export class SearchAnimeComponent implements OnInit, AfterViewInit {
   @ViewChild('resultsContainer') resultsContainer!: ElementRef;
   
+  animateClosing: boolean = false; 
   anime_results: any[] = [];
   animeSuscription!: Subscription;
   inputEmpty: boolean = false;
+  resultsVisible = false;
   searchCompleted: boolean = false;
   searchForm: FormGroup;
   searching: boolean = false;
@@ -29,6 +31,7 @@ export class SearchAnimeComponent implements OnInit, AfterViewInit {
         searchTerm: ["", Validators.required],
       });
     }
+    
     ngAfterViewInit(): void {
       this.resultsContainer.nativeElement.addEventListener('scroll', this.onContainerScroll);
     }
@@ -48,19 +51,13 @@ export class SearchAnimeComponent implements OnInit, AfterViewInit {
     // Búsqueda
     search() {
       if (this.searchTerm.trim() !== "") {
-        this.searching = true;
-        this.inputEmpty = false;
-        this.searchCompleted = false;
-        
         document.body.style.cursor = "progress";
         
         this.animeService.getAnimes(this.searchTerm).subscribe((result) => {
-          this.animeService.addResultAnime(result.data);
-          this.searchTerm = "";
-          this.searching = false;
-          this.searchCompleted = true;
-          
           document.body.style.cursor = "default";
+          this.anime_results = result.data;
+          this.searchTerm = "";
+          this.resultsVisible = true;
         });
       } else {
         this.inputEmpty = true;
@@ -77,9 +74,18 @@ export class SearchAnimeComponent implements OnInit, AfterViewInit {
         }
       }
       
-      clearResults() {
-        this.anime_results = [];
-        this.searchTerm = "";
+      toggleResultsContainer() {
+        this.resultsVisible = !this.resultsVisible;
+      }
+      
+      closeResultsContainer() {
+        this.animateClosing = true;
+        
+        setTimeout(() => {
+          this.anime_results = [];
+          this.searchTerm = "";
+          this.animateClosing = false;
+        }, 200);
       }
       
       //Añadir a la lista
@@ -99,7 +105,7 @@ export class SearchAnimeComponent implements OnInit, AfterViewInit {
         this.searchTerm = "";
       }
       
-      // Efecto de desplazamiento horizontal del contenedor de resultados
+      // Efecto de desplazamiento de la barra de progreso del contenedor de resultados
       onContainerScroll = (event: Event) => {
         this.myFunction();
       }
