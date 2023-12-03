@@ -16,7 +16,6 @@ export class SearchAnimeComponent implements OnInit, AfterViewInit {
   anime_results: any[] = [];
   animeSuscription!: Subscription;
   inputEmpty: boolean = false;
-  searchButtonText: string = "Buscar";
   searchCompleted: boolean = false;
   searchForm: FormGroup;
   searching: boolean = false;
@@ -53,7 +52,6 @@ export class SearchAnimeComponent implements OnInit, AfterViewInit {
         this.inputEmpty = false;
         this.searchCompleted = false;
         
-        this.searchButtonText = "Buscando...";
         document.body.style.cursor = "progress";
         
         this.animeService.getAnimes(this.searchTerm).subscribe((result) => {
@@ -62,7 +60,6 @@ export class SearchAnimeComponent implements OnInit, AfterViewInit {
           this.searching = false;
           this.searchCompleted = true;
           
-          this.searchButtonText = "Buscar";
           document.body.style.cursor = "default";
         });
       } else {
