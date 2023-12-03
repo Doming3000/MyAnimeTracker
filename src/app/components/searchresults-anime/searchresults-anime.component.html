@@ -2,18 +2,6 @@
 <form (ngSubmit)="search()" novalidate [ngClass]="{'searching': searching}">
     <input class="searchInput" type="text" name="search" [(ngModel)]="searchTerm" placeholder="Realiza una búsqueda..." required [ngClass]="{'input-error': inputEmpty}">
     <button class="searchButton" (click)="search()"><i class="fa-solid fa-magnifying-glass"></i></button>
-    
-    <div class="searchOptions">
-        <div>
-            <input name="type" type="radio" value="type-anime" id="type-anime">
-            <label for="type-anime"><i class="fa-solid fa-film"></i></label>
-        </div>
-        
-        <div>
-            <input name="type" type="radio" value="type-manga" id="type-manga">
-            <label for="type-manga"><i class="fa-regular fa-comment-dots"></i></label>
-        </div>
-    </div>
 </form>
 
 <!-- Contenedor de resultados -->

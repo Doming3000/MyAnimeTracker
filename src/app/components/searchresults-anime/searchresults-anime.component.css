@@ -21,7 +21,7 @@ form input {
     outline: none;
     position: absolute;
     top: 10px;
-    width: 250px;
+    width: 290px;
 }
 
 .searchButton {
@@ -38,58 +38,6 @@ form input {
     top: 10px;
     width: 20px;
 }
-
-.searchOptions {
-    position: absolute;
-    right: 15px;
-    text-align: right;
-    top: 10px;
-}
-
-.searchOptions div {
-    cursor: pointer;
-    display: inline-block;
-    margin: 0 1px;
-    position: relative;
-}
-
-.searchOptions input {
-    cursor: pointer;
-    left: 0;
-    position: absolute;
-    top: 0;
-}
-
-label {
-    display: block;
-    cursor: pointer;
-}
-
-i {
-    height: 20px;
-    width: 20px;
-    color: #888;
-    transition: all 0.2s ease-in-out;
-    pointer-events: none;
-}
-
-input:checked + label i {
-    color: #e24040;
-}
-
-input:checked + label span {
-    background: #e24040;
-    
-    &::after {
-        border-top-color: #e24040;
-    }
-}
-
-
-
-
-
-
 
 .shake-placeholder {
     animation: shake 0.5s;
