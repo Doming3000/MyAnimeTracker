@@ -84,11 +84,12 @@ export class SearchAnimeComponent implements OnInit, AfterViewInit {
         this.animateClosing = true;
         
         setTimeout(() => {
+          // Limpiar resultados
           this.anime_results = [];
           this.searchTerm = "";
           this.animateClosing = false;
           
-          // Scroll hacia arriba al contenedor de resultados
+          // Formzar el scroll hasta arriba del contenedor
           const resultsContainer = this.elRef.nativeElement.querySelector('.results-container');
           if (resultsContainer) {
             resultsContainer.scrollTop = 0;
