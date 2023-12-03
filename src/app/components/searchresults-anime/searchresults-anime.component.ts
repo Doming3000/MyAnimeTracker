@@ -25,7 +25,8 @@ export class SearchAnimeComponent implements OnInit, AfterViewInit {
   
   constructor(
     private animeService: AnimeService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private elRef: ElementRef
     ) {
       this.searchForm = this.formBuilder.group({
         searchTerm: ["", Validators.required],
@@ -74,6 +75,7 @@ export class SearchAnimeComponent implements OnInit, AfterViewInit {
         }
       }
       
+      // Metodos para manejar el cierre del contenedor de resultados
       toggleResultsContainer() {
         this.resultsVisible = !this.resultsVisible;
       }
@@ -85,6 +87,12 @@ export class SearchAnimeComponent implements OnInit, AfterViewInit {
           this.anime_results = [];
           this.searchTerm = "";
           this.animateClosing = false;
+          
+          // Scroll hacia arriba al contenedor de resultados
+          const resultsContainer = this.elRef.nativeElement.querySelector('.results-container');
+          if (resultsContainer) {
+            resultsContainer.scrollTop = 0;
+          }
         }, 200);
       }
       
