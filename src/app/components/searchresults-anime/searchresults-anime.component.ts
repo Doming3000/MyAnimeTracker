@@ -17,6 +17,7 @@ export class SearchAnimeComponent implements OnInit, AfterViewInit {
   anime_results: any[] = [];
   animeSuscription!: Subscription;
   inputEmpty: boolean = false;
+  noResultsFound: boolean = false;
   resultsVisible = false;
   searchCompleted: boolean = false;
   searchForm: FormGroup;
@@ -59,6 +60,13 @@ export class SearchAnimeComponent implements OnInit, AfterViewInit {
           this.anime_results = result.data;
           this.searchTerm = "";
           this.resultsVisible = true;
+          
+          if (this.anime_results.length > 0) {
+            this.noResultsFound = false;
+          } else {
+            this.noResultsFound = true;
+            alert("No results found");
+          }
         });
       } else {
         this.inputEmpty = true;
@@ -97,7 +105,7 @@ export class SearchAnimeComponent implements OnInit, AfterViewInit {
         }, 200);
       }
       
-      //Añadir a la lista
+      // Añadir a la lista
       addAnime(anime: Anime) {
         const addAnime: MyAnime = {
           id: anime.mal_id,

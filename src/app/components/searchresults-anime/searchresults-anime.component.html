@@ -17,6 +17,10 @@
         <button (click)="closeResultsContainer()"><i class="fa-solid fa-xmark"></i>Cerrar</button>
     </div>
     
+    <div class="noResults" *ngIf="noResultsFound">
+        <p>No se han encontrado resultados.</p>
+    </div>
+    
     <ng-container *ngIf="anime_results.length > 0">
         <div class="result" *ngFor="let anime of anime_results">
             <img [src]="anime.images['jpg'].image_url" />
@@ -26,5 +30,5 @@
                 <button class="addButton" (click)="addAnime(anime)"><i class="fa-regular fa-bookmark"></i>Añadir a mi lista</button>
             </div>
         </div>
-    </ng-container>    
+    </ng-container>
 </div>

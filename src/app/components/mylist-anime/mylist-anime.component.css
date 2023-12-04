@@ -1,3 +1,35 @@
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes flipdown {
+	0% {
+		opacity: 0;
+		transform-origin: top center;
+		transform: rotateX(-90deg);
+	}
+
+	5% { opacity: 1; }
+
+	80% { transform: rotateX(8deg); }
+
+	83% { transform: rotateX(6deg); }
+
+	92% { transform: rotateX(-3deg); }
+
+	100% {
+		transform-origin: top center;
+		transform: rotateX(0deg);
+	}
+}
+
 .listHeader {
     display: flex;
     margin-bottom: 10px;
