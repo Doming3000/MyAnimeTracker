@@ -87,7 +87,7 @@ form input {
     border-radius: 2px;
     margin-top: 30px;
     max-height: 0;
-    max-width: 500px;
+    max-width: 550px;
     overflow-x: hidden;
     overflow-y: scroll;
     position: fixed;
@@ -112,13 +112,27 @@ form input {
 }
 
 .resultsHeader h3 {
-    margin-left: 5px;
+    margin-left: 6px;
     color: #555;
     font-size: 16px;
 }
 
-.resultsHeader button, .addButton {
-    background-color: lightcoral;
+.resultsHeader button {
+    background-color: transparent;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    font-size: 22px;
+    margin-right: 6px;
+    transition: all 200ms;
+}
+
+.resultsHeader button:hover {
+    color: #555;
+}
+
+.addButton {
+    background-color: royalblue;
     border: none;
     color: white;
     cursor: pointer;
@@ -130,7 +144,7 @@ form input {
 }
 
 .progress-container {
-    width: 500px;
+    width: 550px;
     height: 8px;
     background: #ccc;
     position: sticky;
@@ -140,7 +154,7 @@ form input {
 
 .progress-bar {
     height: 8px;
-    background: lightcoral;
+    background: royalblue;
     width: 0%;
 }
 
@@ -148,23 +162,21 @@ form input {
     margin-right: 5px;
 }
 
-.resultsHeader button i {
-    margin-right: 5px;
-}
-
-.resultsHeader button:hover, .addButton:hover {
+.addButton:hover {
     background-color: pink;
 }
 
 .result {
     display: flex;
     margin: 1rem;
+    margin-top: -1px;
     padding: 1rem;
     border: 1px solid #ccc;
 }
 
 .result img {
-    width: 100px;
+    width: 150px;
+    max-width: 150px;
     border-radius: 0.5rem;
     user-select: none;
     margin-right: 1rem;

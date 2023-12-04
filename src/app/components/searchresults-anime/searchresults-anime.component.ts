@@ -62,6 +62,11 @@ export class SearchResultsAnimeComponent implements OnInit, AfterViewInit {
           this.searchTerm = "";
           this.resultsVisible = true;
           
+          // Bloquear el desplazamiento de la página
+          const scrollY = window.scrollY;  
+          window.onscroll = () => {
+            window.scrollTo(0, scrollY);
+          };
           if (this.anime_results.length > 0) {
             this.noResultsFound = false;
             this.noResultsMessageDisplayed = false;
@@ -95,6 +100,7 @@ export class SearchResultsAnimeComponent implements OnInit, AfterViewInit {
       closeResultsContainer() {
         if (this.resultsVisible) {
           this.animateClosing = true;
+          window.onscroll = null;
           
           setTimeout(() => {
             // Establece el estado de apertura/cierre después de la animación o el tiempo de espera
