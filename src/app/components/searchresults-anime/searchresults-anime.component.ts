@@ -18,6 +18,7 @@ export class SearchResultsAnimeComponent implements OnInit, AfterViewInit {
   animeSuscription!: Subscription;
   inputEmpty: boolean = false;
   noResultsFound: boolean = false;
+  noResultsMessageDisplayed: boolean = false;
   resultsVisible = false;
   searchCompleted: boolean = false;
   searchForm: FormGroup;
@@ -63,9 +64,12 @@ export class SearchResultsAnimeComponent implements OnInit, AfterViewInit {
           
           if (this.anime_results.length > 0) {
             this.noResultsFound = false;
+            this.noResultsMessageDisplayed = false;
           } else {
             this.noResultsFound = true;
-            alert("No results found");
+            if (!this.noResultsMessageDisplayed) {
+              this.noResultsMessageDisplayed = true;
+            }
           }
         });
       } else {
