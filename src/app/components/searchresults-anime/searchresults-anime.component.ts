@@ -10,7 +10,7 @@ import { Subscription } from "rxjs";
   styleUrls: ["./searchresults-anime.component.css"],
 })
 
-export class SearchAnimeComponent implements OnInit, AfterViewInit {
+export class SearchResultsAnimeComponent implements OnInit, AfterViewInit {
   @ViewChild('resultsContainer') resultsContainer!: ElementRef;
   
   animateClosing: boolean = false; 
