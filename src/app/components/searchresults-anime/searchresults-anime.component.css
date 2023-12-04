@@ -72,6 +72,16 @@ form input {
     z-index: 999;
 }
 
+.noResults p {
+    align-items: center;
+    color: #555;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    user-select: none;
+    padding: 30px;
+}
+
 .results-container {
     background-color: white;
     border-radius: 2px;

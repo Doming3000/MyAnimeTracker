@@ -93,20 +93,21 @@ export class SearchResultsAnimeComponent implements OnInit, AfterViewInit {
       }
       
       closeResultsContainer() {
-        this.animateClosing = true;
-        
-        setTimeout(() => {
-          // Limpiar resultados
-          this.anime_results = [];
-          this.searchTerm = "";
-          this.animateClosing = false;
+        if (this.resultsVisible) {
+          this.animateClosing = true;
           
-          // Formzar el scroll hasta arriba del contenedor
-          const resultsContainer = this.elRef.nativeElement.querySelector('.results-container');
-          if (resultsContainer) {
-            resultsContainer.scrollTop = 0;
-          }
-        }, 200);
+          setTimeout(() => {
+            // Establece el estado de apertura/cierre después de la animación o el tiempo de espera
+            this.resultsVisible = false; // Cierra el contenedor
+            this.animateClosing = false;
+            
+            // Formzar el scroll hasta arriba del contenedor
+            const resultsContainer = this.elRef.nativeElement.querySelector('.results-container');
+            if (resultsContainer) {
+              resultsContainer.scrollTop = 0;
+            }
+          }, 200);
+        }
       }
       
       // Añadir a la lista
@@ -122,8 +123,6 @@ export class SearchResultsAnimeComponent implements OnInit, AfterViewInit {
         };
         
         this.animeService.animeSelected(addAnime);
-        this.anime_results = [];
-        this.searchTerm = "";
       }
       
       // Efecto de desplazamiento de la barra de progreso del contenedor de resultados

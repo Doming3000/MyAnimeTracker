@@ -5,9 +5,9 @@
 </form>
 
 <!-- Contenedor de resultados -->
-<div class="overlay" *ngIf="anime_results.length > 0" (click)="closeResultsContainer()"></div>
+<div class="overlay" *ngIf="resultsVisible" (click)="closeResultsContainer()"></div>
 
-<div class="results-container" #resultsContainer id="results-container" [ngClass]="{'results-visible': anime_results.length > 0, 'animate-closing': animateClosing}">
+<div class="results-container" #resultsContainer id="results-container" [ngClass]="{'results-visible': resultsVisible, 'animate-closing': animateClosing}">
     <div class="progress-container">
         <div class="progress-bar" id="myBar"></div>
     </div>
@@ -15,6 +15,10 @@
     <div class="resultsHeader">
         <h3>Resultados de búsqueda:</h3>
         <button (click)="closeResultsContainer()"><i class="fa-solid fa-xmark"></i>Cerrar</button>
+    </div>
+    
+    <div class="noResults" *ngIf="noResultsFound">
+        <p>No se han encontrado resultados.</p>
     </div>
     
     <ng-container *ngIf="anime_results.length > 0">
@@ -27,8 +31,4 @@
             </div>
         </div>
     </ng-container>
-</div>
-
-<div class="noResults" *ngIf="noResultsFound">
-    <p>No se han encontrado resultados.</p>
 </div>
