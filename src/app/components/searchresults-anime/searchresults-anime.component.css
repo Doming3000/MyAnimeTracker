@@ -155,7 +155,6 @@ form input {
 }
 
 .result img {
-    width: 180px;
     max-width: 180px;
     border-radius: 0.5rem;
     user-select: none;
@@ -177,26 +176,42 @@ form input {
 
 .details ul {
     list-style: none;
-    padding: 0;
 }
 
 .details ul li {
     display: inline-block;
-    margin-right: 10px;
+    margin-right: 5px;
 }
 
 .details ul li p {
-    background-color: royalblue;
     color: white;
-    padding: 3px;
+    padding: 5px;
     user-select: none;
     border-radius: 5px;
+}
+
+.details ul li .episodes {
+    background: #3C93D5;
+}
+
+.details ul li .type {
+    background: #e67e22;
+}
+
+.details ul li .genres {
+    background: #2ecc71;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.details ul li .hClass {
+    background-color: #e74c3c;
 }
 
 .details p {
     color: #555;
     font-size: 0.875rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     text-align: justify;
 }
 
