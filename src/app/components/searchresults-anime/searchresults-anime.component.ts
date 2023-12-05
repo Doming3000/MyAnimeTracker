@@ -103,11 +103,10 @@ export class SearchResultsAnimeComponent implements OnInit, AfterViewInit {
           window.onscroll = null;
           
           setTimeout(() => {
-            // Establece el estado de apertura/cierre después de la animación o el tiempo de espera
-            this.resultsVisible = false; // Cierra el contenedor
+            this.resultsVisible = false;
             this.animateClosing = false;
             
-            // Formzar el scroll hasta arriba del contenedor
+            // Forzar el scroll hasta arriba del contenedor
             const resultsContainer = this.elRef.nativeElement.querySelector('.results-container');
             if (resultsContainer) {
               resultsContainer.scrollTop = 0;
