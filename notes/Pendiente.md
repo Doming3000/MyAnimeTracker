@@ -1,15 +1,13 @@
 # Pendiente
 
+- Cambiar fuente de texto "Mi lista"
 - Cambiar icono del botón "Añadir una URL"
-- Hacer que el texto "No se han encontrado resultados" aparezca cuando no hay resultados.
-- Impedir el desplazamiento de la página cuando el contenedor de resultados está visible.
-- Mejorar los diseños de las alertas
-- Nombre y fuentes para el sitio
+- Cambiar las alertas de sweet alert por popups o mejorar el diseño de estas y solucionar errores.
 - Reglas media
 
 # Errores encontrados
 
 - Si hay 1 fila de elementos en la lista, a la hora de aparecer una alerta, el footer se contrae.
-    > Sospecha: El modal no permite desplazar la pagina, lo que puede estar ocacionando el error.
+    > Sospecha: El modal no permite desplazar la página, lo que puede estar ocasionando el error.
 
 Comando para ejecutar: ng serve --o
