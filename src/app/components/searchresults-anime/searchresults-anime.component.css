@@ -131,18 +131,6 @@ form input {
     color: #555;
 }
 
-.details button {
-    background-color: royalblue;
-    border: none;
-    color: white;
-    cursor: pointer;
-    padding: 5px;
-    user-select: none;
-    transition: all linear 200ms;
-    margin-left: auto;
-    margin-right: 6px;
-}
-
 .progress-container {
     width: 550px;
     height: 8px;
@@ -194,14 +182,35 @@ form input {
     text-align: justify;
 }
 
-.details button {
-    background-color: #4672f1;
-}
-
-.details button i {
-    margin-right: 5px;
+.details button  {
+    background-color: #009578;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    font-size: 14px;
+    height: 30px;
+    margin-left: auto;
+    margin-top: auto;
+    outline: none;
+    transition: all linear 200ms;
+    user-select: none;
+    width: 155px;
 }
 
 .details button:hover {
-    background-color: pink;
+    background: #008168;
+}
+
+.buttonIcon, .buttonText {
+    align-items: center;
+    color: white;
+    display: inline-flex;
+    height: 100%;
+    padding: 10px;
+}
+
+.buttonIcon {
+    background: rgba(0, 0, 0, 0.08);
+    font-size: 1rem;
 }
