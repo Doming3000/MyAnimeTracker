@@ -175,6 +175,24 @@ form input {
     margin-bottom: 0.5rem;
 }
 
+.details ul {
+    list-style: none;
+    padding: 0;
+}
+
+.details ul li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.details ul li p {
+    background-color: royalblue;
+    color: white;
+    padding: 3px;
+    user-select: none;
+    border-radius: 5px;
+}
+
 .details p {
     color: #555;
     font-size: 0.875rem;

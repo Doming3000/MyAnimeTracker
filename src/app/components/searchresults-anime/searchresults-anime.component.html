@@ -26,7 +26,12 @@
             <img [src]="anime.images['jpg'].image_url" />
             <div class="details">
                 <h3>{{ anime.title }}</h3>
-                <p *ngIf="anime.synopsis" [title]="anime.synopsis">{{ anime.synopsis.slice(0, 500) }}...</p>
+                <ul>
+                    <li><p>{{ anime.episodes }} {{ anime.episodes === 1 ? 'episodio' : 'episodios' }}</p></li>
+                    <li><p>{{ anime.type }}</p></li>
+                    <li><p *ngFor="let genre of anime.genres">{{ genre.name }}</p></li>
+                </ul>
+                <p *ngIf="anime.synopsis" [title]="anime.synopsis">{{ anime.synopsis.slice(0, 300) }}...</p>
                 <button (click)="addAnime(anime)">
                     <span class="buttonIcon"><i class="fa-regular fa-bookmark"></i></span>
                     <span class="buttonText">Añadir a mi lista</span>
