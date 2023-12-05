@@ -131,7 +131,7 @@ form input {
     color: #555;
 }
 
-.addButton {
+.details button {
     background-color: royalblue;
     border: none;
     color: white;
@@ -156,14 +156,6 @@ form input {
     height: 8px;
     background: royalblue;
     width: 0%;
-}
-
-.addButton i {
-    margin-right: 5px;
-}
-
-.addButton:hover {
-    background-color: pink;
 }
 
 .result {
@@ -200,4 +192,16 @@ form input {
     font-size: 0.875rem;
     margin-bottom: 1rem;
     text-align: justify;
+}
+
+.details button {
+    background-color: #4672f1;
+}
+
+.details button i {
+    margin-right: 5px;
+}
+
+.details button:hover {
+    background-color: pink;
 }

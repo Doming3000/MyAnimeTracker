@@ -27,7 +27,7 @@
             <div class="details">
                 <h3>{{ anime.title }}</h3>
                 <p *ngIf="anime.synopsis" [title]="anime.synopsis">{{ anime.synopsis.slice(0, 400) }}...</p>
-                <button class="addButton" (click)="addAnime(anime)"><i class="fa-regular fa-bookmark"></i>Añadir a mi lista</button>
+                <button (click)="addAnime(anime)"><i class="fa-regular fa-bookmark"></i>Añadir a mi lista</button>
             </div>
         </div>
     </ng-container>
