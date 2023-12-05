@@ -59,7 +59,6 @@ export class SearchResultsAnimeComponent implements OnInit, AfterViewInit {
         this.animeService.getAnimes(this.searchTerm).subscribe((result) => {
           document.body.style.cursor = "default";
           this.anime_results = result.data;
-          this.searchTerm = "";
           this.resultsVisible = true;
           
           // Bloquear el desplazamiento de la página
@@ -100,6 +99,7 @@ export class SearchResultsAnimeComponent implements OnInit, AfterViewInit {
       closeResultsContainer() {
         if (this.resultsVisible) {
           this.animateClosing = true;
+          this.searchTerm = "";
           window.onscroll = null;
           
           setTimeout(() => {
