@@ -27,15 +27,9 @@
             <div class="details">
                 <h3>{{ anime.title }}</h3>
                 <ul>
-                    <li *ngIf="anime.type !== 'Movie'">
-                        <p class="episodes">{{ anime.episodes }} {{ anime.episodes === 1 ? 'episodio' : 'episodios' }}</p>
-                    </li>
-                    <li>
-                        <p class="type">{{ anime.type }}</p>
-                    </li>
-                    <li>
-                        <p class="genres" *ngFor="let genre of anime.genres" [ngClass]="{'hClass': genre.name === 'Hentai'}">{{ genre.name }}</p>
-                    </li>
+                    <li *ngIf="anime.type !== 'Movie'"><p class="episodes">{{ anime.episodes }} {{ anime.episodes === 1 ? 'episode' : 'episodes' }}</p></li>
+                    <li><p class="type">{{ anime.type }}</p></li>
+                    <li><p class="genres" *ngFor="let genre of anime.genres" [ngClass]="{'hClass': genre.name === 'Hentai'}">{{ genre.name }}</p></li>
                 </ul>
                 <p *ngIf="anime.synopsis" [title]="anime.synopsis">{{ anime.synopsis.slice(0, 300) }}...</p>
                 <button (click)="addAnime(anime)">

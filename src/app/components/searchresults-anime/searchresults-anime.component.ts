@@ -55,6 +55,7 @@ export class SearchResultsAnimeComponent implements OnInit, AfterViewInit {
     search() {
       if (this.searchTerm.trim() !== "") {
         document.body.style.cursor = "progress";
+        document.documentElement.style.overflowY = 'hidden';
         
         this.animeService.getAnimes(this.searchTerm).subscribe((result) => {
           document.body.style.cursor = "default";
@@ -97,10 +98,11 @@ export class SearchResultsAnimeComponent implements OnInit, AfterViewInit {
       }
       
       closeResultsContainer() {
+        document.documentElement.style.overflowY = 'visible';
         if (this.resultsVisible) {
           this.animateClosing = true;
-          this.searchTerm = "";
           window.onscroll = null;
+          this.searchTerm = "";
           
           setTimeout(() => {
             this.resultsVisible = false;
