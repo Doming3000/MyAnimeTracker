@@ -92,6 +92,21 @@ export class SearchResultsAnimeComponent implements OnInit, AfterViewInit {
         }
       }
       
+      // Limpiar input
+      clearInput() {
+        if (this.searchTerm === "") {
+          this.searchTerm = "";
+          const placeholder = document.querySelector('input[name="search"]') as HTMLInputElement;
+          placeholder.classList.add("shake-placeholder");
+          
+          setTimeout(() => {
+            placeholder.classList.remove("shake-placeholder");
+          }, 500);
+        } else {
+          this.searchTerm = "";
+        }
+      }
+      
       // Metodos para manejar el cierre del contenedor de resultados
       toggleResultsContainer() {
         this.resultsVisible = !this.resultsVisible;

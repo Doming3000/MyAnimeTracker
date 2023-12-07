@@ -4,6 +4,8 @@
     <button class="searchButton" (click)="search()"><i class="fa-solid fa-magnifying-glass"></i></button>
 </form>
 
+<button class="clearInput" (click)="clearInput()"><i class="fa-solid fa-xmark"></i></button>
+
 <!-- Contenedor de resultados -->
 <div class="overlay" *ngIf="resultsVisible" (click)="closeResultsContainer()"></div>
 

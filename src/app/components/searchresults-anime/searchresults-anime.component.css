@@ -37,7 +37,7 @@ form input {
     position: absolute;
     top: 10px;
     user-select: none;
-    width: 310px;
+    width: 300px;
 }
 
 .searchButton {
@@ -54,6 +54,18 @@ form input {
     top: 10px;
     user-select: none;
     width: 20px;
+}
+
+.clearInput {
+    background-color: transparent;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    font-size: 15px;
+    position: absolute;
+    right: 35px;
+    transform: translateY(-50%);
+    z-index: 999999;
 }
 
 .shake-placeholder {

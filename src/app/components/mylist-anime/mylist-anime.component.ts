@@ -11,7 +11,6 @@ import Swal from 'sweetalert2';
 
 export class MylistAnimeComponent implements OnInit {
   animes_selected: MyAnime[] = [];
-  isListCollapsed = false;
   isListEmpty = true;
   
   constructor(private animeService: AnimeService) { }
@@ -98,11 +97,6 @@ export class MylistAnimeComponent implements OnInit {
   // Verificar si el elemento ya está en la lista
   private isAnimeSelected(anime: MyAnime): boolean {
     return this.animes_selected.some((selectedAnime) => selectedAnime.id === anime.id);
-  }
-  
-  // Colapsar lista 
-  collapse() {
-    this.isListCollapsed = !this.isListCollapsed;
   }
   
   // Botones para contar capítulos:

@@ -9,27 +9,6 @@
     }
 }
 
-@keyframes flipdown {
-	0% {
-		opacity: 0;
-		transform-origin: top center;
-		transform: rotateX(-90deg);
-	}
-
-	5% { opacity: 1; }
-
-	80% { transform: rotateX(8deg); }
-
-	83% { transform: rotateX(6deg); }
-
-	92% { transform: rotateX(-3deg); }
-
-	100% {
-		transform-origin: top center;
-		transform: rotateX(0deg);
-	}
-}
-
 .listHeader {
     display: flex;
     margin-bottom: 10px;
@@ -204,10 +183,6 @@ hr {
 }
 
 /* Ajustes individuales (texto del tooltip) */
-.collapsileTipText {
-    width: 125px;
-}
-
 .episodeCountTipText, .DelAnimeTipText {
     width: 120px;
 }
@@ -217,7 +192,7 @@ hr {
 }
 
 /* Tooltip arrow */
-.episodeCountTipText::after, .DelAnimeTipText::after, .EditAnimeTipText::after, .ViewAnimeTipText::after, .collapsileTipText::after {
+.episodeCountTipText::after, .DelAnimeTipText::after, .EditAnimeTipText::after, .ViewAnimeTipText::after {
     border-color: #555 transparent transparent transparent;
     border-style: solid;
     border-width: 5px;
@@ -229,7 +204,7 @@ hr {
 }
 
 /* Mostrar el tooltip (hover) */
-.episodeTipContainer:hover .episodeCountTipText, .DelAnimeTip:hover .DelAnimeTipText, .EditAnimeTip:hover .EditAnimeTipText, .ViewAnimeTip:hover .ViewAnimeTipText, .collapsileTip:hover .collapsileTipText {
+.episodeTipContainer:hover .episodeCountTipText, .DelAnimeTip:hover .DelAnimeTipText, .EditAnimeTip:hover .EditAnimeTipText, .ViewAnimeTip:hover .ViewAnimeTipText {
     animation: fadeInDown 0.5s;
     opacity: 1;
     visibility: visible;
