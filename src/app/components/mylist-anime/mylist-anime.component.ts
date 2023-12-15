@@ -138,20 +138,6 @@ export class MylistAnimeComponent implements OnInit {
     if (url) {
       window.open(url, '_blank');
     }
-    else {
-      const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 1500,
-        timerProgressBar: true,
-        width: "400px",
-      });
-      Toast.fire({
-        icon: "warning",
-        title: "No has especificado una URL!"
-      });
-    }
   }
   
   // Alerta de confirmación de eliminación

@@ -11,8 +11,7 @@
 
 .listHeader {
     display: flex;
-    margin-bottom: 10px;
-    margin-top: 20px;
+    margin: 20px 0 10px 0;
 }
 
 .listHeader h2 {
@@ -23,8 +22,7 @@
 }
 
 hr {
-    margin-left: 20px;
-    margin-right: 20px;
+    margin: 0 20px 0 20px;
 }
 
 .noElements {
@@ -41,7 +39,7 @@ hr {
     display: grid;
     grid-gap: 1.5rem;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    margin: 20px;
+    margin: 20px 30px 20px 30px;
 }
 
 .anime {
@@ -74,8 +72,7 @@ hr {
     color: #777;
     font-size: 14px;
     height: 30px;
-    margin-bottom: 10px;
-    margin-top: 10px;
+    margin: 10px 0 10px 0;
     text-align: center;
     transition: all linear 200ms;
 }
@@ -91,8 +88,7 @@ hr {
     font-size: 15px;
     height: 100%;
     justify-content: center;
-    margin-left: 3px;
-    margin-right: 3px;
+    margin: 0 3px 0 3px;
     user-select: none;
 }
 
