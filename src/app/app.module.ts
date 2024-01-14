@@ -9,12 +9,14 @@ import { HttpClientModule } from "@angular/common/http";
 import { AppComponent } from './app.component';
 import { SearchResultsAnimeComponent } from './components/searchresults-anime/searchresults-anime.component';
 import { MylistAnimeComponent } from './components/mylist-anime/mylist-anime.component';
+import { WebDataAnimeComponent } from './components/webdata-anime/webdata-anime.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchResultsAnimeComponent,
     MylistAnimeComponent,
+    WebDataAnimeComponent,
   ],
   imports: [
     BrowserModule,
