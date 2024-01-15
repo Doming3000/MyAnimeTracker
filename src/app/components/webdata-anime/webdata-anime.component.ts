@@ -7,7 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class WebDataAnimeComponent {  
-  
   // Método para exportar archivo csv con el almacenamiento local
   exportData() {
     // Obtener el contenido actual del almacenamiento local
