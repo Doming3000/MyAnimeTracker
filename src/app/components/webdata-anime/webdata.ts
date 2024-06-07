@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 
 @Component({
-  selector: 'app-webdata-anime',
-  templateUrl: './webdata-anime.component.html',
-  styleUrls: ['./webdata-anime.component.css']
+  selector: 'app-webdata',
+  templateUrl: './webdata.html',
+  styleUrls: ['./webdata.css']
 })
 
-export class WebDataAnimeComponent {  
+export class WebData {  
   // Método para exportar archivo csv con el almacenamiento local
   exportData() {
     // Obtener el contenido actual del almacenamiento local

@@ -5,12 +5,12 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Subscription } from "rxjs";
 
 @Component({
-  selector: "app-searchresults-anime",
-  templateUrl: "./searchresults-anime.component.html",
-  styleUrls: ["./searchresults-anime.component.css"],
+  selector: "app-searchresults",
+  templateUrl: "./searchresults.html",
+  styleUrls: ["./searchresults.css"],
 })
 
-export class SearchResultsAnimeComponent implements OnInit, AfterViewInit {
+export class SearchResults implements OnInit, AfterViewInit {
   @ViewChild('resultsContainer') resultsContainer!: ElementRef;
   
   animateClosing: boolean = false; 

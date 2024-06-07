@@ -5,11 +5,11 @@ import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-mylist-anime',
-  templateUrl: './mylist-anime.component.html',
-  styleUrls: ['./mylist-anime.component.css']
+  templateUrl: './mylist.html',
+  styleUrls: ['./mylist.css']
 })
 
-export class MylistAnimeComponent implements OnInit {
+export class Mylist implements OnInit {
   animes_selected: MyAnime[] = [];
   isListEmpty = true;
   
