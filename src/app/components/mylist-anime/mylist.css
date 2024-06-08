@@ -42,6 +42,9 @@ hr {
     transform: translate(-50%, -50%);
     user-select: none;  
     width: 380px;
+
+    /* Oculto hasta terminar */
+    visibility: hidden;
 }
 
 .alertWrapper button {

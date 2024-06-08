@@ -9,14 +9,14 @@ import { HttpClientModule } from "@angular/common/http";
 import { AppComponent } from './app.component';
 import { SearchResults } from './components/searchresults-anime/searchresults';
 import { Mylist } from './components/mylist-anime/mylist';
-import { WebData } from './components/webdata-anime/webdata';
+import { SideNav } from './components/sidenav-anime/sidenav';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchResults,
     Mylist,
-    WebData,
+    SideNav,
   ],
   imports: [
     BrowserModule,

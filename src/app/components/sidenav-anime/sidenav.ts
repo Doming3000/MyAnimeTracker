@@ -1,12 +1,17 @@
 import { Component} from '@angular/core';
 
 @Component({
-  selector: 'app-webdata',
-  templateUrl: './webdata.html',
-  styleUrls: ['./webdata.css']
+  selector: 'app-sidenav',
+  templateUrl: './sidenav.html',
+  styleUrls: ['./sidenav.css']
 })
 
-export class WebData {  
+export class SideNav {  
+  // Abrir el menú desplegable
+  openNav() {
+    alert('Abrir el menú');
+  }
+
   // Método para exportar archivo csv con el almacenamiento local
   exportData() {
     // Obtener el contenido actual del almacenamiento local
