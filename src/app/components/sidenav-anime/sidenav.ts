@@ -8,8 +8,14 @@ import { Component} from '@angular/core';
 
 export class SideNav {  
   // Abrir el menú desplegable
+  isOpen: boolean = false;
+
   openNav() {
-    alert('Abrir el menú');
+    this.isOpen = true;
+  }
+
+  closeNav() {
+    this.isOpen = false;
   }
 
   // Método para exportar archivo csv con el almacenamiento local

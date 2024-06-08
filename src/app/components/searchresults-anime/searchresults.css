@@ -65,7 +65,7 @@ form input {
     position: absolute;
     right: 35px;
     transform: translateY(-50%);
-    z-index: 999999;
+    z-index: 1000;
 }
 
 .shake-placeholder {
