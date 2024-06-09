@@ -23,7 +23,7 @@ export class SideNav {
     // Obtener el contenido actual del almacenamiento local
     const storedData = localStorage.getItem("my_anime");
     
-    if (storedData !== null) {
+    if (storedData !== null && storedData !== "[]") {
       // Crear un blob con el contenido JSON
       const blob = new Blob([storedData], { type: "application/json" });
       
