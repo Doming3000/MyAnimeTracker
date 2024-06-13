@@ -54,3 +54,69 @@ main {
 ::-webkit-scrollbar-thumb:hover {
     background: #a8a8a8;
 }
+
+/* Alertas */
+.alertWrapper {
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    user-select: none;  
+    width: 380px;
+    margin-top: 20px;
+
+    /* Oculto hasta terminar */
+    visibility: hidden;
+}
+
+.alertWrapper button {
+    background-color: transparent;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    font-size: 15px;
+    right: 35px;
+}
+
+.alertWrapper button i {
+    color: black;
+}
+
+.success {
+    border-left: 8px solid #47D764;
+}
+
+.success i {
+    color: #47D764;
+}
+
+.toast {
+    background-color: #ffffff;
+    border-radius: 7px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+    display: grid;
+    grid-template-columns: 1.3fr 6fr 0.5fr;
+    height: 80px;
+    margin-bottom: 50px;
+    padding: 20px;
+    width: 100%;
+}
+
+.container-1, .container-2 {
+    align-self: center;
+}
+
+.container-1 i {
+    font-size: 35px;
+}
+
+.container-2 p:first-child {
+    color: #101020;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.container-2 p:last-child {
+    color: #656565;
+    font-size: 12px;
+    font-weight: 400;
+}

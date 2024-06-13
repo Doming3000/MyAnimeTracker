@@ -8,22 +8,6 @@
     <span>Tal parece que aquí no hay nada.<br>¿Por qué no agregas algo a tu lista?</span>
 </div>
 
-<!-- Alertas -->
-<div class="alertWrapper">
-    <div class="toast success">
-        <div class="container-1">
-            <i class="fas fa-check-circle"></i>
-        </div>
-
-        <div class="container-2">
-            <p>Añadido!</p>
-            <p>Se ha añadido este elemento a tu lista</p>
-        </div>
-
-        <button><i class="fa-solid fa-xmark"></i></button>
-    </div>
-</div>
-
 <!-- Lista -->
 <div *ngIf="animes_selected.length > 0" class="mylist">
     <div *ngFor="let anime of animes_selected" class="anime">

@@ -8,5 +8,10 @@
 <div class="sidenav" [class.open]="isOpen">
    <button (click)="closeNav()" class="cerrar"><i class="fa-solid fa-xmark"></i></button>
    
-   <button (click)="exportData()" class="downloadButton"><i class="fa-solid fa-cloud-arrow-down"></i></button>
+   <div class="dataContainer">
+      <input type="file" id="fileInput" (change)="importData($event)" accept=".csv">
+      <label for="fileInput"><i class="fa-solid fa-cloud-arrow-up"></i> Importar datos</label>
+      
+      <label (click)="exportData()"><i class="fa-solid fa-cloud-arrow-down"></i> Exportar datos</label>
+   </div>
 </div>
