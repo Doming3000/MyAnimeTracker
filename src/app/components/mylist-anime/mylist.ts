@@ -52,11 +52,11 @@ export class Mylist implements OnInit {
   addAnimeToMyList(anime: MyAnime) {
     // Verificar si el elemento ya existe en la lista
     if (this.isAnimeSelected(anime)) {
-      this.triggerErrorAlert('Este elemento ya está en tu lista');
+      this.triggerErrorAlert('Oops!', 'Este elemento ya está en tu lista');
     }
     
     else {
-      this.triggerSuccessAlert('Añadido a tu lista');
+      this.triggerSuccessAlert('Hecho!', 'Añadido a tu lista');
       
       // Añadir y actualizar el almacenamiento local
       this.animes_selected.push(anime);
@@ -176,11 +176,13 @@ export class Mylist implements OnInit {
     localStorage.setItem('my_anime', JSON.stringify(this.animes_selected));
   }
   
-  triggerSuccessAlert(message: string) {
-    this.webalerts.showAlert('success', 'Success!', message);
+  // Método para mostrar una alerta de éxito
+  triggerSuccessAlert(title: string, message: string) {
+    this.webalerts.showAlert('success', title, message);
   }
   
-  triggerErrorAlert(message: string) {
-    this.webalerts.showAlert('error', 'Error!', message);
+  // Método para mostrar una alerta de error
+  triggerErrorAlert(title: string, message: string) {
+    this.webalerts.showAlert('error', title, message);
   }
 }

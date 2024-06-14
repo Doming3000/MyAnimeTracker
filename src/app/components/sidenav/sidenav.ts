@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { WebAlerts } from '../webalerts/web-alerts'; // Ajusta la ruta según la estructura de tu proyecto
+import { WebAlerts } from '../webalerts/web-alerts';
 
 @Component({
   selector: 'app-sidenav',
@@ -46,9 +46,6 @@ export class SideNav {
       
       // Eliminar el enlace del documento
       document.body.removeChild(a);
-      
-      // Mostrar alerta de éxito
-      this.triggerSuccessAlert('Hecho!', 'Datos exportados con éxito');
     }
   }
   
@@ -78,7 +75,7 @@ export class SideNav {
         
         // Verificar que el contenido sea un array (ajustar según tu estructura esperada)
         if (!Array.isArray(data)) {
-          throw new Error("El contenido no tiene el formato correcto");
+          this.triggerErrorAlert('Error!', 'El contenido no tiene el formato correcto');
         }
         
         // Almacenar los datos en el almacenamiento local
