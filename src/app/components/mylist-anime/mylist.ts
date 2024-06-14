@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MyAnime } from 'src/app/interfaces/api-movies';
 import { AnimeService } from 'src/app/services/anime.service';
+import { WebAlerts } from '../webalerts/web-alerts';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -10,6 +11,8 @@ import Swal from 'sweetalert2';
 })
 
 export class Mylist implements OnInit {
+  @ViewChild(WebAlerts) webalerts!: WebAlerts;
+  
   animes_selected: MyAnime[] = [];
   isListEmpty = true;
   
@@ -49,30 +52,11 @@ export class Mylist implements OnInit {
   addAnimeToMyList(anime: MyAnime) {
     // Verificar si el elemento ya existe en la lista
     if (this.isAnimeSelected(anime)) {
-      const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 1500,
-        timerProgressBar: true,
-        width: "400",
-      });
-      Toast.fire({
-        icon: "error",
-        title: "Este elemento ya está en tu lista"
-      });
-    } else {
-      const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 1500,
-        timerProgressBar: true,
-      });
-      Toast.fire({
-        icon: "success",
-        title: "Añadido a tu lista!"
-      });
+      this.triggerErrorAlert('Este elemento ya está en tu lista');
+    }
+    
+    else {
+      this.triggerSuccessAlert('Añadido a tu lista');
       
       // Añadir y actualizar el almacenamiento local
       this.animes_selected.push(anime);
@@ -190,5 +174,13 @@ export class Mylist implements OnInit {
   // Actualizar el almacenamiento local con la lista de animes
   private updateLocalStorage() {
     localStorage.setItem('my_anime', JSON.stringify(this.animes_selected));
+  }
+  
+  triggerSuccessAlert(message: string) {
+    this.webalerts.showAlert('success', 'Success!', message);
+  }
+  
+  triggerErrorAlert(message: string) {
+    this.webalerts.showAlert('error', 'Error!', message);
   }
 }

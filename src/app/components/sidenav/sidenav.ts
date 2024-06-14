@@ -1,13 +1,14 @@
-import { Component} from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { WebAlerts } from '../webalerts/web-alerts'; // Ajusta la ruta según la estructura de tu proyecto
 
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.html',
   styleUrls: ['./sidenav.css']
 })
-
-export class SideNav {  
-  // Abrir el menú desplegable
+export class SideNav {
+  @ViewChild(WebAlerts) webalerts!: WebAlerts;
+  
   isOpen: boolean = false;
   
   openNav() {
@@ -23,7 +24,7 @@ export class SideNav {
     const storedData = localStorage.getItem("my_anime");
     
     if (storedData === null || storedData === "[]") {
-      alert("No hay nada que descargar");
+      this.triggerErrorAlert('Vaya!', 'No hay nada que descargar');
       return;
     }
     
@@ -45,6 +46,9 @@ export class SideNav {
       
       // Eliminar el enlace del documento
       document.body.removeChild(a);
+      
+      // Mostrar alerta de éxito
+      this.triggerSuccessAlert('Hecho!', 'Datos exportados con éxito');
     }
   }
   
@@ -54,12 +58,12 @@ export class SideNav {
     
     // Verificar si se seleccionó un archivo
     if (!file) {
-      alert("No se seleccionó ningún archivo");
+      this.triggerErrorAlert('Error!', 'No se seleccionó ningún archivo');
       return;
     }
     
     else if (file.name !== "data.csv") {
-      alert("Este no parece ser el archivo correcto");
+      this.triggerErrorAlert('Vaya!', 'Este no parece ser el archivo correcto');
       return;
     }
     
@@ -80,19 +84,26 @@ export class SideNav {
         // Almacenar los datos en el almacenamiento local
         localStorage.setItem("my_anime", JSON.stringify(data));
         
-        // Mostrar un mensaje de éxito
-        alert("Datos importados con éxito");
+        // Mostrar alerta de éxito
+        this.triggerSuccessAlert('Hecho!', 'Datos importados con éxito');
         
-        // Recargar la ventana
-        window.location.reload();
       } catch (error) {
         // Mostrar un mensaje de error en caso de problemas con el parseo
-        alert("El archivo parece estar dañado y no es posible importarlo");
-        console.error(error);
+        this.triggerErrorAlert('Oh no!', 'El archivo parece estar dañado y no es posible importarlo');
       }
     };
     
     // Leer el archivo como texto
     reader.readAsText(file);
+  }
+  
+  // Método para mostrar una alerta de éxito
+  triggerSuccessAlert(title: string, message: string) {
+    this.webalerts.showAlert('success', title, message);
+  }
+  
+  // Método para mostrar una alerta de error
+  triggerErrorAlert(title: string, message: string) {
+    this.webalerts.showAlert('error', title, message);
   }
 }

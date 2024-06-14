@@ -9,7 +9,8 @@ import { HttpClientModule } from "@angular/common/http";
 import { AppComponent } from './app.component';
 import { SearchResults } from './components/searchresults-anime/searchresults';
 import { Mylist } from './components/mylist-anime/mylist';
-import { SideNav } from './components/sidenav-anime/sidenav';
+import { SideNav } from './components/sidenav/sidenav';
+import { WebAlerts } from './components/webalerts/web-alerts';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { SideNav } from './components/sidenav-anime/sidenav';
     SearchResults,
     Mylist,
     SideNav,
+    WebAlerts,
   ],
   imports: [
     BrowserModule,

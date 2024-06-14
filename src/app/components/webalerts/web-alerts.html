@@ -1,0 +1,16 @@
+<div class="alertWrapper" [ngClass]="{ 'visible': isVisible }">
+    <div class="toast" [ngClass]="alertType">
+        <div class="container-1">
+            <i class="fas" [ngClass]="{
+                'fa-check-circle': alertType === 'success',
+                'fa-circle-exclamation': alertType === 'error',
+                'fa-circle-question': alertType === 'warning'
+            }"></i>
+        </div>
+        <div class="container-2">
+            <p>{{ title }}</p>
+            <p>{{ message }}</p>
+        </div>
+        <button (click)="closeAlert()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+</div>

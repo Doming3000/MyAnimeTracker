@@ -2,7 +2,6 @@
 
 - Cambiar fuente de texto "Mi lista"
 - Cambiar icono del botón "Añadir una URL"
-- Cambiar las alertas de sweet alert por popups o mejorar el diseño de estas y solucionar errores.
 - Reglas media
 
 # Ideas:
