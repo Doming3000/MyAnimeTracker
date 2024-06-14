@@ -6,35 +6,63 @@ import { Component } from '@angular/core';
   styleUrls: ['./web-alerts.css']
 })
 export class WebAlerts {
-  isVisible: boolean = false;
+  isToastVisible: boolean = false;
+  isConfirmVisible: boolean = false;
   alertType: string = '';
   title: string = '';
   message: string = '';
   timer: any;
   
-  // Método para mostrar una alerta
+  confirmTitle: string = '';
+  confirmMessage: string = '';
+  confirmCallback!: () => void;
+  
+  // Mostrar alerta tipo toast
   showAlert(type: string, title: string, message: string) {
-    // Si ya hay una alerta visible, ocultarla primero
-    if (this.isVisible) {
-      this.isVisible = false;
-      clearTimeout(this.timer);
-    }
+    this.clearToast();
     
-    // Mostrar la nueva alerta
     this.alertType = type;
     this.title = title;
     this.message = message;
-    this.isVisible = true;
+    this.isToastVisible = true;
     
-    // Iniciar el temporizador para ocultar automáticamente la alerta
     this.timer = setTimeout(() => {
-      this.isVisible = false;
+      this.isToastVisible = false;
     }, 3000);
   }
   
-  // Método para cerrar manualmente la alerta
+  // Mostrar modal de confirmación
+  showConfirm(title: string, message: string, callback: () => void) {
+    this.confirmTitle = title;
+    this.confirmMessage = message;
+    this.confirmCallback = callback;
+    this.isConfirmVisible = true;
+  }
+  
+  // Acción de confirmación
+  confirmAction() {
+    if (this.confirmCallback) {
+      this.confirmCallback();
+    }
+    this.isConfirmVisible = false;
+  }
+  
+  // Acción de cancelación
+  cancelAction() {
+    this.isConfirmVisible = false;
+  }
+  
+  // Cerrar alerta tipo toast
   closeAlert() {
-    this.isVisible = false;
+    this.isToastVisible = false;
     clearTimeout(this.timer);
+  }
+  
+  // Limpiar cualquier alerta toast visible
+  private clearToast() {
+    if (this.isToastVisible) {
+      this.isToastVisible = false;
+      clearTimeout(this.timer);
+    }
   }
 }

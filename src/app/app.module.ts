@@ -7,8 +7,8 @@ import { HttpClientModule } from "@angular/common/http";
 
 // Componentes
 import { AppComponent } from './app.component';
-import { SearchResults } from './components/searchresults-anime/searchresults';
-import { Mylist } from './components/mylist-anime/mylist';
+import { SearchResults } from './components/searchresults/searchresults';
+import { Mylist } from './components/mylist/mylist';
 import { SideNav } from './components/sidenav/sidenav';
 import { WebAlerts } from './components/webalerts/web-alerts';
 

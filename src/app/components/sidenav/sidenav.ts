@@ -11,95 +11,82 @@ export class SideNav {
   
   isOpen: boolean = false;
   
+  // Abrir el menú lateral
   openNav() {
     this.isOpen = true;
   }
   
+  // Cerrar el menú lateral
   closeNav() {
     this.isOpen = false;
   }
   
-  // Método para exportar archivo csv con el almacenamiento local
+  // Exportar datos a un archivo CSV
   exportData() {
-    const storedData = localStorage.getItem("my_anime");
+    const storedData = localStorage.getItem('my_anime');
     
-    if (storedData === null || storedData === "[]") {
+    if (!storedData || storedData === '[]') {
       this.triggerErrorAlert('Vaya!', 'No hay nada que descargar');
       return;
     }
     
-    else {
-      // Crear un blob con el contenido JSON
-      const blob = new Blob([storedData], { type: "application/json" });
-      
-      // Crear una URL para el blob
-      const url = URL.createObjectURL(blob);
-      
-      // Crear un enlace <a> para descargar el archivo
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "data.csv";
-      
-      // Agregar el enlace al documento y simular un clic para iniciar la descarga
-      document.body.appendChild(a);
-      a.click();
-      
-      // Eliminar el enlace del documento
-      document.body.removeChild(a);
-    }
+    const blob = new Blob([storedData], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'data.csv';
+    
+    // Agregar enlace al documento y simular clic para descargar
+    document.body.appendChild(a);
+    a.click();
+    
+    // Eliminar enlace del documento
+    document.body.removeChild(a);
   }
   
-  // Método para importar datos desde un archivo CSV al almacenamiento local
+  // Importar datos desde un archivo CSV
   importData(event: any) {
     const file = event.target.files[0];
     
-    // Verificar si se seleccionó un archivo
     if (!file) {
       this.triggerErrorAlert('Error!', 'No se seleccionó ningún archivo');
       return;
     }
     
-    else if (file.name !== "data.csv") {
+    else if (file.name !== 'data.csv') {
       this.triggerErrorAlert('Vaya!', 'Este no parece ser el archivo correcto');
       return;
     }
     
     const reader = new FileReader();
     
-    // Leer el contenido del archivo
     reader.onload = (e: any) => {
       const content = e.target.result;
       try {
-        // Intentar parsear el contenido como JSON
         const data = JSON.parse(content);
         
-        // Verificar que el contenido sea un array (ajustar según tu estructura esperada)
         if (!Array.isArray(data)) {
           this.triggerErrorAlert('Error!', 'El contenido no tiene el formato correcto');
+          return;
         }
         
-        // Almacenar los datos en el almacenamiento local
-        localStorage.setItem("my_anime", JSON.stringify(data));
-        
-        // Mostrar alerta de éxito
+        localStorage.setItem('my_anime', JSON.stringify(data));
         this.triggerSuccessAlert('Hecho!', 'Datos importados con éxito');
         
       } catch (error) {
-        // Mostrar un mensaje de error en caso de problemas con el parseo
-        this.triggerErrorAlert('Oh no!', 'El archivo parece estar dañado y no es posible importarlo');
+        this.triggerErrorAlert('Vaya!', 'El archivo parece estar dañado y no es posible importarlo');
       }
     };
     
-    // Leer el archivo como texto
     reader.readAsText(file);
   }
   
-  // Método para mostrar una alerta de éxito
+  // Mostrar alerta de éxito
   triggerSuccessAlert(title: string, message: string) {
     this.webalerts.showAlert('success', title, message);
   }
   
-  // Método para mostrar una alerta de error
+  // Mostrar alerta de error
   triggerErrorAlert(title: string, message: string) {
     this.webalerts.showAlert('error', title, message);
   }
