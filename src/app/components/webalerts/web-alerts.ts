@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./web-alerts.css']
 })
 export class WebAlerts {
+  // Propiedades para manejar el estado de las alertas
   isToastVisible: boolean = false;
   isConfirmVisible: boolean = false;
   alertType: string = '';
@@ -13,11 +14,15 @@ export class WebAlerts {
   message: string = '';
   timer: any;
   
+  // Propiedades para manejar la modal de confirmación
   confirmTitle: string = '';
   confirmMessage: string = '';
   confirmYesText: string = '';
   confirmNoText: string = '';
   confirmCallback!: () => void;
+  confirmCancelCallback!: () => void;
+  
+  constructor() {}
   
   // Mostrar alerta tipo toast
   showAlert(type: string, title: string, message: string) {
@@ -34,12 +39,20 @@ export class WebAlerts {
   }
   
   // Mostrar modal de confirmación
-  showConfirm(title: string, message: string, yesText: string, noText: string, callback: () => void) {
-    this.confirmTitle = title;
-    this.confirmMessage = message;
-    this.confirmYesText = yesText;
-    this.confirmNoText = noText;
-    this.confirmCallback = callback;
+  showConfirm(options: {
+    title: string,
+    message: string,
+    yesText: string,
+    noText: string,
+    callback: () => void,
+    cancelCallback?: () => void
+  }) {
+    this.confirmTitle = options.title;
+    this.confirmMessage = options.message;
+    this.confirmYesText = options.yesText;
+    this.confirmNoText = options.noText;
+    this.confirmCallback = options.callback;
+    this.confirmCancelCallback = options.cancelCallback || (() => {});
     this.isConfirmVisible = true;
   }
   
@@ -53,6 +66,9 @@ export class WebAlerts {
   
   // Acción de cancelación
   cancelAction() {
+    if (this.confirmCancelCallback) {
+      this.confirmCancelCallback();
+    }
     this.isConfirmVisible = false;
   }
   

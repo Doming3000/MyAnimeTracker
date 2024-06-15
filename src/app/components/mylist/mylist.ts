@@ -94,13 +94,17 @@ export class Mylist implements OnInit {
   
   // Eliminar un anime de la lista
   DelAnime(anime: MyAnime) {
-    this.webalerts.showConfirm( 'Confirmar eliminación', '¿Estás seguro de que deseas eliminar este elemento?', 'Sí, quiero eliminarlo' , 'No, cambié de opinión',
-      () => {
+    this.webalerts.showConfirm({
+      title: 'Confirmar eliminación',
+      message: '¿Estás seguro de que deseas eliminar este elemento?',
+      yesText: 'Sí, quiero eliminarlo',
+      noText: 'No, cambié de opinión',
+      callback: () => {
         this.animes_selected = this.animes_selected.filter(an => an.id !== anime.id);
         this.updateLocalStorage();
         this.triggerSuccessAlert('¡Eliminado!', 'El elemento fue eliminado con éxito.');
       }
-    );
+    });
   }
   
   // Acortar el nombre del anime
