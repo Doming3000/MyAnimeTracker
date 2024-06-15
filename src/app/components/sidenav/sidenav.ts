@@ -11,8 +11,6 @@ export class SideNav {
 
   isOpen: boolean = false;
 
-  constructor() {}
-
   // Abrir el menú lateral
   openNav() {
     this.isOpen = true;
