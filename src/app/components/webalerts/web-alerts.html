@@ -1,3 +1,5 @@
+<div class="overlay" *ngIf="isConfirmVisible" (click)="cancelAction()"></div>
+
 <div class="alertWrapper" [ngClass]="{ 'visible': isToastVisible || isConfirmVisible }">
     <div class="toast" *ngIf="isToastVisible" [ngClass]="alertType">
         <div class="container-1">
@@ -14,13 +16,13 @@
         
         <button (click)="closeAlert()"><i class="fa-solid fa-xmark"></i></button>
     </div>
-    
-    <div class="confirmWrapper" *ngIf="isConfirmVisible">
-        <div class="confirmModal">
-            <h2>{{ confirmTitle }}</h2>
-            <p>{{ confirmMessage }}</p>
-            <button (click)="confirmAction()">Yes</button>
-            <button (click)="cancelAction()">No</button>
-        </div>
+</div>
+
+<div class="confirmWrapper" *ngIf="isConfirmVisible">
+    <div class="confirmModal">
+        <h2>{{ confirmTitle }}</h2>
+        <p>{{ confirmMessage }}</p>
+        <button (click)="confirmAction()">{{ confirmYesText }}</button>
+        <button (click)="cancelAction()">{{ confirmNoText }}</button>
     </div>
 </div>

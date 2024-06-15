@@ -15,7 +15,7 @@ export class SearchResults implements OnInit, AfterViewInit {
   
   animateClosing: boolean = false; 
   anime_results: any[] = [];
-  animeSuscription!: Subscription;
+  animeSubscription!: Subscription;
   inputEmpty: boolean = false;
   noResultsFound: boolean = false;
   noResultsMessageDisplayed: boolean = false;
@@ -30,28 +30,30 @@ export class SearchResults implements OnInit, AfterViewInit {
     private formBuilder: FormBuilder,
     private elRef: ElementRef
   ) {
+    // Inicialización del formulario de búsqueda
     this.searchForm = this.formBuilder.group({
       searchTerm: ["", Validators.required],
     });
   }
   
   ngAfterViewInit(): void {
+    // Agregar evento de desplazamiento al contenedor de resultados
     this.resultsContainer.nativeElement.addEventListener('scroll', this.onContainerScroll);
   }
   
   ngOnInit(): void {
-    this.animeSuscription = this.animeService
-    .getResultAnime()
-    .subscribe((result) => {
+    // Suscribirse a los resultados de anime
+    this.animeSubscription = this.animeService.getResultAnime().subscribe((result) => {
       this.anime_results = result;
     });
   }
   
   ngOnDestroy(): void {
-    this.animeSuscription.unsubscribe();
+    // Desuscribirse cuando el componente se destruye
+    this.animeSubscription.unsubscribe();
   }
   
-  // Búsqueda
+  // Realizar búsqueda de animes
   search() {
     if (this.searchTerm.trim() !== "") {
       document.body.style.cursor = "progress";
@@ -63,55 +65,57 @@ export class SearchResults implements OnInit, AfterViewInit {
         this.resultsVisible = true;
         
         // Bloquear el desplazamiento de la página
-        const scrollY = window.scrollY;  
+        const scrollY = window.scrollY;
         window.onscroll = () => {
           window.scrollTo(0, scrollY);
         };
-        if (this.anime_results.length > 0) {
-          this.noResultsFound = false;
-          this.noResultsMessageDisplayed = false;
-        } else {
-          this.noResultsFound = true;
-          if (!this.noResultsMessageDisplayed) {
-            this.noResultsMessageDisplayed = true;
-          }
-        }
+        
+        this.noResultsFound = this.anime_results.length === 0;
+        this.noResultsMessageDisplayed = this.noResultsFound;
       });
     } else {
-      this.inputEmpty = true;
-      this.searchCompleted = false;
-      
-      const placeholder = document.querySelector(
-        'input[name="search"]'
-      ) as HTMLInputElement;
-      placeholder.classList.add("shake-placeholder");
-      
-      setTimeout(() => {
-        placeholder.classList.remove("shake-placeholder");
-      }, 500);
+      this.handleEmptyInput();
     }
   }
   
-  // Limpiar input
+  // Manejar el input vacío y mostrar animación de sacudida
+  handleEmptyInput() {
+    this.inputEmpty = true;
+    this.searchCompleted = false;
+    
+    const placeholder = document.querySelector('input[name="search"]') as HTMLInputElement;
+    placeholder.classList.add("shake-placeholder");
+    
+    setTimeout(() => {
+      placeholder.classList.remove("shake-placeholder");
+    }, 500);
+  }
+  
+  // Limpiar input de búsqueda
   clearInput() {
     if (this.searchTerm === "") {
-      this.searchTerm = "";
-      const placeholder = document.querySelector('input[name="search"]') as HTMLInputElement;
-      placeholder.classList.add("shake-placeholder");
-      
-      setTimeout(() => {
-        placeholder.classList.remove("shake-placeholder");
-      }, 500);
+      this.triggerShakeAnimation();
     } else {
       this.searchTerm = "";
     }
   }
   
-  // Metodos para manejar el cierre del contenedor de resultados
+  // Activar animación de sacudida del placeholder
+  triggerShakeAnimation() {
+    const placeholder = document.querySelector('input[name="search"]') as HTMLInputElement;
+    placeholder.classList.add("shake-placeholder");
+    
+    setTimeout(() => {
+      placeholder.classList.remove("shake-placeholder");
+    }, 500);
+  }
+  
+  // Alternar visibilidad del contenedor de resultados
   toggleResultsContainer() {
     this.resultsVisible = !this.resultsVisible;
   }
   
+  // Cerrar el contenedor de resultados con animación
   closeResultsContainer() {
     document.documentElement.style.overflowY = 'visible';
     if (this.resultsVisible) {
@@ -132,7 +136,7 @@ export class SearchResults implements OnInit, AfterViewInit {
     }
   }
   
-  // Añadir a la lista
+  // Añadir un anime a la lista
   addAnime(anime: Anime) {
     const addAnime: MyAnime = {
       id: anime.mal_id,
@@ -147,12 +151,13 @@ export class SearchResults implements OnInit, AfterViewInit {
     this.animeService.animeSelected(addAnime);
   }
   
-  // Efecto de desplazamiento de la barra de progreso del contenedor de resultados
+  // Manejar el desplazamiento del contenedor de resultados
   onContainerScroll = (event: Event) => {
-    this.myFunction();
+    this.updateProgressBar();
   }
   
-  myFunction() {
+  // Actualizar la barra de progreso del contenedor de resultados
+  updateProgressBar() {
     const container = this.resultsContainer.nativeElement;
     const winScroll = container.scrollTop || document.documentElement.scrollTop || document.body.scrollTop;
     const height = container.scrollHeight - container.clientHeight;

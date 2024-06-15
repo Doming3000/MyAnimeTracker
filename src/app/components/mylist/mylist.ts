@@ -94,7 +94,7 @@ export class Mylist implements OnInit {
   
   // Eliminar un anime de la lista
   DelAnime(anime: MyAnime) {
-    this.webalerts.showConfirm( 'Confirmar eliminación', '¿Estás seguro de que deseas eliminar este elemento?', 
+    this.webalerts.showConfirm( 'Confirmar eliminación', '¿Estás seguro de que deseas eliminar este elemento?', 'Sí, quiero eliminarlo' , 'No, cambié de opinión',
       () => {
         this.animes_selected = this.animes_selected.filter(an => an.id !== anime.id);
         this.updateLocalStorage();

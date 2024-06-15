@@ -15,6 +15,8 @@ export class WebAlerts {
   
   confirmTitle: string = '';
   confirmMessage: string = '';
+  confirmYesText: string = '';
+  confirmNoText: string = '';
   confirmCallback!: () => void;
   
   // Mostrar alerta tipo toast
@@ -32,9 +34,11 @@ export class WebAlerts {
   }
   
   // Mostrar modal de confirmación
-  showConfirm(title: string, message: string, callback: () => void) {
+  showConfirm(title: string, message: string, yesText: string, noText: string, callback: () => void) {
     this.confirmTitle = title;
     this.confirmMessage = message;
+    this.confirmYesText = yesText;
+    this.confirmNoText = noText;
     this.confirmCallback = callback;
     this.isConfirmVisible = true;
   }
