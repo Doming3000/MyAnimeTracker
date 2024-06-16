@@ -84,7 +84,7 @@ export class SideNav {
           this.alerts.showConfirm({
             title: 'Confirmar Importación',
             message: '¿Estás seguro de que deseas importar estos datos?<br>La información actual se perderá si no está respaldada.',
-            yesText: 'Sí, importar',
+            yesText: 'Sí, quiero importar',
             noText: 'No, cambié de opinión',
             callback: () => {
               this.triggerSuccessAlert('Hecho!', 'Datos importados con éxito');
