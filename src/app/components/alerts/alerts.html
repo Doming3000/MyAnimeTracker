@@ -22,7 +22,7 @@
     <div class="confirmModal">
         <h2>{{ confirmTitle }}</h2>
         <p [innerHTML]="confirmMessage"></p>
-        <button (click)="confirmAction()">{{ confirmYesText }}</button>
-        <button (click)="cancelAction()">{{ confirmNoText }}</button>
+        <button class="danger" (click)="confirmAction()">{{ confirmYesText }}</button>
+        <button class="sucess" (click)="cancelAction()">{{ confirmNoText }}</button>
     </div>
 </div>

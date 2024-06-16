@@ -128,14 +128,15 @@
     border: none;
     border-radius: 3px;
     cursor: pointer;
+    color: white;
 }
 
-.confirmModal button:first-child {
+.confirmModal .danger {
     background-color: #d9534f;
     color: white;
 }
 
-.confirmModal button:last-child {
+.confirmModal .sucess {
     background-color: #5bc0de;
     color: white;
 }

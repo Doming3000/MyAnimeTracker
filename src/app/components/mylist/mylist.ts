@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MyAnime } from 'src/app/interfaces/api-movies';
 import { AnimeService } from 'src/app/services/anime.service';
-import { WebAlerts } from '../webalerts/web-alerts';
+import { Alerts } from '../alerts/alerts';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./mylist.css']
 })
 export class Mylist implements OnInit {
-  @ViewChild(WebAlerts) webalerts!: WebAlerts;
+  @ViewChild(Alerts) alerts!: Alerts;
   
   animes_selected: MyAnime[] = [];
   isListEmpty = true;
@@ -94,7 +94,7 @@ export class Mylist implements OnInit {
   
   // Eliminar un anime de la lista
   DelAnime(anime: MyAnime) {
-    this.webalerts.showConfirm({
+    this.alerts.showConfirm({
       title: 'Confirmar eliminación',
       message: '¿Estás seguro de que deseas eliminar este elemento?',
       yesText: 'Sí, quiero eliminarlo',
@@ -138,11 +138,11 @@ export class Mylist implements OnInit {
   
   // Mostrar alerta de éxito
   triggerSuccessAlert(title: string, message: string) {
-    this.webalerts.showAlert('success', title, message);
+    this.alerts.showAlert('success', title, message);
   }
   
   // Mostrar alerta de error
   triggerErrorAlert(title: string, message: string) {
-    this.webalerts.showAlert('error', title, message);
+    this.alerts.showAlert('error', title, message);
   }
 }

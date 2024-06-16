@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-web-alerts',
-  templateUrl: './web-alerts.html',
-  styleUrls: ['./web-alerts.css']
+  selector: 'app-alerts',
+  templateUrl: './alerts.html',
+  styleUrls: ['./alerts.css']
 })
-export class WebAlerts {
+export class Alerts {
   // Propiedades para manejar el estado de las alertas
   isToastVisible: boolean = false;
   isConfirmVisible: boolean = false;

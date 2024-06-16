@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import { SearchResults } from './components/searchresults/searchresults';
 import { Mylist } from './components/mylist/mylist';
 import { SideNav } from './components/sidenav/sidenav';
-import { WebAlerts } from './components/webalerts/web-alerts';
+import { Alerts } from './components/alerts/alerts';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,7 @@ import { WebAlerts } from './components/webalerts/web-alerts';
     SearchResults,
     Mylist,
     SideNav,
-    WebAlerts,
+    Alerts,
   ],
   imports: [
     BrowserModule,
