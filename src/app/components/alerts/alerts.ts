@@ -6,15 +6,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./alerts.css']
 })
 export class Alerts {
-  // Propiedades para manejar el estado de las alertas
+  // Propiedades para manejar el estado de las alertas tipo toast
   isToastVisible: boolean = false;
-  isConfirmVisible: boolean = false;
   alertType: string = '';
   title: string = '';
   message: string = '';
   timer: any;
   
-  // Propiedades para manejar la modal de confirmación
+  // Propiedades para manejar el estado de la modal de confirmación
+  isConfirmVisible: boolean = false;
   confirmTitle: string = '';
   confirmMessage: string = '';
   confirmYesText: string = '';
@@ -23,18 +23,30 @@ export class Alerts {
   confirmCancelCallback!: () => void;
   
   constructor() {}
-  
+    
   // Mostrar alerta tipo toast
   showAlert(type: string, title: string, message: string) {
-    this.clearToast();
+    if (this.isToastVisible) {
+      this.closeAlert();
+    }
+    
+    this.resetProgress();
     
     this.alertType = type;
     this.title = title;
     this.message = message;
     this.isToastVisible = true;
     
+    setTimeout(() => {
+      const progressElement = document.querySelector('.progress') as HTMLElement;
+      if (progressElement) {
+        progressElement.classList.add('active');
+      }
+    }, 0);
+    
     this.timer = setTimeout(() => {
       this.isToastVisible = false;
+      this.resetProgress();
     }, 3000);
   }
   
@@ -76,13 +88,15 @@ export class Alerts {
   closeAlert() {
     this.isToastVisible = false;
     clearTimeout(this.timer);
+    this.resetProgress();
   }
   
-  // Limpiar cualquier alerta toast visible
-  private clearToast() {
-    if (this.isToastVisible) {
-      this.isToastVisible = false;
-      clearTimeout(this.timer);
+  // Reiniciar la barra de progreso
+  private resetProgress() {
+    const progressElement = document.querySelector('.progress') as HTMLElement;
+    if (progressElement) {
+      progressElement.classList.remove('active');
+      void progressElement.offsetWidth;
     }
   }
 }

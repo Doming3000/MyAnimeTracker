@@ -1,3 +1,14 @@
+@keyframes progress {
+    from {
+        right: 0;
+        width: 100%;
+    }
+    to {
+        right: 100%;
+        width: 0;
+    }
+}
+
 .overlay {
     background-color: rgba(0, 0, 0, 0.5);
     height: 100%;
@@ -37,7 +48,6 @@
     display: grid;
     grid-template-columns: 1.3fr 6fr 0.5fr;
     height: 80px;
-    margin-bottom: 20px;
     padding: 20px;
     width: 100%;
 }
@@ -92,6 +102,35 @@
 
 .toast button i {
     color: black;
+}
+
+.progress {
+    background: #ddd;
+    bottom: 0;
+    height: 3px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    overflow: hidden;
+}
+
+.progress::before {
+    content: "";
+    height: 100%;
+    position: absolute;
+    width: 100%;
+}
+
+.progress-success::before {
+    background-color: #47D764;
+}
+
+.progress-error::before {
+    background-color: #ff355b;
+}
+
+.progress.active::before {
+    animation: progress 3s linear forwards;
 }
 
 /* Modal de confirmación */
