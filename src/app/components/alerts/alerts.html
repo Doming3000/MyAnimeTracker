@@ -3,10 +3,7 @@
 <div class="alertWrapper" [ngClass]="{ 'visible': isToastVisible || isConfirmVisible }">
     <div class="toast" *ngIf="isToastVisible" [ngClass]="alertType">
         <div class="container-1">
-            <i class="fas" [ngClass]="{
-                'fa-check-circle': alertType === 'success',
-                'fa-circle-exclamation': alertType === 'error',
-            }"></i>
+            <i class="fas" [ngClass]="{ 'fa-check-circle': alertType === 'success', 'fa-circle-exclamation': alertType === 'error' }"></i>
         </div>
         
         <div class="container-2">

@@ -10,6 +10,16 @@
     }
 }
 
+.overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    display: block;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
 /* Menú de búsqueda */
 form {
     background: white;
@@ -73,17 +83,6 @@ form input {
 }
 
 /* Resultados de búsqueda */
-.overlay {
-    background-color: rgba(0, 0, 0, 0.5);
-    display: block;
-    height: 100%;
-    left: 0;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 999;
-}
-
 .noResults p {
     align-items: center;
     color: #555;
@@ -104,7 +103,9 @@ form input {
     overflow-y: scroll;
     position: fixed;
     right: 20px;
-    z-index: 9999;
+    z-index: 1000;
+
+    /* margin: 30px 100px 100px; */
 }
 
 .results-visible {

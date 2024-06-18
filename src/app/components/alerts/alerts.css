@@ -43,7 +43,7 @@
 
 .toast {
     background-color: #ffffff;
-    border-radius: 7px;
+    border-radius: 5px 5px 0 0;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
     display: grid;
     grid-template-columns: 1.3fr 6fr 0.5fr;
