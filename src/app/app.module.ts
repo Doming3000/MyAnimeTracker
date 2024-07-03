@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { AppRoutingModule } from './app-routing.module';
 
 // Modulos
 import { FormsModule } from "@angular/forms";
@@ -11,6 +12,7 @@ import { SearchResults } from './components/searchresults/searchresults';
 import { Mylist } from './components/mylist/mylist';
 import { SideNav } from './components/sidenav/sidenav';
 import { Alerts } from './components/alerts/alerts';
+import { Newpage } from './newpage/newpage';
 
 @NgModule({
   declarations: [
@@ -19,11 +21,13 @@ import { Alerts } from './components/alerts/alerts';
     Mylist,
     SideNav,
     Alerts,
+    Newpage,
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

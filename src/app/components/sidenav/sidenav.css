@@ -24,6 +24,15 @@
     cursor: pointer;
 }
 
+.title {
+    color: white;
+    /* font-family: 'Poppins', sans-serif; Esta fuente cambia el formato del texto*/
+    font-size: 25px;
+    margin-left: 15px;
+    text-decoration: none;
+    user-select: none;
+}
+
 .sidenav {
     background-color: #555;
     height: 100%;

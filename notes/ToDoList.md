@@ -6,12 +6,14 @@
 • Mejorar el diseño del modal de confirmación de eliminación.
 • Encontrar diseños definitivos (dejar de usar escalas de grises).
 • Ponerle un nombre a la aplicación.
+• Terminar de definir las rutas.
 • Consegir pareja y dejar de ver anime.
 
 # 🧠 Ideas:
 
 • Notificaciones de episodios nuevos.
 • Incluir selección de Mangas.
+• Mostrar resultados de búsqueda en una ruta de aplicación diferente.
 
 # 🐞 Errores encontrados:
 

@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Alerts } from '../alerts/alerts';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidenav',
@@ -9,7 +10,13 @@ import { Alerts } from '../alerts/alerts';
 export class SideNav {
   @ViewChild(Alerts) alerts!: Alerts;
   
+  constructor(private router: Router) {}
+  
   isOpen: boolean = false;
+  
+  goHome() {
+    this.router.navigate(['/']);
+  }
   
   // Abrir el menú lateral
   openNav() {
@@ -19,6 +26,15 @@ export class SideNav {
   // Cerrar el menú lateral
   closeNav() {
     this.isOpen = false;
+  }
+  
+  // Métodos de prueba para comunicar entre rutas
+  navigateToNewPage() {
+    this.router.navigate(['/newpage']);
+  }
+  
+  backToPage() {
+    this.router.navigate(['/']); 
   }
   
   // Exportar datos a un archivo CSV

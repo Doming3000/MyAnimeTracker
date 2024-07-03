@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Subscription } from "rxjs";
 
 @Component({
-  selector: "app-searchresults",
+  selector: "app-searchresults.",
   templateUrl: "./searchresults.html",
   styleUrls: ["./searchresults.css"],
 })

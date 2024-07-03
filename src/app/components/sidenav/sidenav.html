@@ -2,12 +2,17 @@
 
 <div class="menu">
    <span (click)="openNav()"><i class="fa-solid fa-bars"></i></span>
+   <span class="title" (click)="goHome()">My Site</span>
 </div>
 
 <!-- Menú de navegación lateral -->
 <div class="overlay" *ngIf="isOpen" (click)="closeNav()"></div>
 
 <div class="sidenav" [class.open]="isOpen">
+   <!-- Botones de prueba para comunicar entre rutas -->
+   <button (click)="navigateToNewPage()">Ir a New Page</button>
+   <button (click)="backToPage()">Regresar</button>
+
    <button (click)="closeNav()" class="cerrar"><i class="fa-solid fa-xmark"></i></button>
    
    <div class="dataContainer">
