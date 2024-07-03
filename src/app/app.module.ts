@@ -12,7 +12,7 @@ import { SearchResults } from './components/searchresults/searchresults';
 import { Mylist } from './components/mylist/mylist';
 import { SideNav } from './components/sidenav/sidenav';
 import { Alerts } from './components/alerts/alerts';
-import { Newpage } from './newpage/newpage';
+import { Newpage } from './components/newpage/newpage';
 
 @NgModule({
   declarations: [
