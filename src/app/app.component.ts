@@ -17,7 +17,7 @@ export class AppComponent {
       filter((event: Event): event is NavigationEnd => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
 
-      // Esta logica no es adaptable con el paso del tiempo, debe cambiarse.
+      // Esta logica debe revisarse más adelante
       this.showMyList = event.url !== '/newpage';
       this.showNewPage = event.url === '/newpage';
     });
