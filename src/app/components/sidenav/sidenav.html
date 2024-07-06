@@ -9,10 +9,6 @@
 <div class="overlay" *ngIf="isOpen" (click)="closeNav()"></div>
 
 <div class="sidenav" [class.open]="isOpen">
-   <!-- Botones de prueba para comunicar entre rutas -->
-   <button (click)="navigateToNewPage()">Ir a New Page</button>
-   <button (click)="backToPage()">Regresar</button>
-
    <button (click)="closeNav()" class="cerrar"><i class="fa-solid fa-xmark"></i></button>
    
    <div class="dataContainer">
@@ -20,5 +16,11 @@
       <label for="fileInput"><i class="fa-solid fa-cloud-arrow-up"></i> Importar datos</label>
       
       <label (click)="exportData()"><i class="fa-solid fa-cloud-arrow-down"></i> Exportar datos</label>
+   </div>
+   
+   <!-- Botones de prueba para comunicar entre rutas -->
+   <div class="testContainer">
+      <button (click)="navigateToNewPage()">Ir a New Page</button>
+      <button (click)="backToPage()">Regresar</button>
    </div>
 </div>

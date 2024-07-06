@@ -6,7 +6,7 @@
     font-family: 'Fira Sans', sans-serif;
 }
 
-/* Página */
+/* Página principal */
 header, footer {
     align-items: center;
     background-color: #444444;
@@ -27,22 +27,19 @@ main {
     flex: 1;
 }
 
-/* Custom scroll bar */
+/* Custom scrollbar */
 ::-webkit-scrollbar {
     width: 10px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
     background: #f1f1f1;
 }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb /* (Handle) */ {
     background: #c1c1c1;
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #a8a8a8;
 }

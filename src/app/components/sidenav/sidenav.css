@@ -20,14 +20,15 @@
     top: 12px;
 }
 
-.menu span:hover {
+.menu span {
     cursor: pointer;
 }
 
 .title {
     color: white;
-    /* font-family: 'Poppins', sans-serif; Esta fuente cambia el formato del texto*/
+    font-family: 'Poppins', sans-serif;
     font-size: 25px;
+    line-height: 25px;
     margin-left: 15px;
     text-decoration: none;
     user-select: none;
@@ -86,5 +87,13 @@
 
 .dataContainer label:hover {
     background-color: rgba(255, 255, 255, 0.1);
+}
+
+.testContainer {
+    margin-left: 10px;
+}
+
+.testContainer button{
+    margin-left: 10px;
     cursor: pointer;
-}   
+}
