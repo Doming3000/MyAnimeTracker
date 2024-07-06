@@ -1,7 +1,7 @@
 <!-- Formulario de búsqueda -->
 <form (ngSubmit)="search()" novalidate [ngClass]="{'searching': searching}">
-    <input type="text" name="search" [(ngModel)]="searchTerm" placeholder="Realiza una búsqueda..." required [ngClass]="{'input-error': inputEmpty}">
     <button class="searchButton" (click)="search()"><i class="fa-solid fa-magnifying-glass"></i></button>
+    <input type="text" name="search" [(ngModel)]="searchTerm" placeholder="Realiza una búsqueda..." required [ngClass]="{'input-error': inputEmpty}">
 </form>
 
 <button class="clearInput" (click)="clearInput()"><i class="fa-solid fa-xmark"></i></button>

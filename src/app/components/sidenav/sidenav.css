@@ -5,7 +5,7 @@
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1000;
+    z-index: 1001;
 }
 
 .overlay.active {
@@ -18,6 +18,7 @@
     margin-left: 20px;
     position: absolute;
     top: 12px;
+    user-select: none;
 }
 
 .menu span {
@@ -25,13 +26,11 @@
 }
 
 .title {
-    color: white;
     font-family: 'Poppins', sans-serif;
     font-size: 25px;
     line-height: 25px;
     margin-left: 15px;
     text-decoration: none;
-    user-select: none;
 }
 
 .sidenav {
@@ -45,8 +44,7 @@
     transform: translateX(-100%);
     transition: 0.5s;
     width: 250px;
-    z-index: 1;
-    z-index: 1000;
+    z-index: 1002;
 }
 
 .sidenav.open {
