@@ -22,17 +22,19 @@
 
 /* Menú de búsqueda */
 form {
+    align-items: center;
     background: white;
     border-radius: 40px;
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    display: flex;
     height: 40px;
-    margin-left: auto;
     margin-right: 20px;
+    padding: 0 10px;
     position: absolute;
     right: 0;
     top: 50px;
     transform: translateY(-50%);
-    width: 370px;  
+    width: 370px;
     z-index: 1000;
 }
 
@@ -40,42 +42,34 @@ form input {
     background: none;
     border: none;
     color: #888;
+    flex-grow: 1;
     font-size: 14px;
-    height: 20px;
-    left: 45px;
+    margin: 0 20px 0 20px;
     outline: none;
-    position: absolute;
-    top: 10px;
-    user-select: none;
-    width: 290px;
+    padding: 10px;
 }
 
-.searchButton {
+.searchButton, .clearInput {
+    align-items: center;
     background: none;
     border: none;
     color: #555;
     cursor: pointer;
+    display: flex;
     font-size: 16px;
     height: 20px;
-    left: 15px;
-    margin: 0;
-    padding: 0;
+    justify-content: center;
     position: absolute;
-    top: 10px;
     user-select: none;
     width: 20px;
 }
 
+.searchButton {
+    left: 15px;
+}
+
 .clearInput {
-    background-color: transparent;
-    border: none;
-    color: #888;
-    cursor: pointer;
-    font-size: 15px;
-    position: absolute;
-    right: 35px;
-    transform: translateY(-50%);
-    z-index: 1000;
+    right: 15px;
 }
 
 .shake-placeholder {
@@ -104,7 +98,7 @@ form input {
     position: fixed;
     right: 20px;
     z-index: 1000;
-
+    
     /* margin: 30px 100px 100px; */
 }
 

@@ -1,10 +1,9 @@
 <!-- Formulario de búsqueda -->
-<form (ngSubmit)="search()" novalidate [ngClass]="{'searching': searching}">
-    <button class="searchButton" (click)="search()"><i class="fa-solid fa-magnifying-glass"></i></button>
-    <input type="text" name="search" [(ngModel)]="searchTerm" placeholder="Realiza una búsqueda..." required [ngClass]="{'input-error': inputEmpty}">
+<form (ngSubmit)="search()" [ngClass]="{'searching': searching}">
+    <button type="button" class="searchButton" (click)="search()"><i class="fa-solid fa-magnifying-glass"></i></button>
+    <input type="text" name="search" [(ngModel)]="searchTerm" placeholder="Realiza una búsqueda..." required [ngClass]="{'input-error': inputEmpty}"/>
+    <button type="button" class="clearInput" (click)="clearInput()"><i class="fa-solid fa-xmark"></i></button>
 </form>
-
-<button class="clearInput" (click)="clearInput()"><i class="fa-solid fa-xmark"></i></button>
 
 <!-- Contenedor de resultados -->
 <div class="overlay" *ngIf="resultsVisible" (click)="closeResultsContainer()"></div>
