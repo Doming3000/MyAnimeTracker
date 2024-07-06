@@ -1,3 +1,15 @@
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-5px);
+    }
+    20%, 40%, 60%, 80% {
+        transform: translateX(5px);
+    }
+}
+
 .overlay {
     background-color: rgba(0, 0, 0, 0.5);
     height: 100%;
@@ -12,6 +24,7 @@
     pointer-events: auto;
 }
 
+/* Menú de navegación principal */
 .menu {
     color: white;
     font-size: 25px;
@@ -33,6 +46,63 @@
     text-decoration: none;
 }
 
+/* Formulario de búsqueda */
+form {
+    align-items: center;
+    background: white;
+    border-radius: 40px;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    display: flex;
+    height: 40px;
+    margin-right: 20px;
+    padding: 0 10px;
+    position: absolute;
+    right: 0;
+    top: 50px;
+    transform: translateY(-50%);
+    width: 370px;
+    z-index: 1000;
+}
+
+form input {
+    background: none;
+    border: none;
+    color: #888;
+    flex-grow: 1;
+    font-size: 14px;
+    margin: 0 20px 0 20px;
+    outline: none;
+    padding: 10px;
+}
+
+.searchButton, .clearInput {
+    align-items: center;
+    background: none;
+    border: none;
+    color: #555;
+    cursor: pointer;
+    display: flex;
+    font-size: 16px;
+    height: 20px;
+    justify-content: center;
+    position: absolute;
+    user-select: none;
+    width: 20px;
+}
+
+.searchButton {
+    left: 15px;
+}
+
+.clearInput {
+    right: 15px;
+}
+
+.shake-placeholder {
+    animation: shake 0.5s;
+}
+
+/* Menú de navegación lateral */
 .sidenav {
     background-color: #555;
     height: 100%;
@@ -87,6 +157,7 @@
     background-color: rgba(255, 255, 255, 0.1);
 }
 
+/* Contenedores de prueba en el menu de Menú de navegación lateral */
 .testContainer {
     margin-left: 10px;
 }

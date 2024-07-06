@@ -1,65 +1,95 @@
 import { Component, ViewChild } from '@angular/core';
 import { Alerts } from '../alerts/alerts';
 import { Router } from '@angular/router';
+import { SearchService } from 'src/app/services/search.service';
 
 @Component({
-  selector: 'app-sidenav',
-  templateUrl: './sidenav.html',
-  styleUrls: ['./sidenav.css']
+  selector: 'app-navigation',
+  templateUrl: './navigation.html',
+  styleUrls: ['./navigation.css']
 })
-export class SideNav {
+export class Navigation {
   @ViewChild(Alerts) alerts!: Alerts;
   
-  constructor(private router: Router) {}
-  
+  // Variables
   isOpen: boolean = false;
+  searchTerm: string = '';
+  inputEmpty: boolean = false;
   
+  // Inyección de dependencias
+  constructor(private router: Router, private searchService: SearchService) {}
+  
+  // Navegar a la página principal
   goHome() {
     this.router.navigate(['/']);
   }
   
-  // Abrir el menú lateral
+  // Abrir/Cerrar el menú lateral
   openNav() {
     this.isOpen = true;
   }
   
-  // Cerrar el menú lateral
   closeNav() {
     this.isOpen = false;
   }
   
-  // Métodos de prueba para comunicar entre rutas
+  // Navegar a una nueva página
   navigateToNewPage() {
     this.router.navigate(['/newpage']);
   }
   
+  // Volver a la página principal
   backToPage() {
-    this.router.navigate(['/']); 
+    this.router.navigate(['/']);
+  }
+  
+  // Realizar búsqueda con el término ingresado
+  search() {
+    if (this.searchTerm.trim() !== '') {
+      this.inputEmpty = false;
+      this.searchService.updateSearchTerm(this.searchTerm);
+    } else {
+      this.inputEmpty = true;
+      this.triggerShakeAnimation();
+    }
+  }
+  
+  // Limpiar el campo de entrada de búsqueda
+  clearInput() {
+    if (this.searchTerm === '') {
+      this.triggerShakeAnimation();
+    } else {
+      this.searchTerm = '';
+      this.searchService.updateSearchTerm('');
+    }
+  }
+  
+  // Activar animación de sacudida en el campo de entrada de búsqueda
+  triggerShakeAnimation() {
+    const inputElement = document.querySelector('.search-input') as HTMLInputElement;
+    if (inputElement) {
+      inputElement.classList.add('shake-placeholder');
+      setTimeout(() => {
+        inputElement.classList.remove('shake-placeholder');
+      }, 500);
+    }
   }
   
   // Exportar datos a un archivo CSV
   exportData() {
     const storedData = localStorage.getItem('my_anime');
-    
     if (!storedData || storedData === '[]') {
       this.triggerErrorAlert('Vaya!', 'No hay nada que descargar');
       return;
     }
-    
-    else {
-      const blob = new Blob([storedData], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'data.csv';
-      
-      // Agregar enlace al documento y simular clic para descargar
-      document.body.appendChild(a);
-      a.click();
-      
-      // Eliminar enlace del documento
-      document.body.removeChild(a);
-    }
+    const blob = new Blob([storedData], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'data.csv';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
   }
   
   // Importar datos desde un archivo CSV
@@ -70,33 +100,28 @@ export class SideNav {
     
     reader.onload = (e: any) => {
       const content = e.target.result;
-      
       try {
         const data = JSON.parse(content);
         
-        // Comprobar nombre del archivo
+        // Verificar el nombre del archivo y el formato de los datos
         if (file.name !== 'data.csv') {
           this.triggerErrorAlert('Vaya!', 'Este no parece ser el archivo correcto');
           this.resetFileInput(event.target);
           return;
         }
         
-        // Comprobar contenido del archivo
-        else if (!Array.isArray(data)) {
+        if (!Array.isArray(data)) {
           this.triggerErrorAlert('Error!', 'El contenido no tiene el formato correcto');
           this.resetFileInput(event.target);
           return;
         }
         
-        // Comprobar si hay datos antes de importar
-        else if (!storedData || storedData === '[]') {
+        if (!storedData || storedData === '[]') {
           this.triggerSuccessAlert('Hecho!', 'Datos importados con éxito');
           localStorage.setItem('my_anime', JSON.stringify(data));
           this.resetFileInput(event.target);
-        }
-        
-        else {
-          // Mostrar confirmación antes de importar
+        } else {
+          // Mostrar confirmación antes de sobrescribir datos existentes
           this.alerts.showConfirm({
             title: 'Confirmar Importación',
             message: '¿Estás seguro de que deseas importar estos datos?<br>La información actual se perderá si no está respaldada.',
@@ -117,6 +142,7 @@ export class SideNav {
         this.resetFileInput(event.target);
       }
     };
+    
     reader.readAsText(file);
   }
   
@@ -130,7 +156,7 @@ export class SideNav {
     this.alerts.showAlert('error', title, message);
   }
   
-  // Limpiar el valor del input de archivo
+  // Resetear el valor del input de archivo
   resetFileInput(inputElement: HTMLInputElement) {
     inputElement.value = '';
   }

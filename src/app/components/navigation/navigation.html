@@ -1,9 +1,17 @@
 <app-alerts></app-alerts>
 
+<!-- Menú de navegación principal (header) -->
 <div class="menu">
    <span (click)="openNav()"><i class="fa-solid fa-bars"></i></span>
    <span class="title" (click)="goHome()">My Site</span>
 </div>
+
+<!-- Formulario de búsqueda -->
+<form (ngSubmit)="search()">
+   <button type="button" class="searchButton" (click)="search()"><i class="fa-solid fa-magnifying-glass"></i></button>
+   <input type="text" name="search" class="search-input" [(ngModel)]="searchTerm" placeholder="Realiza una búsqueda..." required [ngClass]="{'input-error': inputEmpty}" />
+   <button type="button" class="clearInput" (click)="clearInput()"><i class="fa-solid fa-xmark"></i></button>
+</form>
 
 <!-- Menú de navegación lateral -->
 <div class="overlay" *ngIf="isOpen" (click)="closeNav()"></div>

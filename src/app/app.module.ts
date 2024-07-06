@@ -10,7 +10,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { AppComponent } from './app.component';
 import { SearchResults } from './components/searchresults/searchresults';
 import { Mylist } from './components/mylist/mylist';
-import { SideNav } from './components/sidenav/sidenav';
+import { Navigation } from './components/navigation/navigation';
 import { Alerts } from './components/alerts/alerts';
 import { Newpage } from './components/newpage/newpage';
 
@@ -19,7 +19,7 @@ import { Newpage } from './components/newpage/newpage';
     AppComponent,
     SearchResults,
     Mylist,
-    SideNav,
+    Navigation,
     Alerts,
     Newpage,
   ],

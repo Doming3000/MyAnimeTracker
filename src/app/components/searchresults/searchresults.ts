@@ -3,9 +3,10 @@ import { AnimeService } from "src/app/services/anime.service";
 import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Subscription } from "rxjs";
+import { SearchService } from 'src/app/services/search.service';
 
 @Component({
-  selector: "app-searchresults.",
+  selector: "app-searchresults",
   templateUrl: "./searchresults.html",
   styleUrls: ["./searchresults.css"],
 })
@@ -13,7 +14,7 @@ import { Subscription } from "rxjs";
 export class SearchResults implements OnInit, AfterViewInit {
   @ViewChild('resultsContainer') resultsContainer!: ElementRef;
   
-  animateClosing: boolean = false; 
+  animateClosing: boolean = false;
   anime_results: any[] = [];
   animeSubscription!: Subscription;
   inputEmpty: boolean = false;
@@ -25,46 +26,48 @@ export class SearchResults implements OnInit, AfterViewInit {
   searching: boolean = false;
   searchTerm: string = "";
   
+  searchTermSubscription!: Subscription;
+  
   constructor(
     private animeService: AnimeService,
     private formBuilder: FormBuilder,
+    private searchService: SearchService,
     private elRef: ElementRef
   ) {
-    // Inicialización del formulario de búsqueda
     this.searchForm = this.formBuilder.group({
       searchTerm: ["", Validators.required],
     });
   }
   
   ngAfterViewInit(): void {
-    // Agregar evento de desplazamiento al contenedor de resultados
     this.resultsContainer.nativeElement.addEventListener('scroll', this.onContainerScroll);
   }
   
   ngOnInit(): void {
-    // Suscribirse a los resultados de anime
-    this.animeSubscription = this.animeService.getResultAnime().subscribe((result) => {
+    this.searchTermSubscription = this.searchService.searchTerm$.subscribe(term => {
+      this.search(term);
+    });
+    
+    this.animeSubscription = this.animeService.getResultAnime().subscribe(result => {
       this.anime_results = result;
     });
   }
   
   ngOnDestroy(): void {
-    // Desuscribirse cuando el componente se destruye
+    this.searchTermSubscription.unsubscribe();
     this.animeSubscription.unsubscribe();
   }
   
-  // Realizar búsqueda de animes
-  search() {
-    if (this.searchTerm.trim() !== "") {
+  search(term: string) {
+    if (term.trim() !== '') {
       document.body.style.cursor = "progress";
       document.documentElement.style.overflowY = 'hidden';
       
-      this.animeService.getAnimes(this.searchTerm).subscribe((result) => {
+      this.animeService.getAnimes(term).subscribe(result => {
         document.body.style.cursor = "default";
         this.anime_results = result.data;
         this.resultsVisible = true;
         
-        // Bloquear el desplazamiento de la página
         const scrollY = window.scrollY;
         window.onscroll = () => {
           window.scrollTo(0, scrollY);
@@ -74,60 +77,28 @@ export class SearchResults implements OnInit, AfterViewInit {
         this.noResultsMessageDisplayed = this.noResultsFound;
       });
     } else {
-      this.handleEmptyInput();
+      this.inputEmpty = true;
+      this.searchCompleted = false;
+      this.searchService.updateSearchTerm("");
     }
   }
   
-  // Manejar el input vacío y mostrar animación de sacudida
-  handleEmptyInput() {
-    this.inputEmpty = true;
-    this.searchCompleted = false;
-    
-    const placeholder = document.querySelector('input[name="search"]') as HTMLInputElement;
-    placeholder.classList.add("shake-placeholder");
-    
-    setTimeout(() => {
-      placeholder.classList.remove("shake-placeholder");
-    }, 500);
-  }
-  
-  // Limpiar input de búsqueda
-  clearInput() {
-    if (this.searchTerm === "") {
-      this.triggerShakeAnimation();
-    } else {
-      this.searchTerm = "";
-    }
-  }
-  
-  // Activar animación de sacudida del placeholder
-  triggerShakeAnimation() {
-    const placeholder = document.querySelector('input[name="search"]') as HTMLInputElement;
-    placeholder.classList.add("shake-placeholder");
-    
-    setTimeout(() => {
-      placeholder.classList.remove("shake-placeholder");
-    }, 500);
-  }
-  
-  // Alternar visibilidad del contenedor de resultados
   toggleResultsContainer() {
     this.resultsVisible = !this.resultsVisible;
   }
   
-  // Cerrar el contenedor de resultados con animación
   closeResultsContainer() {
     document.documentElement.style.overflowY = 'visible';
     if (this.resultsVisible) {
       this.animateClosing = true;
       window.onscroll = null;
       this.searchTerm = "";
+      this.searchService.updateSearchTerm("");
       
       setTimeout(() => {
         this.resultsVisible = false;
         this.animateClosing = false;
         
-        // Forzar el scroll hasta arriba del contenedor
         const resultsContainer = this.elRef.nativeElement.querySelector('.results-container');
         if (resultsContainer) {
           resultsContainer.scrollTop = 0;
@@ -136,7 +107,6 @@ export class SearchResults implements OnInit, AfterViewInit {
     }
   }
   
-  // Añadir un anime a la lista
   addAnime(anime: Anime) {
     const addAnime: MyAnime = {
       id: anime.mal_id,
@@ -151,12 +121,10 @@ export class SearchResults implements OnInit, AfterViewInit {
     this.animeService.animeSelected(addAnime);
   }
   
-  // Manejar el desplazamiento del contenedor de resultados
   onContainerScroll = (event: Event) => {
     this.updateProgressBar();
   }
   
-  // Actualizar la barra de progreso del contenedor de resultados
   updateProgressBar() {
     const container = this.resultsContainer.nativeElement;
     const winScroll = container.scrollTop || document.documentElement.scrollTop || document.body.scrollTop;
