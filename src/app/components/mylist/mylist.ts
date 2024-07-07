@@ -9,12 +9,15 @@ import Swal from 'sweetalert2';
   templateUrl: './mylist.html',
   styleUrls: ['./mylist.css']
 })
+
 export class Mylist implements OnInit {
   @ViewChild(Alerts) alerts!: Alerts;
   
+  // Variables
   animes_selected: MyAnime[] = [];
   isListEmpty = true;
   
+  // Inyección de dependencias
   constructor(private animeService: AnimeService) { }
   
   ngOnInit(): void {

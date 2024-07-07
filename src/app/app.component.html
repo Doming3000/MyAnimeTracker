@@ -1,4 +1,3 @@
 <app-navigation></app-navigation>
-<app-searchresults></app-searchresults>
+<app-searchresults *ngIf="showResults"></app-searchresults>
 <app-mylist *ngIf="showMyList"></app-mylist>
-<app-newpage *ngIf="showNewPage"></app-newpage>

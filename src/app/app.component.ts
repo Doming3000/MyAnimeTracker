@@ -1,25 +1,27 @@
 import { Component } from '@angular/core';
-import { Router, Event, NavigationEnd } from '@angular/router';
+import { Router, Event, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
-
 export class AppComponent {
   title = 'anime';
   showMyList = true;
-  showNewPage = false;
+  showResults = false;
   
-  constructor(private router: Router) {
+  constructor(private router: Router, private route: ActivatedRoute) {
     this.router.events.pipe(
       filter((event: Event): event is NavigationEnd => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
-
-      // Esta logica debe revisarse más adelante
-      this.showMyList = event.url !== '/newpage';
-      this.showNewPage = event.url === '/newpage';
+      this.updateComponentVisibility(event.url);
     });
+  }
+  
+  private updateComponentVisibility(url: string): void {
+    const hasSearchTerm = this.route.snapshot.queryParams['term'];
+    this.showResults = !!hasSearchTerm;
+    this.showMyList = !hasSearchTerm;
   }
 }

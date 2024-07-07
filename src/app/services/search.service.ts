@@ -11,7 +11,7 @@ export class SearchService {
   searchTerm$ = this.searchTermSubject.asObservable().pipe(
     debounceTime(300)
   );
-
+  
   updateSearchTerm(term: string) {
     this.searchTermSubject.next(term);
   }

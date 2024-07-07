@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { Alerts } from '../alerts/alerts';
 import { Router } from '@angular/router';
+import { Alerts } from '../alerts/alerts';
 import { SearchService } from 'src/app/services/search.service';
 
 @Component({
@@ -8,13 +8,14 @@ import { SearchService } from 'src/app/services/search.service';
   templateUrl: './navigation.html',
   styleUrls: ['./navigation.css']
 })
+
 export class Navigation {
   @ViewChild(Alerts) alerts!: Alerts;
   
   // Variables
   isOpen: boolean = false;
-  searchTerm: string = '';
   inputEmpty: boolean = false;
+  searchTerm: string = '';
   
   // Inyección de dependencias
   constructor(private router: Router, private searchService: SearchService) {}
@@ -22,6 +23,8 @@ export class Navigation {
   // Navegar a la página principal
   goHome() {
     this.router.navigate(['/']);
+    this.searchService.updateSearchTerm("");
+    document.documentElement.style.overflowY = 'visible';
   }
   
   // Abrir/Cerrar el menú lateral
@@ -33,24 +36,22 @@ export class Navigation {
     this.isOpen = false;
   }
   
-  // Navegar a una nueva página
-  navigateToNewPage() {
-    this.router.navigate(['/newpage']);
-  }
-  
-  // Volver a la página principal
-  backToPage() {
-    this.router.navigate(['/']);
+  ngOnInit(): void {
+    this.searchService.searchTerm$.subscribe(term => {
+      this.searchTerm = term;
+    });
   }
   
   // Realizar búsqueda con el término ingresado
   search() {
-    if (this.searchTerm.trim() !== '') {
-      this.inputEmpty = false;
-      this.searchService.updateSearchTerm(this.searchTerm);
-    } else {
+    if (this.searchTerm.trim() == '') {
       this.inputEmpty = true;
       this.triggerShakeAnimation();
+    } else {
+      this.inputEmpty = false;
+      this.router.navigate(['/searchresults']);
+      this.searchService.updateSearchTerm(this.searchTerm);
+      this.router.navigate(['/searchresults'], { queryParams: { term: this.searchTerm } });
     }
   }
   
@@ -60,6 +61,7 @@ export class Navigation {
       this.triggerShakeAnimation();
     } else {
       this.searchTerm = '';
+      this.inputEmpty = false;
       this.searchService.updateSearchTerm('');
     }
   }
@@ -110,18 +112,20 @@ export class Navigation {
           return;
         }
         
-        if (!Array.isArray(data)) {
+        else if (!Array.isArray(data)) {
           this.triggerErrorAlert('Error!', 'El contenido no tiene el formato correcto');
           this.resetFileInput(event.target);
           return;
         }
         
-        if (!storedData || storedData === '[]') {
+        else if (!storedData || storedData === '[]') {
           this.triggerSuccessAlert('Hecho!', 'Datos importados con éxito');
           localStorage.setItem('my_anime', JSON.stringify(data));
           this.resetFileInput(event.target);
-        } else {
-          // Mostrar confirmación antes de sobrescribir datos existentes
+        }
+        
+        else {
+          // Mostrar confirmación antes de sobrescribir
           this.alerts.showConfirm({
             title: 'Confirmar Importación',
             message: '¿Estás seguro de que deseas importar estos datos?<br>La información actual se perderá si no está respaldada.',

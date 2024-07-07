@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 // Componentes
-import { Newpage } from './components/newpage/newpage';
 import { Mylist } from './components/mylist/mylist';
+import { SearchResults } from './components/searchresults/searchresults';
 
 const routes: Routes = [
   { path: '', component: Mylist }, 
-  { path: 'newpage', component: Newpage }, 
+  { path: 'searchresults', component: SearchResults },
 ];
 
 @NgModule({

@@ -1,51 +1,57 @@
 import { Anime, MyAnime } from "src/app/interfaces/api-movies";
 import { AnimeService } from "src/app/services/anime.service";
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Subscription } from "rxjs";
+import { ActivatedRoute, Router } from '@angular/router';
 import { SearchService } from 'src/app/services/search.service';
+import { Alerts } from '../alerts/alerts';
 
 @Component({
   selector: "app-searchresults",
   templateUrl: "./searchresults.html",
   styleUrls: ["./searchresults.css"],
 })
-
-export class SearchResults implements OnInit, AfterViewInit {
+export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('resultsContainer') resultsContainer!: ElementRef;
+  @ViewChild(Alerts) alerts!: Alerts;
   
-  animateClosing: boolean = false;
-  anime_results: any[] = [];
-  animeSubscription!: Subscription;
-  inputEmpty: boolean = false;
-  noResultsFound: boolean = false;
-  noResultsMessageDisplayed: boolean = false;
-  resultsVisible = false;
-  searchCompleted: boolean = false;
   searchForm: FormGroup;
-  searching: boolean = false;
-  searchTerm: string = "";
+  anime_results: Anime[] = [];
+  resultsVisible: boolean = false;
+  animateClosing: boolean = false;
+  noResultsFound: boolean = false;
+  searchTerm: string = '';
   
-  searchTermSubscription!: Subscription;
+  private searchTermSubscription!: Subscription;
+  private animeSubscription!: Subscription;
+  private currentScrollY = 0;
   
   constructor(
     private animeService: AnimeService,
     private formBuilder: FormBuilder,
     private searchService: SearchService,
-    private elRef: ElementRef
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     this.searchForm = this.formBuilder.group({
       searchTerm: ["", Validators.required],
     });
   }
   
-  ngAfterViewInit(): void {
-    this.resultsContainer.nativeElement.addEventListener('scroll', this.onContainerScroll);
-  }
-  
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      const term = params['term'];
+      if (term) {
+        this.searchTerm = term;
+        this.search(term);
+      }
+    });
+    
     this.searchTermSubscription = this.searchService.searchTerm$.subscribe(term => {
-      this.search(term);
+      if (term.trim()) {
+        this.search(term);
+      }
     });
     
     this.animeSubscription = this.animeService.getResultAnime().subscribe(result => {
@@ -53,61 +59,41 @@ export class SearchResults implements OnInit, AfterViewInit {
     });
   }
   
+  ngAfterViewInit(): void {
+    this.resultsContainer.nativeElement.addEventListener('scroll', this.onContainerScroll);
+  }
+  
   ngOnDestroy(): void {
-    this.searchTermSubscription.unsubscribe();
-    this.animeSubscription.unsubscribe();
+    this.cleanup();
   }
   
-  search(term: string) {
-    if (term.trim() !== '') {
-      document.body.style.cursor = "progress";
-      document.documentElement.style.overflowY = 'hidden';
-      
-      this.animeService.getAnimes(term).subscribe(result => {
-        document.body.style.cursor = "default";
-        this.anime_results = result.data;
-        this.resultsVisible = true;
-        
-        const scrollY = window.scrollY;
-        window.onscroll = () => {
-          window.scrollTo(0, scrollY);
-        };
-        
-        this.noResultsFound = this.anime_results.length === 0;
-        this.noResultsMessageDisplayed = this.noResultsFound;
-      });
-    } else {
-      this.inputEmpty = true;
-      this.searchCompleted = false;
-      this.searchService.updateSearchTerm("");
+  search(term: string): void {
+    if (term.trim() === '') {
+      this.noResultsFound = true;
+      this.anime_results = [];
+      this.resultsVisible = false;
+      return;
     }
+    
+    document.body.style.cursor = "progress";
+    document.documentElement.style.overflowY = 'hidden';
+    this.currentScrollY = window.scrollY;
+    window.onscroll = () => window.scrollTo(0, this.currentScrollY);
+    
+    this.animeService.getAnimes(term).subscribe(result => {
+      document.body.style.cursor = "default";
+      this.anime_results = result.data;
+      this.resultsVisible = true;
+      this.noResultsFound = this.anime_results.length === 0;
+    });
   }
   
-  toggleResultsContainer() {
-    this.resultsVisible = !this.resultsVisible;
+  goHome(): void {
+    this.router.navigate(['/']);
+    this.restoreScrollAndOverflow();
   }
   
-  closeResultsContainer() {
-    document.documentElement.style.overflowY = 'visible';
-    if (this.resultsVisible) {
-      this.animateClosing = true;
-      window.onscroll = null;
-      this.searchTerm = "";
-      this.searchService.updateSearchTerm("");
-      
-      setTimeout(() => {
-        this.resultsVisible = false;
-        this.animateClosing = false;
-        
-        const resultsContainer = this.elRef.nativeElement.querySelector('.results-container');
-        if (resultsContainer) {
-          resultsContainer.scrollTop = 0;
-        }
-      }, 200);
-    }
-  }
-  
-  addAnime(anime: Anime) {
+  addAnime(anime: Anime): void {
     const addAnime: MyAnime = {
       id: anime.mal_id,
       title: anime.title,
@@ -117,17 +103,16 @@ export class SearchResults implements OnInit, AfterViewInit {
       markedAsViewed: false,
       link: "",
     };
-    
     this.animeService.animeSelected(addAnime);
   }
   
-  onContainerScroll = (event: Event) => {
+  onContainerScroll = (): void => {
     this.updateProgressBar();
   }
   
-  updateProgressBar() {
+  updateProgressBar(): void {
     const container = this.resultsContainer.nativeElement;
-    const winScroll = container.scrollTop || document.documentElement.scrollTop || document.body.scrollTop;
+    const winScroll = container.scrollTop;
     const height = container.scrollHeight - container.clientHeight;
     const scrolled = (winScroll / height) * 100;
     const myBar = document.getElementById("myBar");
@@ -135,5 +120,17 @@ export class SearchResults implements OnInit, AfterViewInit {
     if (myBar) {
       myBar.style.width = scrolled + "%";
     }
+  }
+  
+  private cleanup(): void {
+    document.documentElement.style.overflowY = 'visible';
+    window.onscroll = null;
+    if (this.searchTermSubscription) this.searchTermSubscription.unsubscribe();
+    if (this.animeSubscription) this.animeSubscription.unsubscribe();
+  }
+  
+  private restoreScrollAndOverflow(): void {
+    document.documentElement.style.overflowY = 'visible';
+    window.onscroll = null;
   }
 }

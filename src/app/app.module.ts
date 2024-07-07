@@ -12,7 +12,6 @@ import { SearchResults } from './components/searchresults/searchresults';
 import { Mylist } from './components/mylist/mylist';
 import { Navigation } from './components/navigation/navigation';
 import { Alerts } from './components/alerts/alerts';
-import { Newpage } from './components/newpage/newpage';
 
 @NgModule({
   declarations: [
@@ -21,7 +20,6 @@ import { Newpage } from './components/newpage/newpage';
     Mylist,
     Navigation,
     Alerts,
-    Newpage,
   ],
   imports: [
     BrowserModule,
@@ -32,4 +30,5 @@ import { Newpage } from './components/newpage/newpage';
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

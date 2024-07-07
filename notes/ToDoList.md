@@ -16,7 +16,6 @@
 
 # 🐞 Errores encontrados:
 
-• Al ocultarse la barra de desplazamiento horizontal, el contenido de la página se mueve a la derecha.
-• Las alertas tipo Toast se muestran por detrás del menú de resultados y se ve mal.
+• No se muestran alertas en la ruta de los resultados de búsqueda
 
     Comando para ejecutar: ng serve --o
