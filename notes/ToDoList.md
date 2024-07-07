@@ -17,5 +17,6 @@
 # 🐞 Errores encontrados:
 
 • No se muestran alertas en la ruta de los resultados de búsqueda
+• Riesgo de hacer demasiadas peticiones a la API
 
     Comando para ejecutar: ng serve --o

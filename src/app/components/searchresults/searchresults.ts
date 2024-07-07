@@ -6,6 +6,7 @@ import { Subscription } from "rxjs";
 import { ActivatedRoute, Router } from '@angular/router';
 import { SearchService } from 'src/app/services/search.service';
 import { Alerts } from '../alerts/alerts';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: "app-searchresults",
@@ -27,6 +28,7 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
   private animeSubscription!: Subscription;
   private currentScrollY = 0;
   
+  // Inyección de dependencias
   constructor(
     private animeService: AnimeService,
     private formBuilder: FormBuilder,
@@ -39,7 +41,9 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
     });
   }
   
+  // Inicialización del componente
   ngOnInit(): void {
+    // Obtener el término de búsqueda desde los parámetros de la ruta
     this.route.queryParams.subscribe(params => {
       const term = params['term'];
       if (term) {
@@ -48,25 +52,32 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
       }
     });
     
-    this.searchTermSubscription = this.searchService.searchTerm$.subscribe(term => {
+    // Suscripción al término de búsqueda del servicio de búsqueda
+    this.searchTermSubscription = this.searchService.searchTerm$.pipe(
+      debounceTime(300)
+    ).subscribe(term => {
       if (term.trim()) {
         this.search(term);
       }
     });
     
+    // Suscripción a los resultados de búsqueda del servicio de anime
     this.animeSubscription = this.animeService.getResultAnime().subscribe(result => {
       this.anime_results = result;
     });
   }
   
+  // Configuración después de que la vista ha sido inicializada
   ngAfterViewInit(): void {
     this.resultsContainer.nativeElement.addEventListener('scroll', this.onContainerScroll);
   }
   
+  // Limpieza cuando el componente es destruido
   ngOnDestroy(): void {
     this.cleanup();
   }
   
+  // Realizar la búsqueda de animes
   search(term: string): void {
     if (term.trim() === '') {
       this.noResultsFound = true;
@@ -75,11 +86,13 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
     
+    // Mostrar cursor de progreso y deshabilitar desplazamiento
     document.body.style.cursor = "progress";
     document.documentElement.style.overflowY = 'hidden';
     this.currentScrollY = window.scrollY;
     window.onscroll = () => window.scrollTo(0, this.currentScrollY);
     
+    // Solicitar animes al servicio
     this.animeService.getAnimes(term).subscribe(result => {
       document.body.style.cursor = "default";
       this.anime_results = result.data;
@@ -88,11 +101,13 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
     });
   }
   
+  // Navegar a la página de inicio
   goHome(): void {
     this.router.navigate(['/']);
     this.restoreScrollAndOverflow();
   }
   
+  // Agregar anime a la lista seleccionada
   addAnime(anime: Anime): void {
     const addAnime: MyAnime = {
       id: anime.mal_id,
@@ -106,10 +121,12 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
     this.animeService.animeSelected(addAnime);
   }
   
+  // Manejar el evento de desplazamiento del contenedor de resultados
   onContainerScroll = (): void => {
     this.updateProgressBar();
   }
   
+  // Actualizar la barra de progreso de desplazamiento
   updateProgressBar(): void {
     const container = this.resultsContainer.nativeElement;
     const winScroll = container.scrollTop;
@@ -122,6 +139,7 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
     }
   }
   
+  // Limpiar suscripciones y restaurar el comportamiento de desplazamiento
   private cleanup(): void {
     document.documentElement.style.overflowY = 'visible';
     window.onscroll = null;
@@ -129,6 +147,7 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
     if (this.animeSubscription) this.animeSubscription.unsubscribe();
   }
   
+  // Restaurar el comportamiento de desplazamiento
   private restoreScrollAndOverflow(): void {
     document.documentElement.style.overflowY = 'visible';
     window.onscroll = null;
