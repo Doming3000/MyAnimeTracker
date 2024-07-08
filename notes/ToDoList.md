@@ -6,13 +6,11 @@
 • Mejorar los diseños de alertas en general (Modal y Toast).
 • Encontrar diseños definitivos (dejar de usar escalas de grises).
 • Ponerle un nombre a la aplicación.
-• Terminar de definir las rutas.
 
 # 🧠 Ideas:
 
 • Notificaciones de episodios nuevos.
 • Incluir selección de Mangas.
-• Mostrar resultados de búsqueda en una ruta de aplicación diferente.
 
 # 🐞 Errores encontrados:
 

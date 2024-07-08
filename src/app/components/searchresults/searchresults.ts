@@ -98,6 +98,7 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
   goHome(): void {
     this.router.navigate(['/']);
     this.restoreScrollAndOverflow();
+    document.body.style.cursor = "default"; 
   }
   
   // Agregar un anime a mi lista
@@ -134,6 +135,7 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
   // Restaurar el comportamiento de desplazamiento
   private restoreScrollAndOverflow(): void {
     document.documentElement.style.overflowY = 'visible';
+    document.body.style.cursor = "default"; 
     window.onscroll = null;
   }
   
@@ -143,5 +145,6 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
     window.onscroll = null;
     if (this.searchTermSubscription) this.searchTermSubscription.unsubscribe();
     if (this.animeSubscription) this.animeSubscription.unsubscribe();
+    document.body.style.cursor = "default"; 
   }
 }
