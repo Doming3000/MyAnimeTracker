@@ -6,7 +6,7 @@ import { Subscription } from "rxjs";
 import { ActivatedRoute, Router } from '@angular/router';
 import { SearchService } from 'src/app/services/search.service';
 import { Alerts } from '../alerts/alerts';
-import { debounceTime } from 'rxjs/operators';
+import { debounceTime, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: "app-searchresults",
@@ -43,28 +43,45 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
   
   // Inicialización del componente
   ngOnInit(): void {
-    // Obtener el término de búsqueda desde los parámetros de la ruta
-    this.route.queryParams.subscribe(params => {
-      const term = params['term'];
-      if (term) {
-        this.searchTerm = term;
-        this.search(term);
+    this.searchTermSubscription = this.route.queryParams.pipe(
+      switchMap(params => {
+        // Mostrar cursor de progreso y deshabilitar desplazamiento
+        document.body.style.cursor = "progress";
+        document.documentElement.style.overflowY = 'hidden';
+        this.currentScrollY = window.scrollY;
+        window.onscroll = () => window.scrollTo(0, this.currentScrollY);
+        
+        const term = params['term'];
+        if (term) {
+          this.searchTerm = term;
+          return this.animeService.getAnimes(term);
+        } else {
+          return this.searchService.searchTerm$.pipe(
+            debounceTime(300),
+            switchMap(searchTerm => {
+              if (searchTerm.trim()) {
+                this.searchTerm = searchTerm;
+                return this.animeService.getAnimes(searchTerm);
+              } else {
+                return this.animeService.getAnimes('');
+              }
+            })
+          );
+        }
+      })
+    ).subscribe(
+      result => {
+        this.anime_results = result.data;
+        this.resultsVisible = true;
+        this.noResultsFound = this.anime_results.length === 0;
+        document.body.style.cursor = "default";
+      },
+      error => {
+        document.body.style.cursor = "default";
+        console.error('ERROR', error);
+        alert(`Error al realizar la búsqueda: ${error}. Por favor, inténtalo más tarde.`);
       }
-    });
-    
-    // Suscripción al término de búsqueda del servicio de búsqueda
-    this.searchTermSubscription = this.searchService.searchTerm$.pipe(
-      debounceTime(300)
-    ).subscribe(term => {
-      if (term.trim()) {
-        this.search(term);
-      }
-    });
-    
-    // Suscripción a los resultados de búsqueda del servicio de anime
-    this.animeSubscription = this.animeService.getResultAnime().subscribe(result => {
-      this.anime_results = result;
-    });
+    );
   }
   
   // Configuración después de que la vista ha sido inicializada
@@ -77,37 +94,13 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
     this.cleanup();
   }
   
-  // Realizar la búsqueda de animes
-  search(term: string): void {
-    if (term.trim() === '') {
-      this.noResultsFound = true;
-      this.anime_results = [];
-      this.resultsVisible = false;
-      return;
-    }
-    
-    // Mostrar cursor de progreso y deshabilitar desplazamiento
-    document.body.style.cursor = "progress";
-    document.documentElement.style.overflowY = 'hidden';
-    this.currentScrollY = window.scrollY;
-    window.onscroll = () => window.scrollTo(0, this.currentScrollY);
-    
-    // Solicitar animes al servicio
-    this.animeService.getAnimes(term).subscribe(result => {
-      document.body.style.cursor = "default";
-      this.anime_results = result.data;
-      this.resultsVisible = true;
-      this.noResultsFound = this.anime_results.length === 0;
-    });
-  }
-  
   // Navegar a la página de inicio
   goHome(): void {
     this.router.navigate(['/']);
     this.restoreScrollAndOverflow();
   }
   
-  // Agregar anime a la lista seleccionada
+  // Agregar un anime a mi lista
   addAnime(anime: Anime): void {
     const addAnime: MyAnime = {
       id: anime.mal_id,
@@ -121,12 +114,7 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
     this.animeService.animeSelected(addAnime);
   }
   
-  // Manejar el evento de desplazamiento del contenedor de resultados
-  onContainerScroll = (): void => {
-    this.updateProgressBar();
-  }
-  
-  // Actualizar la barra de progreso de desplazamiento
+  // Actualizar la barra de desplazamiento horizontal
   updateProgressBar(): void {
     const container = this.resultsContainer.nativeElement;
     const winScroll = container.scrollTop;
@@ -139,17 +127,21 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
     }
   }
   
-  // Limpiar suscripciones y restaurar el comportamiento de desplazamiento
-  private cleanup(): void {
-    document.documentElement.style.overflowY = 'visible';
-    window.onscroll = null;
-    if (this.searchTermSubscription) this.searchTermSubscription.unsubscribe();
-    if (this.animeSubscription) this.animeSubscription.unsubscribe();
+  onContainerScroll = (): void => {
+    this.updateProgressBar();
   }
   
   // Restaurar el comportamiento de desplazamiento
   private restoreScrollAndOverflow(): void {
     document.documentElement.style.overflowY = 'visible';
     window.onscroll = null;
+  }
+  
+  // Limpiar suscripciones y restaurar el comportamiento de desplazamiento
+  private cleanup(): void {
+    document.documentElement.style.overflowY = 'visible';
+    window.onscroll = null;
+    if (this.searchTermSubscription) this.searchTermSubscription.unsubscribe();
+    if (this.animeSubscription) this.animeSubscription.unsubscribe();
   }
 }
