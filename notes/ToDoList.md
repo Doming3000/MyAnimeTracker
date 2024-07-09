@@ -14,6 +14,6 @@
 
 # 🐞 Errores encontrados:
 
-• No se muestran alertas en la ruta de los resultados de búsqueda
+• No se muestran alertas de ningún tipo en la ruta de los resultados de búsqueda
 
     Comando para ejecutar: ng serve --o
