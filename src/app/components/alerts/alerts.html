@@ -1,27 +1,27 @@
 <div class="overlay" *ngIf="isConfirmVisible" (click)="cancelAction()"></div>
 
 <div class="alertWrapper" [ngClass]="{ 'visible': isToastVisible || isConfirmVisible }">
-    <div class="toast" *ngIf="isToastVisible" [ngClass]="alertType">
-        <div class="container-1">
-            <i class="fas" [ngClass]="{ 'fa-check-circle': alertType === 'success', 'fa-circle-exclamation': alertType === 'error' }"></i>
-        </div>
-        
-        <div class="container-2">
-            <p>{{ title }}</p>
-            <p>{{ message }}</p>
-        </div>
-        
-        <button (click)="closeAlert()"><i class="fa-solid fa-xmark"></i></button>
-
-        <div class="progress" [ngClass]="{ 'progress-success': alertType === 'success', 'progress-error': alertType === 'error' }"></div>
-    </div>
+   <div class="toast" *ngIf="isToastVisible" [ngClass]="alertType">
+      <div class="container-1">
+         <i class="fas" [ngClass]="{ 'fa-check-circle': alertType === 'success', 'fa-circle-exclamation': alertType === 'error' }"></i>
+      </div>
+      
+      <div class="container-2">
+         <p>{{ title }}</p>
+         <p>{{ message }}</p>
+      </div>
+      
+      <button (click)="closeAlert()"><i class="fa-solid fa-xmark"></i></button>
+      
+      <div class="progress" [ngClass]="{ 'progress-success': alertType === 'success', 'progress-error': alertType === 'error' }"></div>
+   </div>
 </div>
 
 <div class="confirmWrapper" *ngIf="isConfirmVisible">
-    <div class="confirmModal">
-        <h2>{{ confirmTitle }}</h2>
-        <p [innerHTML]="confirmMessage"></p>
-        <button class="danger" (click)="confirmAction()">{{ confirmYesText }}</button>
-        <button class="sucess" (click)="cancelAction()">{{ confirmNoText }}</button>
-    </div>
+   <div class="confirmModal">
+      <h2>{{ confirmTitle }}</h2>
+      <p [innerHTML]="confirmMessage"></p>
+      <button class="danger" (click)="confirmAction()">{{ confirmYesText }}</button>
+      <button class="sucess" (click)="cancelAction()">{{ confirmNoText }}</button>
+   </div>
 </div>

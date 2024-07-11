@@ -1,35 +1,35 @@
 <app-alerts></app-alerts>
 
 <div class="results-container" #resultsContainer id="results-container" [ngClass]="{'results-visible': resultsVisible, 'animate-closing': animateClosing}">
-    <div class="progress-container">
-        <div class="progress-bar" id="myBar"></div>
-    </div>
-    
-    <div class="resultsHeader">
-        <h3>Resultados de búsqueda:</h3>
-        <button (click)="goHome()"><i class="fa-solid fa-xmark"></i></button>
-    </div>
-    
-    <div class="noResults" *ngIf="noResultsFound">
-        <p>No se han encontrado resultados.</p>
-    </div>
-    
-    <ng-container *ngIf="anime_results.length > 0">
-        <div class="result" *ngFor="let anime of anime_results">
-            <img [src]="anime.images['jpg'].image_url"/>
-            <div class="details">
-                <h3>{{ anime.title }}</h3>
-                <ul>
-                    <li *ngIf="anime.type !== 'Movie'"><p class="episodes">{{ anime.episodes }} {{ anime.episodes === 1 ? 'episode' : 'episodes' }}</p></li>
-                    <li><p class="type">{{ anime.type }}</p></li>
-                    <li><p class="genres" *ngFor="let genre of anime.genres" [ngClass]="{'hClass': genre.name === 'Hentai'}">{{ genre.name }}</p></li>
-                </ul>
-                <p *ngIf="anime.synopsis" [title]="anime.synopsis">{{ anime.synopsis.slice(0, 300) }}...</p>
-                <button (click)="addAnime(anime)">
-                    <span class="buttonIcon"><i class="fa-regular fa-bookmark"></i></span>
-                    <span class="buttonText">Añadir a mi lista</span>
-                </button>
-            </div>
-        </div>
-    </ng-container>
+   <div class="progress-container">
+      <div class="progress-bar" id="myBar"></div>
+   </div>
+   
+   <div class="resultsHeader">
+      <h3>Resultados de búsqueda:</h3>
+      <button (click)="goHome()"><i class="fa-solid fa-xmark"></i></button>
+   </div>
+   
+   <div class="noResults" *ngIf="noResultsFound">
+      <p>No se han encontrado resultados.</p>
+   </div>
+   
+   <ng-container *ngIf="anime_results.length > 0">
+      <div class="result" *ngFor="let anime of anime_results">
+         <img [src]="anime.images['jpg'].image_url"/>
+         <div class="details">
+            <h3>{{ anime.title }}</h3>
+            <ul>
+               <li *ngIf="anime.type !== 'Movie'"><p class="episodes">{{ anime.episodes }} {{ anime.episodes === 1 ? 'episode' : 'episodes' }}</p></li>
+               <li><p class="type">{{ anime.type }}</p></li>
+               <li><p class="genres" *ngFor="let genre of anime.genres" [ngClass]="{'hClass': genre.name === 'Hentai'}">{{ genre.name }}</p></li>
+            </ul>
+            <p *ngIf="anime.synopsis" [title]="anime.synopsis">{{ anime.synopsis.slice(0, 300) }}...</p>
+            <button (click)="addAnime(anime)">
+               <span class="buttonIcon"><i class="fa-regular fa-bookmark"></i></span>
+               <span class="buttonText">Añadir a mi lista</span>
+            </button>
+         </div>
+      </div>
+   </ng-container>
 </div>

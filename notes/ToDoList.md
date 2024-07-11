@@ -18,6 +18,6 @@
 # 🐞 Errores encontrados:
 
 • No se muestran alertas de ningún tipo en la ruta de los resultados de búsqueda.
-    Posible solución: Requiere mejorar la logica de visibilidad de componentes para arreglar.
+   Posible solución: Requiere mejorar la logica de visibilidad de componentes para arreglar.
 
     Comando para ejecutar: ng serve --o
