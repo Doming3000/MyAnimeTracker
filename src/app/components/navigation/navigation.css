@@ -128,7 +128,7 @@ form input::-ms-input-placeholder {
     height: 100%;
     left: 0;
     overflow-x: hidden;
-    padding-top: 60px;
+    padding-top: 40px;
     position: fixed;
     top: 0;
     transform: translateX(-100%);
