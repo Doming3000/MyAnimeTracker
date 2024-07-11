@@ -2,27 +2,27 @@
 
 <!-- Menú de navegación principal (header) -->
 <div class="menu">
-   <span (click)="openNav()"><i class="fa-solid fa-bars"></i></span>
-   <span class="title" (click)="goHome()">My Site</span>
+    <span (click)="openNav()"><i class="fa-solid fa-bars"></i></span>
+    <span class="title" (click)="goHome()">My Site</span>
 </div>
 
 <!-- Formulario de búsqueda -->
 <form (ngSubmit)="search()">
-   <button type="button" class="searchButton" (click)="search()"><i class="fa-solid fa-magnifying-glass"></i></button>
-   <input type="text" name="search" class="search-input" [(ngModel)]="searchTerm" placeholder="Realiza una búsqueda..." required [ngClass]="{'input-error': inputEmpty}" />
-   <button type="button" class="clearInput" (click)="clearInput()"><i class="fa-solid fa-xmark"></i></button>
+    <button type="button" class="searchButton" (click)="search()"><i class="fa-solid fa-magnifying-glass"></i></button>
+    <input type="text" name="search" class="search-input" [(ngModel)]="searchTerm" placeholder="Realiza una búsqueda..." required [ngClass]="{'input-error': inputEmpty}" />
+    <button type="button" class="clearInput" (click)="clearInput()"><i class="fa-solid fa-xmark"></i></button>
 </form>
 
 <!-- Menú de navegación lateral -->
 <div class="overlay" *ngIf="isOpen" (click)="closeNav()"></div>
 
 <div class="sidenav" [class.open]="isOpen">
-   <button (click)="closeNav()" class="cerrar"><i class="fa-solid fa-xmark"></i></button>
-   
-   <div class="dataContainer">
-      <input type="file" id="fileInput" (change)="importData($event)" accept=".csv">
-      <label for="fileInput"><i class="fa-solid fa-cloud-arrow-up"></i> Importar datos</label>
-      
-      <label (click)="exportData()"><i class="fa-solid fa-cloud-arrow-down"></i> Exportar datos</label>
-   </div>
+    <button (click)="closeNav()" class="cerrar"><i class="fa-solid fa-xmark"></i></button>
+    
+    <div class="dataContainer">
+        <input type="file" id="fileInput" (change)="importData($event)" accept=".csv">
+        <label for="fileInput"><i class="fa-solid fa-cloud-arrow-up"></i> Importar datos</label>
+        
+        <label (click)="exportData()"><i class="fa-solid fa-cloud-arrow-down"></i> Exportar datos</label>
+    </div>
 </div>
