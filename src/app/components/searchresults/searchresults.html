@@ -1,4 +1,5 @@
 <app-alerts></app-alerts>
+<router-outlet></router-outlet>
 
 <div class="results-container" #resultsContainer id="results-container" [ngClass]="{'results-visible': resultsVisible, 'animate-closing': animateClosing}">
     <div class="progress-container">
@@ -24,7 +25,7 @@
                     <li><p class="type">{{ anime.type }}</p></li>
                     <li><p class="genres" *ngFor="let genre of anime.genres" [ngClass]="{'hClass': genre.name === 'Hentai'}">{{ genre.name }}</p></li>
                 </ul>
-                <p *ngIf="anime.synopsis" [title]="anime.synopsis">{{ anime.synopsis.slice(0, 300) }}...</p>
+                <p *ngIf="anime.synopsis" [title]="anime.synopsis">{{ anime.synopsis.slice(0, 1500) }}</p>
                 <button (click)="addAnime(anime)">
                     <span class="buttonIcon"><i class="fa-regular fa-bookmark"></i></span>
                     <span class="buttonText">Añadir a mi lista</span>

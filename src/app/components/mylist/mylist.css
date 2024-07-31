@@ -120,16 +120,16 @@ hr {
 }
 
 .increaseButton {
-    left: 2px;
+    left: 5px;
 }
 
 .decreaseButton {
-    right: 2px;
+    right: 5px;
 }
 
 .increaseButton:disabled, .decreaseButton:disabled {
     opacity: 0.5;
-    cursor: not-allowed;
+    cursor: default
 }
 
 .anime:hover .buttonContainer {
