@@ -17,10 +17,6 @@
 
 # 🐞 Errores encontrados:
 
-• No se muestran alertas de ningún tipo en la ruta de los resultados de búsqueda.
-   Posible solución: Requiere mejorar la logica de visibilidad de componentes para arreglar.
-   # Causa del error encontrada: Las alertas se llaman desde el componente MyList, por lo que no aparecen en el componente de resultados.
-
 • Si se retrocede a la pagina anterior mediante el menú de navegación o botones del mouse, el término de búsqueda no se limpia del buscador.
    Posible solución: Implementar cualquier logíca para detectar si se cambia de página para limpiar término de búsqueda.
 

@@ -1,63 +1,65 @@
 <app-alerts></app-alerts>
 
-<div class="listHeader">
-    <h2><i class="fa-regular fa-bookmark"></i> Mi Lista</h2>
-</div>
-
-<hr>
-
-<div class="noElements" *ngIf="isListEmpty">
-    <span>Tal parece que aquí no hay nada.<br>¿Por qué no agregas algo a tu lista?</span>
-</div>
-
-<!-- Lista -->
-<div *ngIf="animes_selected.length > 0" class="mylist">
-    <div *ngFor="let anime of animes_selected" class="anime">
-        <div class="anime-content">
-            <img [src]="anime.imagen" (click)="redirectToAnime(anime.link)">
-            <h3>{{ truncateAnimeName(anime.title, 50) }}</h3>
-        </div>
-        
-        <!-- Contenedor de botones -->
-        <div class="buttonContainer"> 
-            <!-- Contador de episodios -->
-            <div class="episodeCount">
-                <ng-container *ngIf="!anime.markedAsViewed; else viewedText">
-                    <!-- Botón para incrementar el número de episodios -->
-                    <button class="increaseButton" [disabled]="anime.watched_episodes === anime.total_episodes" (click)="increaseWatch(anime)"><i class="fa-solid fa-angle-up"></i></button>
+<div *ngIf="showMainContent">
+    <div class="listHeader">
+        <h2><i class="fa-regular fa-bookmark"></i> Mi Lista</h2>
+    </div>
+    
+    <hr>
+    
+    <div class="noElements" *ngIf="isListEmpty">
+        <span>Tal parece que aquí no hay nada.<br>¿Por qué no agregas algo a tu lista?</span>
+    </div>
+    
+    <!-- Lista -->
+    <div *ngIf="animes_selected.length > 0" class="mylist">
+        <div *ngFor="let anime of animes_selected" class="anime">
+            <div class="anime-content">
+                <img [src]="anime.imagen" (click)="redirectToAnime(anime.link)">
+                <h3>{{ truncateAnimeName(anime.title, 50) }}</h3>
+            </div>
+            
+            <!-- Contenedor de botones -->
+            <div class="buttonContainer"> 
+                <!-- Contador de episodios -->
+                <div class="episodeCount">
+                    <ng-container *ngIf="!anime.markedAsViewed; else viewedText">
+                        <!-- Botón para incrementar el número de episodios -->
+                        <button class="increaseButton" [disabled]="anime.watched_episodes === anime.total_episodes" (click)="increaseWatch(anime)"><i class="fa-solid fa-angle-up"></i></button>
+                        
+                        <div class="episodeTipContainer">
+                            <span class="episodeCountText">{{ anime.watched_episodes }} / {{ anime.total_episodes }}</span>
+                            <span class="episodeCountTipText">Llevas {{ anime.watched_episodes }} episodios vistos</span>
+                        </div>
+                        
+                        <!-- Botón para disminuir el número de episodios -->
+                        <button class="decreaseButton" [disabled]="anime.watched_episodes === 0" (click)="decreaseWatch(anime)"><i class="fa-solid fa-angle-down"></i></button>
+                    </ng-container>
                     
-                    <div class="episodeTipContainer">
-                        <span class="episodeCountText">{{ anime.watched_episodes }} / {{ anime.total_episodes }}</span>
-                        <span class="episodeCountTipText">Llevas {{ anime.watched_episodes }} episodios vistos</span>
-                    </div>
-                    
-                    <!-- Botón para disminuir el número de episodios -->
-                    <button class="decreaseButton" [disabled]="anime.watched_episodes === 0" (click)="decreaseWatch(anime)"><i class="fa-solid fa-angle-down"></i></button>
-                </ng-container>
+                    <ng-template #viewedText>
+                        <div class="ViewCheckText">
+                            <span><i class="fa-solid fa-check-double"></i> Visto</span>
+                        </div>
+                    </ng-template>
+                </div>
                 
-                <ng-template #viewedText>
-                    <div class="ViewCheckText">
-                        <span><i class="fa-solid fa-check-double"></i> Visto</span>
-                    </div>
-                </ng-template>
-            </div>
-            
-            <!-- Botón "Marcar como visto" -->
-            <div class="ViewAnimeTip">
-                <button (click)="ViewAnime(anime)" class="viewButton"><i class="fa-regular" [ngClass]="{'fa-eye': !anime.markedAsViewed, 'fa-eye-slash': anime.markedAsViewed}"></i></button>
-                <span class="ViewAnimeTipText">{{ anime.markedAsViewed ? 'Marcar como no visto' : 'Marcar como visto' }}</span>
-            </div>
-            
-            <!-- Botón "añadir/editar URL" -->
-            <div class="EditAnimeTip">
-                <button (click)="EditAnime(anime)" class="editButton"><i class="fa-regular" [ngClass]="{'fa-pen-to-square': anime.link, 'fa-hard-drive': !anime.link}"></i></button>
-                <span class="EditAnimeTipText">{{ anime.link ? 'Editar URL' : 'Añadir una URL' }}</span>
-            </div>
-            
-            <!-- Botón "eliminar de la lista" -->
-            <div class="DelAnimeTip">
-                <button (click)="DelAnime(anime)" class="delButton"><i class="fa-regular fa-trash-can"></i></button>
-                <span class="DelAnimeTipText">Ya no me interesa</span>
+                <!-- Botón "Marcar como visto" -->
+                <div class="ViewAnimeTip">
+                    <button (click)="ViewAnime(anime)" class="viewButton"><i class="fa-regular" [ngClass]="{'fa-eye': !anime.markedAsViewed, 'fa-eye-slash': anime.markedAsViewed}"></i></button>
+                    <span class="ViewAnimeTipText">{{ anime.markedAsViewed ? 'Marcar como no visto' : 'Marcar como visto' }}</span>
+                </div>
+                
+                <!-- Botón "añadir/editar URL" -->
+                <div class="EditAnimeTip">
+                    <button (click)="EditAnime(anime)" class="editButton"><i class="fa-regular" [ngClass]="{'fa-pen-to-square': anime.link, 'fa-hard-drive': !anime.link}"></i></button>
+                    <span class="EditAnimeTipText">{{ anime.link ? 'Editar URL' : 'Añadir una URL' }}</span>
+                </div>
+                
+                <!-- Botón "eliminar de la lista" -->
+                <div class="DelAnimeTip">
+                    <button (click)="DelAnime(anime)" class="delButton"><i class="fa-regular fa-trash-can"></i></button>
+                    <span class="DelAnimeTipText">Ya no me interesa</span>
+                </div>
             </div>
         </div>
     </div>

@@ -8,8 +8,8 @@ import { filter } from 'rxjs/operators';
 })
 export class AppComponent {
   title = 'anime';
-  showMyList = true;
   showResults = false;
+  showMyList = true;
   
   constructor(private router: Router, private route: ActivatedRoute) {
     this.router.events.pipe(

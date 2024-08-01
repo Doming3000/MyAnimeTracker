@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { MyAnime } from 'src/app/interfaces/api-movies';
 import { AnimeService } from 'src/app/services/anime.service';
 import { Alerts } from '../alerts/alerts';
@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 
 export class Mylist implements OnInit {
   @ViewChild(Alerts) alerts!: Alerts;
+  @Input() showMainContent = true;
   
   // Variables
   animes_selected: MyAnime[] = [];
