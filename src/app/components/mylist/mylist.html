@@ -1,13 +1,13 @@
 <app-alerts></app-alerts>
 
-<div *ngIf="showMainContent">
+<div [ngClass]="{'visible': !showMainContent}" class="mainContent">
     <div class="listHeader">
         <h2><i class="fa-regular fa-bookmark"></i> Mi Lista</h2>
     </div>
     
     <hr>
     
-    <div class="noElements" *ngIf="isListEmpty">
+    <div *ngIf="isListEmpty" class="noElements">
         <span>Tal parece que aquí no hay nada.<br>¿Por qué no agregas algo a tu lista?</span>
     </div>
     

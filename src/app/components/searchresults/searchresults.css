@@ -16,6 +16,7 @@
     overflow-x: hidden;
     overflow-y: scroll;
     margin: 30px 100px 100px;
+    position: absolute;
 }
 
 .results-visible {

@@ -9,6 +9,16 @@
     }
 }
 
+.mainContent {
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.mainContent.visible {
+    opacity: 0;
+    pointer-events: none;
+}
+
 .listHeader {
     display: flex;
     margin: 20px 0 10px 0;
