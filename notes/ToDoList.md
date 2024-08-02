@@ -11,13 +11,14 @@
 
 # 🧠 Ideas:
 
+• Gif de búsqueda mientras se cargan los resultados de búsqueda.
 • Incluir selección de Mangas.
-• Logica para modificar el contador de episodios cuando un anime está en emisión.
+• Lógica para modificar el contador de episodios cuando un anime está en emisión.
 • Notificaciones de episodios nuevos.
 
 # 🐞 Errores encontrados:
 
 • Si se retrocede a la pagina anterior mediante el menú de navegación o botones del mouse, el término de búsqueda no se limpia del buscador.
-   Posible solución: Implementar cualquier logíca para detectar si se cambia de página para limpiar término de búsqueda.
+   Posible solución: Implementar cualquier lógica para detectar si se cambia de página para limpiar término de búsqueda.
 
     Comando para ejecutar: ng serve --o
