@@ -17,7 +17,9 @@
 
 # 🐞 Errores encontrados:
 
-• Si se retrocede a la pagina anterior mediante el menú de navegación o botones del mouse, el término de búsqueda no se limpia del buscador.
+• Si se retrocede a la página anterior mediante el menú de navegación o botones del mouse, el término de búsqueda no se limpia del buscador.
    Posible solución: Implementar cualquier lógica para detectar si se cambia de página para limpiar término de búsqueda.
+
+• Si se está en la página de resultados y se realiza una búsqueda, los resultados deberían limpiarse para que el gif de carga se vea bien.  
 
     Comando para ejecutar: ng serve --o
