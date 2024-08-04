@@ -1,14 +1,3 @@
-.noResults p {
-    align-items: center;
-    color: #555;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    user-select: none;
-    padding: 30px;
-}
-
-/* Resultados de búsqueda */
 .results-container {
     background-color: white;
     border-radius: 2px;
@@ -24,10 +13,40 @@
     transition: max-height 200ms ease-in-out;
 }
 
-.animate-closing {
-    max-height: 0;
+/* Loading gif */
+.loadingGif {
+    align-items: center;
+    justify-content: center;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    user-select: none;
+    z-index: 1;
 }
 
+.loadingGif img {
+    max-height: 100px;
+    max-width: 100px;
+}
+
+.loadingGif p {
+    color: #888;
+    font-size: 20px;
+}
+
+/* Si no hay resultados */
+.noResults p {
+    align-items: center;
+    color: #555;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    user-select: none;
+    padding: 30px;
+}
+
+/* Header */
 .resultsHeader {
     align-items: center;
     display: flex;
@@ -55,6 +74,7 @@
     color: #555;
 }
 
+/* Barra de progreso */
 .progress-container {
     height: 8px;
     background: #ccc;
@@ -69,6 +89,7 @@
     width: 0%;
 }
 
+/* Por cada resultado*/
 .result {
     display: flex;
     margin: 1rem;

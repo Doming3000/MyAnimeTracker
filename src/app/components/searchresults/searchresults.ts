@@ -1,3 +1,4 @@
+// searchresults.component.ts
 import { Anime, MyAnime } from "src/app/interfaces/api-movies";
 import { AnimeService } from "src/app/services/anime.service";
 import { Component, OnInit, AfterViewInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
@@ -22,6 +23,7 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
   resultsVisible: boolean = false;
   animateClosing: boolean = false;
   noResultsFound: boolean = false;
+  loading: boolean = false;
   searchTerm: string = '';
   
   private searchTermSubscription!: Subscription;
@@ -52,6 +54,7 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
         window.onscroll = () => window.scrollTo(0, this.currentScrollY);
         
         const term = params['term'];
+        this.loading = true;
         if (term) {
           this.searchTerm = term;
           return this.animeService.getAnimes(term);
@@ -74,9 +77,11 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
         this.anime_results = result.data;
         this.resultsVisible = true;
         this.noResultsFound = this.anime_results.length === 0;
+        this.loading = false;
         document.body.style.cursor = "default";
       },
       error => {
+        this.loading = false;
         document.body.style.cursor = "default";
         console.error('ERROR', error);
         alert(`Error al realizar la búsqueda: ${error}. Por favor, inténtalo más tarde.`);

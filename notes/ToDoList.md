@@ -11,7 +11,6 @@
 
 # 🧠 Ideas:
 
-• Gif de búsqueda mientras se cargan los resultados de búsqueda.
 • Incluir selección de Mangas.
 • Lógica para modificar el contador de episodios cuando un anime está en emisión.
 • Notificaciones de episodios nuevos.
