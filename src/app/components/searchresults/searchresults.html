@@ -1,12 +1,12 @@
 <app-alerts></app-alerts>
 
 <!-- Gif de carga -->
-<div class="loadingGif" *ngIf="loading">
+<div class="loadingGif" *ngIf="isLoading">
     <img src="assets/Loading.gif" alt="No se pudo cargar la imagen">
     <p>Buscando...</p>
 </div>
 
-<div class="results-container" #resultsContainer id="results-container" [ngClass]="{'results-visible': resultsVisible, 'animate-closing': animateClosing}">
+<div class="results-container" #resultsContainer id="results-container" [ngClass]="{'results-visible': resultsVisible}">
     <!-- Barra de progreso -->
     <div class="progress-container">
         <div class="progress-bar" id="myBar"></div>
