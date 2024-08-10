@@ -1,4 +1,2 @@
-Texto de ejemplo.
-
-# Comando para ejecutar la aplicación:
+# Comando para ejecutar mediante terminal:
     ng serve --o
