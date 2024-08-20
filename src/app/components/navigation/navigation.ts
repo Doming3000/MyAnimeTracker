@@ -125,6 +125,9 @@ export class Navigation {
         }
         
         else {
+          // Cerrar overlay del menú de navegación para evitar duplicados
+          this.isOpen = false;
+
           // Mostrar confirmación antes de sobrescribir
           this.alerts.showConfirm({
             title: 'Confirmar Importación',

@@ -16,7 +16,7 @@
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1000;
+    z-index: 2;
 }
 
 .overlay.active {
@@ -33,7 +33,7 @@
     opacity: 0;
     transition: transform 0.1s ease-out, opacity 0.1s ease-out;
     width: 380px;
-    z-index: 1002;
+    z-index: 3;
 }
 
 .alertWrapper.visible {
@@ -140,7 +140,7 @@
     top: 50%;
     transform: translate(-50%, -50%);
     user-select: none;
-    z-index: 1001;
+    z-index: 3;
 }
 
 .confirmModal {

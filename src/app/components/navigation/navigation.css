@@ -17,7 +17,7 @@
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1001;
+    z-index: 2;
 }
 
 .overlay.active {
@@ -61,7 +61,7 @@ form {
     top: 50px;
     transform: translateY(-50%);
     width: 370px;
-    z-index: 1000;
+    z-index: 1;
 }
 
 form input {
@@ -134,7 +134,7 @@ form input::-ms-input-placeholder {
     transform: translateX(-100%);
     transition: 0.5s;
     width: 250px;
-    z-index: 1002;
+    z-index: 2;
 }
 
 .sidenav.open {
