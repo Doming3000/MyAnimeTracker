@@ -10,7 +10,6 @@ export interface MyAnime {
   total_episodes: number | null,
   watched_episodes: number,
   markedAsViewed: boolean;
-  link: string;
 }
 
 export interface Anime {

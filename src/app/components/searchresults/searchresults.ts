@@ -114,7 +114,6 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
       total_episodes: anime.episodes,
       watched_episodes: 0,
       markedAsViewed: false,
-      link: "",
     };
     this.animeService.animeSelected(addAnime);
   }

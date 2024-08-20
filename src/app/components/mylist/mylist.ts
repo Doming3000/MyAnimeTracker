@@ -2,7 +2,6 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { MyAnime } from 'src/app/interfaces/api-movies';
 import { AnimeService } from 'src/app/services/anime.service';
 import { Alerts } from '../alerts/alerts';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-mylist',
@@ -72,23 +71,6 @@ export class Mylist implements OnInit {
     this.updateLocalStorage();
   }
   
-  // Editar enlace del anime
-  async EditAnime(anime: MyAnime) {
-    const { value: url } = await Swal.fire({
-      title: 'Editar URL',
-      text: 'Añade una url',
-      input: 'url',
-      inputLabel: 'Añade una url',
-      inputPlaceholder: 'https://www3.animeflv.net/',
-      confirmButtonText: '<i class="fa-solid fa-link"></i> Añadir',
-    });
-    
-    if (url) {
-      anime.link = url;
-      this.updateLocalStorage();
-    }
-  }
-  
   // Redirigir a la URL del anime
   redirectToAnime(url: string) {
     if (url) {
@@ -120,7 +102,8 @@ export class Mylist implements OnInit {
   private updateLocalStorage() {
     localStorage.setItem('my_anime', JSON.stringify(this.animes_selected));
     this.isListEmpty = this.animes_selected.length === 0;
-    this.sortAnimeList();
+    // Revisar esto después, quizás sea mejor no reordenar de forma dinámica.
+    // this.sortAnimeList();
   }
   
   // Ordenar la lista de animes por nombre y estado

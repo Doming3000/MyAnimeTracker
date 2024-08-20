@@ -9,7 +9,7 @@
     
     <!-- Barra lateral -->
     <hr>
-
+    
     <!-- Lista si está vacía -->
     <div *ngIf="isListEmpty" class="noElements">
         <span>Tal parece que aquí no hay nada.<br>¿Por qué no agregas algo a tu lista?</span>
@@ -19,7 +19,7 @@
     <div *ngIf="animes_selected.length > 0" class="mylist">
         <div *ngFor="let anime of animes_selected" class="anime">
             <div class="anime-content">
-                <img [src]="anime.imagen" (click)="redirectToAnime(anime.link)">
+                <img [src]="anime.imagen">
                 <h3>{{ truncateAnimeName(anime.title, 50) }}</h3>
             </div>
             
@@ -53,10 +53,10 @@
                     <span class="ViewAnimeTipText">{{ anime.markedAsViewed ? 'Marcar como no visto' : 'Marcar como visto' }}</span>
                 </div>
                 
-                <!-- Botón "añadir/editar URL" -->
+                <!-- Botón para modificar algo (aún pendiente) -->
                 <div class="EditAnimeTip">
-                    <button (click)="EditAnime(anime)" class="editButton"><i class="fa-regular" [ngClass]="{'fa-pen-to-square': anime.link, 'fa-hard-drive': !anime.link}"></i></button>
-                    <span class="EditAnimeTipText">{{ anime.link ? 'Editar URL' : 'Añadir una URL' }}</span>
+                    <button class="editButton"><i class="fa-regular"></i></button>
+                    <span class="EditAnimeTipText">Modificar</span>
                 </div>
                 
                 <!-- Botón "eliminar de la lista" -->

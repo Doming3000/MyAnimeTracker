@@ -71,7 +71,7 @@ hr {
 
 .anime img {
     border-radius: 0.5rem;
-    cursor: pointer;
+    /* cursor: pointer; */
     display: block;
     height: 220px;
     margin: 0 auto;

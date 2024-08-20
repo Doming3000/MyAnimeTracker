@@ -55,7 +55,7 @@ export class Navigation {
     }
   }
   
-  // Limpiar el campo de entrada de búsqueda
+  // Limpiar el buscador
   clearInput() {
     if (this.searchTerm === '') {
       this.triggerShakeAnimation();
@@ -66,7 +66,7 @@ export class Navigation {
     }
   }
   
-  // Activar animación de sacudida en el campo de entrada de búsqueda
+  // Activar animación de sacudida en el buscador
   triggerShakeAnimation() {
     const inputElement = document.querySelector('.search-input') as HTMLInputElement;
     if (inputElement) {
