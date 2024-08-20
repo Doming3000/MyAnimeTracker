@@ -3,7 +3,6 @@
 • Aplicar reglas media en imágenes y buscador.
 • Encontrar diseños definitivos (dejar de usar escalas de grises).
 • Encontrar la forma de redirigir a algún lado al hacer click en un elemento de la lista (imágen).
-• Mejorar el css del contador de episodios, debe adaptarse a la cantidad de episodios para un tamaño más congruente.
 • Mejorar las animaciones de las alertas tipo Toast al aparecer y desaparecer.
 • Mejorar los diseños de alertas en general (Modal y Toast).
 • Ponerle un nombre a la aplicación.

@@ -98,6 +98,21 @@ export class Mylist implements OnInit {
     return name.length <= maxLength ? name : `${name.substr(0, maxLength - 3)}...`;
   }
   
+  // Objetener cantidad de episodios para ajustar estilos css
+  getEpisodeCountClass(anime: any): string {
+    const totalEpisodesLength = anime.total_episodes?.toString().length || 0;
+    
+    if (totalEpisodesLength === 1) {
+      return 'oneDigit';
+    } else if (totalEpisodesLength === 2) {
+      return 'twoDigits';
+    } else if (totalEpisodesLength >= 3) {
+      return 'threeDigits';
+    }
+    
+    return '';
+  }
+  
   // Actualizar el almacenamiento local con la lista de animes
   private updateLocalStorage() {
     localStorage.setItem('my_anime', JSON.stringify(this.animes_selected));

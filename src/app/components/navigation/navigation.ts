@@ -118,6 +118,7 @@ export class Navigation {
           return;
         }
         
+        // Importar si no hay datos ya existentes en el almacenamiento local
         else if (!storedData || storedData === '[]') {
           this.triggerSuccessAlert('Hecho!', 'Datos importados con éxito');
           localStorage.setItem('my_anime', JSON.stringify(data));
@@ -125,7 +126,7 @@ export class Navigation {
         }
         
         else {
-          // Cerrar overlay del menú de navegación para evitar duplicados
+          // Cerrar menú de navegación para evitar overlays duplicados
           this.isOpen = false;
 
           // Mostrar confirmación antes de sobrescribir

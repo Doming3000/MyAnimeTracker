@@ -129,17 +129,35 @@ hr {
     position: absolute;
 }
 
-.increaseButton {
-    left: 5px;
-}
-
-.decreaseButton {
-    right: 5px;
-}
-
 .increaseButton:disabled, .decreaseButton:disabled {
     opacity: 0.5;
-    cursor: default
+    cursor: default;
+}
+
+/* ----- Estilos de los botones según la cantidad de dígitos ----- */
+
+.episodeCount.oneDigit .increaseButton {
+    left: 8px;
+}
+
+.episodeCount.oneDigit .decreaseButton {
+    right: 8px;
+}
+
+.episodeCount.twoDigits .increaseButton {
+    left: 3px;
+}
+
+.episodeCount.twoDigits .decreaseButton {
+    right: 3px;
+}
+
+.episodeCount.threeDigits .increaseButton {
+    left: -2px;
+}
+
+.episodeCount.threeDigits .decreaseButton {
+    right: -2px;
 }
 
 .anime:hover .buttonContainer {
