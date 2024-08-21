@@ -1,2 +1,2 @@
-# Comando para ejecutar mediante terminal:
+### Comando para ejecutar mediante terminal:
     ng serve --o
