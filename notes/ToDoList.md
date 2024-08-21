@@ -22,4 +22,4 @@
 • Al importar datos, la página debería actualizar el almacenamiento local sin necesidad de recargar la página, del mismo modo o similar a como se hace al
   agregar un elemento a mi lista.
 • Si se está en la página de resultados y se realiza una búsqueda, los resultados deberían limpiarse para que el gif de carga se vea bien.
-• Footer mal posicionado si no hay elementos en la lista.
+• El footer está mal posicionado si no hay elementos en la lista.
