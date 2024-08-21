@@ -9,6 +9,16 @@
     }
 }
 
+@keyframes shakeToast {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.shakeToast {
+    animation: shakeToast 0.1s;
+}
+
 .overlay {
     background-color: rgba(0, 0, 0, 0.5);
     height: 100%;

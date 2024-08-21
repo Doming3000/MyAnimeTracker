@@ -23,4 +23,3 @@
   agregar un elemento a mi lista.
 • Si se está en la página de resultados y se realiza una búsqueda, los resultados deberían limpiarse para que el gif de carga se vea bien.
 • Footer mal posicionado si no hay elementos en la lista.
-• Sospecha: Llamadas duplicadas a Fontawesome al cargar la aplicación.

@@ -83,7 +83,8 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
         this.isLoading = false;
         document.body.style.cursor = "default";
         console.error('ERROR', error);
-        alert(`Error al realizar la búsqueda: ${error}. Por favor, inténtalo más tarde.`);
+        alert(`Ha ocurrido un error inesperado al realizar la búsqueda: ${error}. Haga click en aceptar para recargar la página.`);
+        window.location.reload();
       }
     );
   }

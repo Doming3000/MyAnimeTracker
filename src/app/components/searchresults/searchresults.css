@@ -80,7 +80,7 @@
     background: #ccc;
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index: 1;
 }
 
 .progress-bar {
