@@ -1,5 +1,6 @@
 # 💀 Pendiente a realizar:
 
+• Agilizar la forma para organizar los elementos de la lista en tiempo real
 • Aplicar reglas media en imágenes y buscador.
 • Encontrar diseños definitivos (dejar de usar escalas de grises).
 • Encontrar la forma de redirigir a algún lado al hacer click en un elemento de la lista (imágen).

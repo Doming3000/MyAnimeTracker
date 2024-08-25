@@ -113,14 +113,6 @@ export class Mylist implements OnInit {
     return '';
   }
   
-  // Actualizar el almacenamiento local con la lista de animes
-  private updateLocalStorage() {
-    localStorage.setItem('my_anime', JSON.stringify(this.animes_selected));
-    this.isListEmpty = this.animes_selected.length === 0;
-    // Revisar esto después, quizás sea mejor no reordenar de forma dinámica.
-    // this.sortAnimeList();
-  }
-  
   // Ordenar la lista de animes por nombre y estado
   private sortAnimeList() {
     this.animes_selected.sort((a, b) => {
@@ -136,6 +128,14 @@ export class Mylist implements OnInit {
         return a.title.localeCompare(b.title);
       }
     });
+  }
+  
+  // Actualizar el almacenamiento local con la lista de animes
+  private updateLocalStorage() {
+    localStorage.setItem('my_anime', JSON.stringify(this.animes_selected));
+    this.isListEmpty = this.animes_selected.length === 0;
+    // Revisar esto después, quizás sea mejor no reordenar de forma dinámica.
+    // this.sortAnimeList();
   }
   
   // Mostrar alerta de éxito
