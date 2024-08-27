@@ -14,7 +14,9 @@ export class Mylist implements OnInit {
   @Input() showMainContent = true;
   
   // Variables
+  selectedAnime: MyAnime | null = null;
   animes_selected: MyAnime[] = [];
+  isModalOpen = false;
   isListEmpty = true;
   
   // Inyección de dependencias
@@ -32,6 +34,7 @@ export class Mylist implements OnInit {
     const storedData = localStorage.getItem('my_anime');
     if (storedData) {
       this.animes_selected = JSON.parse(storedData) || [];
+      this.animes_selected.forEach(anime => anime.isModalOpen = false); 
       this.isListEmpty = this.animes_selected.length === 0;
       this.sortAnimeList();
     }
@@ -45,6 +48,7 @@ export class Mylist implements OnInit {
       this.triggerSuccessAlert('Hecho!', 'Añadido a tu lista');
       this.animes_selected.push(anime);
       this.updateLocalStorage();
+      anime.isModalOpen = false;
     }
   }
   
@@ -71,11 +75,15 @@ export class Mylist implements OnInit {
     this.updateLocalStorage();
   }
   
-  // Redirigir a la URL del anime
-  redirectToAnime(url: string) {
-    if (url) {
-      window.open(url, '_blank');
-    }
+  // Abrir modal y overlay
+  openDetails(anime: MyAnime) {
+    this.selectedAnime = anime;
+    this.isModalOpen = true;
+  }
+  
+  closeDetails() {
+    this.selectedAnime = null;
+    this.isModalOpen = false;
   }
   
   // Eliminar un anime de la lista

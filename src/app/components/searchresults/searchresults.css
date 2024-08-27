@@ -4,13 +4,13 @@
     max-height: 0;
     overflow-x: hidden;
     overflow-y: scroll;
-    margin: 30px 100px 100px;
+    margin: 30px 40px 40px;
     position: absolute;
 }
 
 .results-visible {
-    max-height: 605px;
-    transition: max-height 200ms ease-in-out;
+    max-height: calc(100vh - 80px);
+    transition: max-height 500ms ease-in-out;
 }
 
 /* Loading gif */

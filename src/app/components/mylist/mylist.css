@@ -9,6 +9,16 @@
     }
 }
 
+.overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+}
+
 .mainContent {
     opacity: 1;
     transition: opacity 0.5s ease-in-out;
@@ -34,6 +44,34 @@
 hr {
     margin: 0 20px 0 20px;
 }
+
+.detailsModal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    width: 80%;
+    max-width: 600px;
+    display: block;
+  }
+  
+  .detailsModal .modal-content {
+    position: relative;
+  }
+  
+  .detailsModal .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
 
 .noElements {
     align-items: center;
@@ -169,7 +207,7 @@ hr {
     visibility: visible;
 }
 
-.viewButton, .editButton, .delButton {
+.viewButton, .detailsButton, .delButton {
     align-items: flex-end;
     border-radius: 0.2rem;
     border: none;
@@ -185,25 +223,25 @@ hr {
     margin-right: 5px;
 }
 
-.editButton{
+.detailsButton{
     background-color: lightskyblue;
     margin-right: 5px;
 }
 
 .delButton {
-    background-color: lightsalmon;
+    background-color: #ff5c7a;
 }
 
 /* ----- Tooltips ----- */
 
 /* Contenedor del tooltip */
-.episodeTipContainer, .DelAnimeTip, .EditAnimeTip, .ViewAnimeTip, .collapsileTip {
+.episodeTipContainer, .DelAnimeTip, .DetailsAnimeTip, .ViewAnimeTip, .collapsileTip {
     display: inline-block;
     position: relative;
 }
 
 /* Texto del tooltip */
-.episodeCountTipText, .DelAnimeTipText, .EditAnimeTipText, .ViewAnimeTipText, .collapsileTipText {
+.episodeCountTipText, .DelAnimeTipText, .DetailsAnimeTipText, .ViewAnimeTipText, .collapsileTipText {
     background-color: #555;
     border-radius: 6px;
     color: white;
@@ -229,7 +267,7 @@ hr {
     width: 120px;
 }
 
-.EditAnimeTipText, .ViewAnimeTipText {
+.DetailsAnimeTipText, .ViewAnimeTipText {
     width: 115px;
 }
 
@@ -242,7 +280,7 @@ hr {
 }
 
 /* Tooltip arrow */
-.episodeCountTipText::after, .DelAnimeTipText::after, .EditAnimeTipText::after, .ViewAnimeTipText::after {
+.episodeCountTipText::after, .DelAnimeTipText::after, .DetailsAnimeTipText::after, .ViewAnimeTipText::after {
     border-color: #555 transparent transparent transparent;
     border-style: solid;
     border-width: 5px;
@@ -254,7 +292,7 @@ hr {
 }
 
 /* Mostrar el tooltip (hover) */
-.episodeTipContainer:hover .episodeCountTipText, .DelAnimeTip:hover .DelAnimeTipText, .EditAnimeTip:hover .EditAnimeTipText, .ViewAnimeTip:hover .ViewAnimeTipText {
+.episodeTipContainer:hover .episodeCountTipText, .DelAnimeTip:hover .DelAnimeTipText, .DetailsAnimeTip:hover .DetailsAnimeTipText, .ViewAnimeTip:hover .ViewAnimeTipText {
     animation: fadeInDown 0.5s;
     opacity: 1;
     visibility: visible;

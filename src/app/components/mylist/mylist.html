@@ -1,5 +1,7 @@
 <app-alerts></app-alerts>
 
+<div class="overlay" *ngIf="isModalOpen" (click)="closeDetails()"></div>
+
 <!-- Contenido principal -->
 <div [ngClass]="{'visible': !showMainContent}" class="mainContent">
     <!-- Título -->
@@ -15,9 +17,19 @@
         <span>Tal parece que aquí no hay nada.<br>¿Por qué no agregas algo a tu lista?</span>
     </div>
     
+    <!-- Modal de detalles -->
+    <div class="detailsModal" *ngIf="selectedAnime && isModalOpen">
+        <div class="modal-content">
+            <span class="close" (click)="closeDetails()">&times;</span>
+            <h3>{{ selectedAnime.title }}</h3>
+            <p>Este es un modal de prueba para {{ selectedAnime.title }}</p>
+            <img [src]="selectedAnime.imagen">
+        </div>
+    </div>
+    
     <!-- Lista -->
     <div *ngIf="animes_selected.length > 0" class="mylist">
-        <div *ngFor="let anime of animes_selected" class="anime">
+        <div *ngFor="let anime of animes_selected" class="anime">            
             <div class="anime-content">
                 <img [src]="anime.imagen">
                 <h3>{{ truncateAnimeName(anime.title, 50) }}</h3>
@@ -33,7 +45,7 @@
                         
                         <div class="episodeTipContainer">
                             <span class="episodeCountText">{{ anime.watched_episodes }} / {{ anime.total_episodes }}</span>
-                            <span class="episodeCountTipText">Llevas {{ anime.watched_episodes }} episodios vistos</span>
+                            <span class="episodeCountTipText">Has visto {{ anime.watched_episodes }} episodios</span>
                         </div>
                         
                         <!-- Botón para disminuir el número de episodios -->
@@ -53,10 +65,10 @@
                     <span class="ViewAnimeTipText">{{ anime.markedAsViewed ? 'Marcar como no visto' : 'Marcar como visto' }}</span>
                 </div>
                 
-                <!-- Botón para modificar algo (aún pendiente) -->
-                <div class="EditAnimeTip">
-                    <button class="editButton"><i class="fa-regular"></i></button>
-                    <span class="EditAnimeTipText">Modificar</span>
+                <!-- Botón para ver detalles -->
+                <div class="DetailsAnimeTip">
+                    <button (click)="openDetails(anime)" class="detailsButton"><i class="fa-regular fa-rectangle-list"></i></button>
+                    <span class="DetailsAnimeTipText">Ver detalles</span>
                 </div>
                 
                 <!-- Botón "eliminar de la lista" -->
