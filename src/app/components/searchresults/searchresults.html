@@ -6,6 +6,7 @@
     <p>Buscando...</p>
 </div>
 
+<!-- Contenedor de resultados -->
 <div class="results-container" #resultsContainer id="results-container" [ngClass]="{'results-visible': resultsVisible}">
     <!-- Barra de progreso -->
     <div class="progress-container">
@@ -14,7 +15,7 @@
     
     <!-- Header -->
     <div class="resultsHeader">
-        <h3>Resultados de búsqueda:</h3>
+        <h3>Resultados de búsqueda para: "{{ searchTerm }}"</h3>
         <button (click)="goHome()"><i class="fa-solid fa-xmark"></i></button>
     </div>
     

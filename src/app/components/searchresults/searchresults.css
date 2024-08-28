@@ -159,6 +159,10 @@
     text-align: justify;
 }
 
+p[title] {
+    pointer-events: none;
+}
+
 .details button  {
     background: #009578;
     border-radius: 5px;

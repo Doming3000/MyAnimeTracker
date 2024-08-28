@@ -45,13 +45,6 @@ export class AnimeService {
   }
   
   private handleError(error: HttpErrorResponse): Observable<never> {
-    let errorMessage = 'An unknown error occurred';
-    if (error.error instanceof ErrorEvent) {
-      errorMessage = `Client-side error: ${error.error.message}`;
-    } else {
-      errorMessage = `Server-side error: ${error.status} ${error.message}`;
-    }
-    console.error('Ha ocurrido un error:', errorMessage);
-    return throwError(errorMessage);
+    return throwError(() => error);
   }
 }

@@ -44,28 +44,35 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
   
   // Inicialización del componente
   ngOnInit(): void {
+    // Suscripción a los parámetros de consulta de la ruta
     this.searchTermSubscription = this.route.queryParams.pipe(
       switchMap(params => {
-        // Mostrar cursor de progreso y deshabilitar desplazamiento
+        // Mostrar cursor de progreso y deshabilitar el desplazamiento
         document.body.style.cursor = "progress";
         document.documentElement.style.overflowY = 'hidden';
         this.currentScrollY = window.scrollY;
+        
+        // Mantener la posición de scroll fija durante la carga
         window.onscroll = () => window.scrollTo(0, this.currentScrollY);
         
         const term = params['term'];
         this.isLoading = true;
+        
+        // Si existe un término de búsqueda en los parámetros de la URL
         if (term) {
           this.searchTerm = term;
-          return this.animeService.getAnimes(term);
+          return this.animeService.getAnimes(term); // Realizar la búsqueda basada en el término
         } else {
+          // Si no existe un término en la URL, escuchar los cambios en searchTerm$
           return this.searchService.searchTerm$.pipe(
-            debounceTime(300),
+            debounceTime(300), // Retrasar la búsqueda para evitar múltiples solicitudes rápidas
             switchMap(searchTerm => {
+              // Validar si el término de búsqueda no está vacío
               if (searchTerm.trim()) {
                 this.searchTerm = searchTerm;
-                return this.animeService.getAnimes(searchTerm);
+                return this.animeService.getAnimes(searchTerm); // Realizar la búsqueda
               } else {
-                return this.animeService.getAnimes('');
+                return this.animeService.getAnimes(''); // Manejar la búsqueda con un término vacío
               }
             })
           );
@@ -73,18 +80,61 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
       })
     ).subscribe(
       result => {
+        // Manejar la respuesta exitosa de la búsqueda
         this.anime_results = result.data;
         this.resultsVisible = true;
         this.noResultsFound = this.anime_results.length === 0;
         this.isLoading = false;
-        document.body.style.cursor = "default";
+        document.body.style.cursor = "default"; // Restaurar el cursor a su estado normal
       },
       error => {
+        // Manejar errores en la solicitud de búsqueda
         this.isLoading = false;
-        document.body.style.cursor = "default";
-        console.error('ERROR', error);
-        alert(`Ha ocurrido un error inesperado al realizar la búsqueda: ${error}. Haga click en aceptar para recargar la página.`);
-        window.location.reload();
+        document.body.style.cursor = "default"; // Restaurar el cursor a su estado normal
+        
+        // Manejo específico de errores HTTP
+        if (error.status) {
+          switch (error.status) {
+            case 400:
+            alert("(Error 400) La solicitud es inválida. Por favor, verifique correctamente los términos de búsqueda e inténtelo nuevamente.");
+            this.router.navigate(['/']);
+            break;
+            
+            case 408:
+            alert("(Error 408) La solicitud tardó demasiado tiempo en completarse, seguramente debido a un error de red o conexión con el servidor. Por favor, vuelva a intentarlo más tarde.");
+            this.router.navigate(['/']);
+            break;
+            
+            case 429:
+            alert("(Error 429) Demasiadas peticiones. Por favor, espere un momento antes de volver a realizar una búsqueda y evite realizar búsquedas demasiado rápido.");
+            this.router.navigate(['/']);
+            break;
+            
+            case 500:
+            alert("(Error 500) Ha ocurrido un problema con el servidor. Por favor, vuelva a intentarlo más tarde.");
+            this.router.navigate(['/']);
+            break;
+            
+            case 502:
+            alert("(Error 502) Ha ocurrido un problema con la comunicación entre servidores. Por favor, vuelva a intentarlo más tarde.");
+            this.router.navigate(['/']);
+            break;
+            
+            case 503:
+            alert("(Error 503) El servicio no está disponible en este momento. Por favor, vuelva a intentarlo más tarde.");
+            this.router.navigate(['/']);
+            break;
+            
+            default:
+            alert(`Ha ocurrido un error inesperado (Error ${error.status}): ${error.message}.`);
+            this.router.navigate(['/']);
+            break;
+          }
+        } else {
+          // Manejo de errores inesperados sin código de estado HTTP
+          alert('Ha ocurrido un error inesperado. Por favor, vuelva a intentarlo más tarde.');
+          this.router.navigate(['/']);
+        }
       }
     );
   }
