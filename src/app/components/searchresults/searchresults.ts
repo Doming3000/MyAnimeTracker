@@ -85,12 +85,12 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
         this.resultsVisible = true;
         this.noResultsFound = this.anime_results.length === 0;
         this.isLoading = false;
-        document.body.style.cursor = "default"; // Restaurar el cursor a su estado normal
+        document.body.style.cursor = "default";
       },
       error => {
         // Manejar errores en la solicitud de búsqueda
         this.isLoading = false;
-        document.body.style.cursor = "default"; // Restaurar el cursor a su estado normal
+        document.body.style.cursor = "default";
         
         // Manejo específico de errores HTTP
         if (error.status) {
@@ -168,6 +168,11 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
       isModalOpen: false,
     };
     this.animeService.animeSelected(addAnime);
+  }
+  
+  // Ver anim en My Anime List (MAL)
+  viewOnMal(url: string): void {
+    window.open(url, '_blank');
   }
   
   // Actualizar la barra de desplazamiento horizontal

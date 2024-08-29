@@ -163,24 +163,39 @@ p[title] {
     pointer-events: none;
 }
 
-.details button  {
-    background: #009578;
+/* Botones */
+.buttonContainer {
+    display: flex;
+    gap: 5px;
+    margin-left: auto;
+    margin-top: auto;
+    user-select: none;
+}
+
+.buttonContainer button  {
     border-radius: 5px;
     border: none;
     cursor: pointer;
     display: flex;
     font-size: 14px;
     height: 30px;
-    margin-left: auto;
-    margin-top: auto;
     outline: none;
     transition: all linear 200ms;
-    user-select: none;
-    width: 155px;
+    white-space: nowrap;
 }
 
-.details button:hover {
-    background: #008168;
+.buttonContainer .malButton {
+    background: #2e51a2;
+    color: white;
+}
+
+.buttonContainer .addButton {
+    background: #009578;
+    color: white;
+}
+
+.buttonContainer button:hover {
+    filter: brightness(0.9);
 }
 
 .buttonIcon, .buttonText {
@@ -194,4 +209,15 @@ p[title] {
 .buttonIcon {
     background: rgba(0, 0, 0, 0.08);
     font-size: 1rem;
+    justify-content: center;
+    width: 40px;
+}
+
+.buttonIcon svg {
+    width: 50px;
+    height: 30px;
+}
+
+.buttonText {
+    padding-left: 10px;
 }
