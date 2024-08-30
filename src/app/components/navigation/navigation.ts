@@ -48,6 +48,7 @@ export class Navigation {
       this.inputEmpty = true;
       this.triggerShakeAnimation();
     } else {
+      window.scrollTo(0, 0);
       this.inputEmpty = false;
       this.router.navigate(['/searchresults']);
       this.searchService.updateSearchTerm(this.searchTerm);

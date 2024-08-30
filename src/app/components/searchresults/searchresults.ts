@@ -86,6 +86,12 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
         this.noResultsFound = this.anime_results.length === 0;
         this.isLoading = false;
         document.body.style.cursor = "default";
+
+        // Comprobar si el contenedor de resultados existe antes de desplazar el scroll
+        if (this.resultsContainer && this.resultsContainer.nativeElement) {
+          this.resultsContainer.nativeElement.scrollTo(0, 0);
+          this.updateProgressBar();
+        }
       },
       error => {
         // Manejar errores en la solicitud de búsqueda
@@ -170,7 +176,7 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
     this.animeService.animeSelected(addAnime);
   }
   
-  // Ver anim en My Anime List (MAL)
+  // Ver anime en My Anime List (MAL)
   viewOnMal(url: string): void {
     window.open(url, '_blank');
   }

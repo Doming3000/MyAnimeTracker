@@ -1,11 +1,14 @@
 .results-container {
     background-color: white;
     border-radius: 2px;
+    left: 0;
+    margin: 30px 40px 40px;
     max-height: 0;
     overflow-x: hidden;
     overflow-y: scroll;
-    margin: 30px 40px 40px;
     position: absolute;
+    right: 0;
+    width: calc(100% - 80px);
 }
 
 .results-visible {
@@ -127,28 +130,32 @@
     margin-right: 5px;
 }
 
-.details ul li p {
+.details ul li {
     color: white;
     padding: 5px;
     user-select: none;
     border-radius: 5px;
 }
 
-.details ul li .episodes {
+.episodes {
     background: #3C93D5;
 }
 
-.details ul li .type {
+.type {
     background: #e67e22;
 }
 
-.details ul li .genres {
+.status {
+    background: royalblue;
+}
+
+.genres {
     background: #2ecc71;
     display: inline-block;
     margin-right: 5px;
 }
 
-.details ul li .hClass {
+.hClass {
     background-color: #e74c3c;
 }
 
@@ -156,6 +163,7 @@
     color: #555;
     font-size: 0.875rem;
     margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
     text-align: justify;
 }
 
