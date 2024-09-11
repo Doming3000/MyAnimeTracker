@@ -27,6 +27,15 @@ main {
     flex: 1;
 }
 
+footer p.issue a, i {
+    color: white;
+    text-decoration: none;
+}
+
+footer p.issue a:visited {
+    color: white;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
     width: 10px;
