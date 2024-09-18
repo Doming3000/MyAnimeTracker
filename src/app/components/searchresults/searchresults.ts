@@ -159,7 +159,8 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
   goHome(): void {
     this.router.navigate(['/']);
     this.restoreScrollAndOverflow();
-    document.body.style.cursor = "default"; 
+    document.body.style.cursor = "default";
+    this.searchService.updateSearchTerm(""); 
   }
   
   // Agregar un anime a mi lista

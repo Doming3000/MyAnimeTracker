@@ -27,9 +27,19 @@ main {
     flex: 1;
 }
 
-footer p.issue a, i {
+footer {
+    justify-content: flex-end;
+    padding: 10px;
+}
+
+footer p.issue {
     color: white;
+    user-select: none;
+}
+
+footer p.issue a {
     text-decoration: none;
+    color: white;
 }
 
 footer p.issue a:visited {
