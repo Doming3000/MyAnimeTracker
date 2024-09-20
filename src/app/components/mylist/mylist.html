@@ -23,7 +23,6 @@
             <span class="close" (click)="closeDetails()">&times;</span>
             <h3>{{ selectedAnime.title }}</h3>
             <p>Este es un modal de prueba para {{ selectedAnime.title }}</p>
-            <img [src]="selectedAnime.imagen">
         </div>
     </div>
     
@@ -31,7 +30,7 @@
     <div *ngIf="animes_selected.length > 0" class="mylist">
         <div *ngFor="let anime of animes_selected" class="anime">            
             <div class="anime-content">
-                <img [src]="anime.imagen">
+                <img [src]="anime.images['jpg'].large_image_url" alt="Anime Image">
                 <h3>{{ truncateAnimeName(anime.title, 50) }}</h3>
             </div>
             

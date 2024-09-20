@@ -6,7 +6,7 @@ export interface APIAnime {
 export interface MyAnime {
   id: number,
   title: string,
-  imagen: string,
+  images: { [key: string]: Image },
   total_episodes: number | null,
   watched_episodes: number,
   markedAsViewed: boolean;

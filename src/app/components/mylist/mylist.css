@@ -108,12 +108,13 @@ hr {
 
 .anime img {
     border-radius: 0.5rem;
-    /* cursor: pointer; */
     display: block;
-    height: 220px;
+    height: 250px;
     margin: 0 auto;
-    width: 190px;
+    object-fit: cover;
+    object-position: center;
     user-select: none;
+    width: 180px;
 }
 
 .anime h3 {

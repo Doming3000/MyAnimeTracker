@@ -5,7 +5,6 @@
 • Desactivar el contador de episodios si el elemento de la lista es una película.
 • Encontrar diseños definitivos (dejar de usar escalas de grises).
 • Encontrar la forma de redirigir a algún lado al hacer click en un elemento de la lista (imágen).
-• Mejorar calidad de imágen de la lista.
 • Mejorar las animaciones de las alertas tipo Toast al aparecer y desaparecer.
 • Mejorar los diseños de alertas en general (Modal y Toast).
 • Ponerle un nombre a la aplicación.

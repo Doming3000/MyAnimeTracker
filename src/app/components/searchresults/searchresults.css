@@ -102,10 +102,12 @@
 }
 
 .result img {
-    max-width: 180px;
     border-radius: 0.5rem;
-    user-select: none;
     margin-right: 1rem;
+    max-width: 180px;
+    object-fit: cover;
+    object-position: center;
+    user-select: none;
 }
 
 .details {
