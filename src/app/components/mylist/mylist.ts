@@ -58,14 +58,24 @@ export class Mylist implements OnInit {
   }
   
   // Aumentar el número de episodios vistos
-  increaseWatch(anime: MyAnime) {
-    anime.watched_episodes++;
+  increaseWatch(anime: MyAnime, event: MouseEvent) {
+    const increment = event.ctrlKey ? 10 : 1;
+    
+    if (anime.watched_episodes + increment <= (anime.total_episodes || Infinity)) {
+      anime.watched_episodes += increment;
+    } else {
+      anime.watched_episodes = anime.total_episodes || anime.watched_episodes;
+    }
     this.updateLocalStorage();
   }
   
   // Disminuir el número de episodios vistos
-  decreaseWatch(anime: MyAnime) {
-    anime.watched_episodes--;
+  decreaseWatch(anime: MyAnime, event: MouseEvent) {
+    if (event.ctrlKey) {
+      anime.watched_episodes = Math.max(anime.watched_episodes - 10, 0);
+    } else {
+      anime.watched_episodes = Math.max(anime.watched_episodes - 1, 0);
+    }
     this.updateLocalStorage();
   }
   

@@ -22,7 +22,8 @@
         <div class="modal-content">
             <span class="close" (click)="closeDetails()">&times;</span>
             <h3>{{ selectedAnime.title }}</h3>
-            <p>Este es un modal de prueba para {{ selectedAnime.title }}</p>
+            <p> {{ selectedAnime.type }} </p>
+            <p> {{ selectedAnime.url }} </p>
         </div>
     </div>
     
@@ -38,9 +39,9 @@
             <div class="buttonContainer"> 
                 <!-- Contador de episodios -->
                 <div class="episodeCount" [ngClass]="getEpisodeCountClass(anime)">
-                    <ng-container *ngIf="!anime.markedAsViewed; else viewedText">
+                    <ng-container *ngIf="!anime.markedAsViewed && anime.type !== 'Movie'; else viewedText">
                         <!-- Botón para incrementar el número de episodios -->
-                        <button class="increaseButton" [disabled]="anime.watched_episodes === anime.total_episodes" (click)="increaseWatch(anime)"><i class="fa-solid fa-angle-up"></i></button>
+                        <button class="increaseButton" [disabled]="anime.watched_episodes === anime.total_episodes" (click)="increaseWatch(anime, $event)"><i class="fa-solid fa-angle-up"></i></button>
                         
                         <div class="episodeTipContainer">
                             <span class="episodeCountText">{{ anime.watched_episodes }} / {{ anime.total_episodes }}</span>
@@ -48,11 +49,11 @@
                         </div>
                         
                         <!-- Botón para disminuir el número de episodios -->
-                        <button class="decreaseButton" [disabled]="anime.watched_episodes === 0" (click)="decreaseWatch(anime)"><i class="fa-solid fa-angle-down"></i></button>
+                        <button class="decreaseButton" [disabled]="anime.watched_episodes === 0" (click)="decreaseWatch(anime, $event)"><i class="fa-solid fa-angle-down"></i></button>
                     </ng-container>
                     
                     <ng-template #viewedText>
-                        <div class="ViewCheckText">
+                        <div class="ViewCheckText" *ngIf="anime.markedAsViewed">
                             <span><i class="fa-solid fa-check-double"></i> Visto</span>
                         </div>
                     </ng-template>

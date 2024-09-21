@@ -86,7 +86,7 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
         this.noResultsFound = this.anime_results.length === 0;
         this.isLoading = false;
         document.body.style.cursor = "default";
-
+        
         // Comprobar si el contenedor de resultados existe antes de desplazar el scroll
         if (this.resultsContainer && this.resultsContainer.nativeElement) {
           this.resultsContainer.nativeElement.scrollTo(0, 0);
@@ -169,6 +169,8 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
       id: anime.mal_id,
       title: anime.title,
       images: anime.images,
+      type: anime.type,
+      url: anime.url,
       total_episodes: anime.episodes,
       watched_episodes: 0,
       markedAsViewed: false,

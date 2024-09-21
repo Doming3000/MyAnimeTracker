@@ -2,7 +2,6 @@
 
 • Agilizar la forma para organizar los elementos de la lista en tiempo real
 • Aplicar reglas media en imágenes y buscador.
-• Desactivar el contador de episodios si el elemento de la lista es una película.
 • Encontrar diseños definitivos (dejar de usar escalas de grises).
 • Encontrar la forma de redirigir a algún lado al hacer click en un elemento de la lista (imágen).
 • Mejorar las animaciones de las alertas tipo Toast al aparecer y desaparecer.
@@ -26,3 +25,4 @@
 • Si se está en la página de resultados y se realiza una búsqueda, los resultados deberían limpiarse u ocultarse para que el gif de carga se vea bien.
 • El footer está mal posicionado si no hay elementos en la lista.
 • Si el anime está en emisión el botón para decrementar episodios se posiciona mal.
+• Los elementos con más de mil episodios causan problemas de espacio.

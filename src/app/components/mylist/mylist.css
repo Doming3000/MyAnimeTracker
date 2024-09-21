@@ -1,14 +1,3 @@
-@keyframes fadeInDown {
-    0% {
-        opacity: 0;
-        transform: translateY(-100%);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 .overlay {
     background-color: rgba(0, 0, 0, 0.5);
     height: 100%;
@@ -98,12 +87,14 @@ hr {
     flex-direction: column;
     justify-content: center;
     padding: 1rem;
-    transition: all linear 200ms;
+    transition: transform 200ms ease-in-out, background-color 200ms ease-in-out;
+    will-change: transform, background-color;
 }
 
 .anime:hover {
     background-color: lightgray;
     transform: scale(1.1);
+    z-index: 1;
 }
 
 .anime img {
@@ -161,7 +152,10 @@ hr {
 .increaseButton, .decreaseButton {
     background: none;
     border: none;
+    color: #555;
+    font-size: 15px;
     cursor: pointer;
+    font-size: 16px;
     height: 25px;
     width: 15px;
     text-align: center;
@@ -205,6 +199,7 @@ hr {
 .anime:hover .buttonContainer {
     background: none;
     visibility: visible;
+    gap: 5px;
 }
 
 .viewButton, .detailsButton, .delButton {
@@ -220,12 +215,10 @@ hr {
 
 .viewButton {
     background-color: lightgreen;
-    margin-right: 5px;
 }
 
 .detailsButton{
     background-color: lightskyblue;
-    margin-right: 5px;
 }
 
 .delButton {
@@ -246,6 +239,7 @@ hr {
     border-radius: 6px;
     color: white;
     font-size: 12px;
+    margin-bottom: 2px;
     padding: 5px 5px;
     text-align: center;
     user-select: none;
@@ -254,21 +248,18 @@ hr {
     /* Posición del texto */
     bottom: 125%;
     left: 50%;
-    margin-left: -60px;
     position: absolute;
+    transform: translateX(-50%) translateY(-20px); 
     
     /* Fade in tooltip */
     opacity: 0;
-    transition: opacity 0.3s;
+    transition: transform 350ms ease-in-out, opacity 350ms ease-in-out;
+    will-change: transform, opacity;
 }
 
 /* Ajustes individuales (texto del tooltip) */
-.episodeCountTipText, .DelAnimeTipText {
+.episodeCountTipText, .DelAnimeTipText, .DetailsAnimeTipText, .ViewAnimeTipText {
     width: 120px;
-}
-
-.DetailsAnimeTipText, .ViewAnimeTipText {
-    width: 115px;
 }
 
 .episodeCount.oneDigit .episodeCountTipText {
@@ -293,7 +284,7 @@ hr {
 
 /* Mostrar el tooltip (hover) */
 .episodeTipContainer:hover .episodeCountTipText, .DelAnimeTip:hover .DelAnimeTipText, .DetailsAnimeTip:hover .DetailsAnimeTipText, .ViewAnimeTip:hover .ViewAnimeTipText {
-    animation: fadeInDown 0.5s;
     opacity: 1;
     visibility: visible;
+    transform: translateX(-50%) translateY(0);
 }

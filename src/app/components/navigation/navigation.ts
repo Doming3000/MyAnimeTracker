@@ -106,15 +106,9 @@ export class Navigation {
       try {
         const data = JSON.parse(content);
         
-        // Verificar el nombre del archivo y el formato de los datos
-        if (file.name !== 'data.csv') {
-          this.triggerErrorAlert('Vaya!', 'Este no parece ser el archivo correcto');
-          this.resetFileInput(event.target);
-          return;
-        }
-        
-        else if (!Array.isArray(data)) {
-          this.triggerErrorAlert('Error!', 'El contenido no tiene el formato correcto');
+        // Verificar el formato de los datos
+        if (!Array.isArray(data)) {
+          this.triggerErrorAlert('Error!', 'El contenido del archivo no tiene el formato correcto');
           this.resetFileInput(event.target);
           return;
         }
