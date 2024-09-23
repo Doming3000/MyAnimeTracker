@@ -23,7 +23,6 @@
             <span class="close" (click)="closeDetails()">&times;</span>
             <h3>{{ selectedAnime.title }}</h3>
             <p> {{ selectedAnime.type }} </p>
-            <p> {{ selectedAnime.url }} </p>
         </div>
     </div>
     
@@ -31,7 +30,7 @@
     <div *ngIf="animes_selected.length > 0" class="mylist">
         <div *ngFor="let anime of animes_selected" class="anime">            
             <div class="anime-content">
-                <img [src]="anime.images['jpg'].large_image_url" alt="Anime Image">
+                <a [href]="anime.url" target="_blank" rel="noopener noreferrer"><img [src]="anime.images['jpg'].large_image_url" alt="Anime Image"></a>
                 <h3>{{ truncateAnimeName(anime.title, 50) }}</h3>
             </div>
             
@@ -39,9 +38,11 @@
             <div class="buttonContainer"> 
                 <!-- Contador de episodios -->
                 <div class="episodeCount" [ngClass]="getEpisodeCountClass(anime)">
-                    <ng-container *ngIf="!anime.markedAsViewed && anime.type !== 'Movie'; else viewedText">
+                    <ng-container *ngIf="!anime.markedAsViewed && anime.type !== 'Movie' && anime.status !== 'Not yet aired'; else viewedText">
                         <!-- Botón para incrementar el número de episodios -->
-                        <button class="increaseButton" [disabled]="anime.watched_episodes === anime.total_episodes" (click)="increaseWatch(anime, $event)"><i class="fa-solid fa-angle-up"></i></button>
+                        <button class="increaseButton" [disabled]="anime.watched_episodes === anime.total_episodes" (click)="increaseWatch(anime, $event)">
+                            <i class="fa-solid fa-angle-up"></i>
+                        </button>
                         
                         <div class="episodeTipContainer">
                             <span class="episodeCountText">{{ anime.watched_episodes }} / {{ anime.total_episodes }}</span>
@@ -49,7 +50,9 @@
                         </div>
                         
                         <!-- Botón para disminuir el número de episodios -->
-                        <button class="decreaseButton" [disabled]="anime.watched_episodes === 0" (click)="decreaseWatch(anime, $event)"><i class="fa-solid fa-angle-down"></i></button>
+                        <button class="decreaseButton" [disabled]="anime.watched_episodes === 0" (click)="decreaseWatch(anime, $event)">
+                            <i class="fa-solid fa-angle-down"></i>
+                        </button>
                     </ng-container>
                     
                     <ng-template #viewedText>

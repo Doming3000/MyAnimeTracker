@@ -168,9 +168,10 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
     const addAnime: MyAnime = {
       id: anime.mal_id,
       title: anime.title,
-      images: anime.images,
       type: anime.type,
       url: anime.url,
+      status: anime.status,
+      images: anime.images,
       total_episodes: anime.episodes,
       watched_episodes: 0,
       markedAsViewed: false,

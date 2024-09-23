@@ -149,6 +149,29 @@ export class Navigation {
     reader.readAsText(file);
   }
   
+  nukeData() {
+    const storedData = localStorage.getItem('my_anime');
+    if (!storedData || storedData === '[]') {
+      this.triggerErrorAlert('Vaya!', 'No hay nada que eliminar');
+      return;
+    }
+    
+    // Cerrar menú de navegación para evitar overlays duplicados
+    this.isOpen = false;
+    
+    // Mostrar confirmación antes de eliminar
+    this.alerts.showConfirm({
+      title: 'Confirmar eliminación',
+      message: '¿Estás seguro de que deseas eliminar todos tus datos?<br>Esta acción es irreversible.',
+      yesText: 'Sí, eliminar datos',
+      noText: 'No, cambié de opinión',
+      callback: () => {
+        localStorage.clear();
+        this.triggerSuccessAlert('Hecho!', 'Datos eliminados con éxito');
+      }
+    });
+  }
+  
   // Mostrar alerta de éxito
   triggerSuccessAlert(title: string, message: string) {
     this.alerts.showAlert('success', title, message);

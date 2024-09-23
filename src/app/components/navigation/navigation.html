@@ -20,9 +20,14 @@
     <button (click)="closeNav()" class="cerrar"><i class="fa-solid fa-xmark"></i></button>
     
     <div class="dataContainer">
+        <!-- Opción para importar datos -->
         <input type="file" id="fileInput" (change)="importData($event)" accept=".csv">
         <label for="fileInput"><i class="fa-solid fa-cloud-arrow-up"></i> Importar datos</label>
         
+        <!-- Opción para exportar datos -->
         <label (click)="exportData()"><i class="fa-solid fa-cloud-arrow-down"></i> Exportar datos</label>
+        
+        <!-- Opción para eliminar datos -->
+        <label (click)="nukeData()"><i class="fa-solid fa-radiation"></i> Eliminar datos</label>
     </div>
 </div>

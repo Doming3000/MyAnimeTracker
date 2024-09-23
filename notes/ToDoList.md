@@ -3,18 +3,20 @@
 • Agilizar la forma para organizar los elementos de la lista en tiempo real
 • Aplicar reglas media en imágenes y buscador.
 • Encontrar diseños definitivos (dejar de usar escalas de grises).
-• Encontrar la forma de redirigir a algún lado al hacer click en un elemento de la lista (imágen).
 • Mejorar las animaciones de las alertas tipo Toast al aparecer y desaparecer.
 • Mejorar los diseños de alertas en general (Modal y Toast).
 • Ponerle un nombre a la aplicación.
+• Lógica para modificar el contador de episodios cuando un anime está en emisión o no tiene episodios definidos.
 
 # 🧠 Ideas:
 
 • Incluir selección de Mangas.
-• Lógica para modificar el contador de episodios cuando un anime está en emisión o no tiene episodios definidos.
 • Botones en header para reordenar la lista al gusto del usuario (a-z, z-a, visto - no visto, no visto - visto, etc), requiere crear variables para
   recordar los ajustes, además de modificar la lógica para organizar la lista al cargar la página.
 • Notificaciones de episodios nuevos (no se como mierda hacer esto).
+• Encontrar la forma de redirigir a algún lado al hacer click en un elemento de la lista (imágen).
+  - Dar la opción al usuario de agregar manualmente su propio enlace a cada elemento.
+  - No dar la opción y redirigir siempre a MAL.
 
 # 🐞 Errores encontrados:
 
