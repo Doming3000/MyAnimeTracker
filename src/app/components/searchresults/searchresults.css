@@ -1,3 +1,12 @@
+.overlay {
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 10%;
+    width: 100%;
+    background-color: #EEE;
+}
+
 .results-container {
     background-color: white;
     border-radius: 2px;
@@ -227,35 +236,4 @@ p[title] {
 
 .buttonText {
     padding-left: 10px;
-}
-
-/* Custom Tittle */
-[data-title] {
-    cursor: help;
-    position: relative;
-}
-
-[data-title]:hover::before {
-    background: #555;
-    border-radius: 2px;
-    bottom: -27px;
-    color: white;
-    content: attr(data-title);
-    display: inline-block;
-    font-family: sans-serif;
-    font-size: 13px;
-    padding: 3px 6px;
-    position: absolute;
-    white-space: nowrap;
-}
-
-[data-title]:hover::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 8px;
-    display: inline-block;
-    color: white;
-    border: 8px solid transparent;	
-    border-bottom: 8px solid #555;
 }

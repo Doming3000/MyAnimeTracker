@@ -37,15 +37,16 @@
             <!-- Contenedor de botones -->
             <div class="buttonContainer"> 
                 <!-- Contador de episodios -->
-                <div class="episodeCount" [ngClass]="getEpisodeCountClass(anime)">
+                <div class="episodeCount"> <!-- [ngClass]="getEpisodeCountClass(anime)" -->
                     <ng-container *ngIf="!anime.markedAsViewed && anime.type !== 'Movie' && anime.status !== 'Not yet aired'; else viewedText">
                         <!-- Botón para incrementar el número de episodios -->
                         <button class="increaseButton" [disabled]="anime.watched_episodes === anime.total_episodes" (click)="increaseWatch(anime, $event)">
                             <i class="fa-solid fa-angle-up"></i>
                         </button>
                         
+                        <!-- Contador de episodios (texto) -->
                         <div class="episodeTipContainer">
-                            <span class="episodeCountText">{{ anime.watched_episodes }} / {{ anime.total_episodes }}</span>
+                            <span class="episodeCountText">{{ anime.watched_episodes }} / {{ anime.total_episodes ? anime.total_episodes : '?' }}</span>
                             <span class="episodeCountTipText">Has visto {{ anime.watched_episodes }} episodios</span>
                         </div>
                         

@@ -93,7 +93,6 @@ hr {
 
 .anime:hover {
     background-color: rgba(255, 255, 255, 0);
-    /* transform: scale(1.1); */
     z-index: 1;
 }
 
@@ -119,24 +118,66 @@ hr {
 
 .episodeCount {
     align-items: center;
-    display: flex;
-    justify-content: center;
-    margin-right: auto;
-    position: relative;
-    width: 90px;
-}  
-
-.episodeCountText, .ViewCheckText {
-    align-items: center;
     color: #555;
     display: flex;
     font-size: 15px;
-    height: 100%;
-    justify-content: center;
-    margin: 0 3px 0 3px;
-    pointer-events: none; 
+    /* gap: 5px; */
+    width: 100%;
     user-select: none;
 }
+
+.episodeCountText {
+    white-space: nowrap;
+    background-color: white;
+}
+
+/* Botones, reordenar más tarde */
+/* .increaseButton, .decreaseButton {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    font-size: 18px;
+    height: 25px;
+    width: 25px;
+} */
+
+/* .increaseButton {
+    margin-right: auto;
+}
+
+.decreaseButton {
+    margin-left: auto;
+}
+
+.increaseButton:disabled, .decreaseButton:disabled {
+    cursor: default;
+    opacity: 0.5;
+} */
+
+/* .episodeTipContainer {
+display: flex;
+align-items: center;
+justify-content: center;
+width: 80px;
+} */
+
+/* .episodeCountText, .ViewCheckText {
+font-size: 15px;
+
+user-select: none;
+pointer-events: none;
+text-align: center;
+width: 100%;
+} */
+
+/* .increaseButton, .decreaseButton {
+background: none;
+border: none;
+color: #555;
+cursor: pointer;
+font-size: 18px;
+} */
 
 .ViewCheckText {
     margin-right: auto; 
@@ -147,53 +188,6 @@ hr {
     display: flex;
     justify-content: flex-end;
     visibility: hidden;
-}
-
-.increaseButton, .decreaseButton {
-    background: none;
-    border: none;
-    color: #555;
-    font-size: 15px;
-    cursor: pointer;
-    font-size: 16px;
-    height: 25px;
-    width: 15px;
-    text-align: center;
-    position: absolute;
-    z-index: 1;
-}
-
-.increaseButton {
-    left: 2px;
-}
-
-.increaseButton:disabled, .decreaseButton:disabled {
-    opacity: 0.5;
-    cursor: default;
-}
-
-.episodeCount.oneDigit .episodeCountText {
-    margin-left: -10px;
-}
-
-.episodeCount.oneDigit .decreaseButton {
-    left: 60px;
-}
-
-.episodeCount.twoDigits .episodeCountText {
-    margin-left: 5px;
-}
-
-.episodeCount.twoDigits .decreaseButton {
-    left: 75px;
-}
-
-.episodeCount.threeDigits .episodeCountText {
-    margin-left: 15px;
-}
-
-.episodeCount.threeDigits .decreaseButton {
-    left: 85px;
 }
 
 .anime:hover .buttonContainer {
@@ -224,6 +218,23 @@ hr {
 .delButton {
     background-color: #ff5c7a;
 }
+
+/* Enecoger tamaño del contenedor según cantidad de episodios */
+/* .episodeCount.noDigits {
+width: 40%;
+}
+
+.episodeCount.oneDigit {
+width: 40%;
+}
+
+.episodeCount.twoDigits {
+width: 45%;
+}
+
+.episodeCount.threeDigits {
+width: 50%;
+} */
 
 /* ----- Tooltips ----- */
 
@@ -260,14 +271,6 @@ hr {
 /* Ajustes individuales (texto del tooltip) */
 .episodeCountTipText, .DelAnimeTipText, .DetailsAnimeTipText, .ViewAnimeTipText {
     width: 120px;
-}
-
-.episodeCount.oneDigit .episodeCountTipText {
-    left: calc(50% - 5px);
-}
-
-.episodeCount.threeDigits .episodeCountTipText {
-    left: calc(50% + 5px);
 }
 
 /* Tooltip arrow */

@@ -117,19 +117,25 @@ export class Mylist implements OnInit {
   }
   
   // Objetener cantidad de episodios para ajustar estilos css
-  getEpisodeCountClass(anime: any): string {
-    const totalEpisodesLength = anime.total_episodes?.toString().length || 0;
+  // getEpisodeCountClass(anime: any): string {
+  //   if (anime.total_episodes == null) {
+  //     return 'noDigits';
+  //   }
     
-    if (totalEpisodesLength === 1) {
-      return 'oneDigit';
-    } else if (totalEpisodesLength === 2) {
-      return 'twoDigits';
-    } else if (totalEpisodesLength >= 3) {
-      return 'threeDigits';
-    }
+  //   const totalEpisodesLength = anime.total_episodes.toString().length;
     
-    return '';
-  }
+  //   if (totalEpisodesLength === 1) {
+  //     return 'oneDigit';
+  //   } else if (totalEpisodesLength === 2) {
+  //     return 'twoDigits';
+  //   } else if (totalEpisodesLength === 3) {
+  //     return 'threeDigits';
+  //   } else if (totalEpisodesLength >= 4) {
+  //     return 'fourDigits';
+  //   }
+    
+  //   return '';
+  // }
   
   // Ordenar la lista de animes por nombre y estado
   private sortAnimeList() {

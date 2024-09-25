@@ -1,5 +1,7 @@
 <app-alerts></app-alerts>
 
+<div class="overlay" *ngIf="resultsVisible"></div>
+
 <!-- Gif de carga -->
 <div class="loadingGif" *ngIf="isLoading">
     <img src="assets/Loading.gif" alt="Gif de carga">
@@ -16,7 +18,7 @@
     <!-- Header -->
     <div class="resultsHeader">
         <h3>Resultados de búsqueda para: "{{ searchTerm }}"</h3>
-        <button title="Regresar" (click)="goHome()"><i class="fa-solid fa-arrow-left"></i></button>
+        <button data-title="Regresar" (click)="goHome()"><i class="fa-solid fa-arrow-left"></i></button>
     </div>
     
     <!-- Contenido si no hay resultados -->
