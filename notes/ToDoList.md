@@ -20,11 +20,9 @@
   - No dar la opción y redirigir siempre a MAL.
 
 # 🐞 Errores encontrados:
-
-• Si se retrocede a la página anterior mediante el menú de navegación o botones del mouse, el término de búsqueda no se limpia del buscador.
-  Posible solución: Implementar cualquier lógica para detectar si se cambia de página para limpiar término de búsqueda.
 • Al importar datos, la página debería actualizar el almacenamiento local sin necesidad de recargar la página, del mismo modo o similar a como se hace al
   agregar un elemento a mi lista.
+• El contador de episodios necesita estilos que se adapten al espacio y que a su vez, no se estire dependiendo de la cantidad de episodios que tiene un
+  anime.
 • Si se está en la página de resultados y se realiza una búsqueda, los resultados deberían limpiarse u ocultarse para que el gif de carga se vea bien.
-• Si el anime está en emisión el botón para decrementar episodios se posiciona mal.
-• Los elementos con más de mil episodios causan problemas de espacio.
+• Si se retrocede a la página anterior mediante el menú de navegación o botones del mouse, el término de búsqueda no se limpia del buscador.

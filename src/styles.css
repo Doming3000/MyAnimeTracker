@@ -70,7 +70,7 @@ footer p.issue a:visited {
     content: '';
     position: absolute;
     bottom: -10px;
-    left: 8px;
+    left: calc(50% - 5px);;
     display: inline-block;
     color: white;
     border: 8px solid transparent;	
