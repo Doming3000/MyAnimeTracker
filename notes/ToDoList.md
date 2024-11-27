@@ -1,5 +1,4 @@
 # 💀 Pendiente a realizar:
-
 • Agilizar la forma para organizar los elementos de la lista en tiempo real
 • Aplicar reglas media en imágenes y buscador.
 • Encontrar diseños definitivos (dejar de usar escalas de grises).
@@ -10,7 +9,6 @@
 • Ponerle un nombre a la aplicación.
 
 # 🧠 Ideas:
-
 • Incluir selección de Mangas.
 • Botones en header para reordenar la lista al gusto del usuario (a-z, z-a, visto - no visto, no visto - visto, etc), requiere crear variables para
   recordar los ajustes, además de modificar la lógica para organizar la lista al cargar la página.

@@ -9,7 +9,7 @@
 <!-- Formulario de búsqueda -->
 <form (ngSubmit)="search()">
     <button type="button" class="searchButton" (click)="search()"><i class="fa-solid fa-magnifying-glass"></i></button>
-    <input type="text" name="search" class="search-input" [(ngModel)]="searchTerm" placeholder="Realiza una búsqueda..." required [ngClass]="{'input-error': inputEmpty}" />
+    <input type="text" name="search" class="search-input" [(ngModel)]="searchTerm" spellcheck="false" placeholder="Realiza una búsqueda..." required [ngClass]="{'input-error': inputEmpty}" />
     <button type="button" class="clearInput" (click)="clearInput()"><i class="fa-solid fa-xmark"></i></button>
 </form>
 
@@ -21,13 +21,13 @@
     
     <div class="dataContainer">
         <!-- Opción para importar datos -->
-        <input type="file" id="fileInput" (change)="importData($event)" accept=".csv">
+        <input type="file" id="fileInput" (change)="importData($event)" accept=".json">
         <label for="fileInput"><i class="fa-solid fa-cloud-arrow-up"></i> Importar datos</label>
         
         <!-- Opción para exportar datos -->
-        <label (click)="exportData()"><i class="fa-solid fa-cloud-arrow-down"></i> Exportar datos</label>
+        <span (click)="exportData()"><i class="fa-solid fa-cloud-arrow-down"></i> Exportar datos</span>
         
         <!-- Opción para eliminar datos -->
-        <label (click)="nukeData()"><i class="fa-regular fa-trash-can"></i> Eliminar datos</label>
+        <span (click)="nukeData()"><i class="fa-regular fa-trash-can"></i> Eliminar datos</span>
     </div>
 </div>

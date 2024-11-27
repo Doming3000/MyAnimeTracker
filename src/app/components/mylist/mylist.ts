@@ -43,9 +43,9 @@ export class Mylist implements OnInit {
   // Agregar un elemento a la lista
   addAnimeToMyList(anime: MyAnime) {
     if (this.isAnimeSelected(anime)) {
-      this.triggerErrorAlert('Oops!', 'Este elemento ya está en tu lista');
+      this.triggerAlert('error', 'Error!', 'Este elemento ya está en tu lista');
     } else {
-      this.triggerSuccessAlert('Hecho!', 'Añadido a tu lista');
+      this.triggerAlert('success', 'Hecho!', 'Añadido a tu lista.');
       this.animes_selected.push(anime);
       this.updateLocalStorage();
       anime.isModalOpen = false;
@@ -106,7 +106,7 @@ export class Mylist implements OnInit {
       callback: () => {
         this.animes_selected = this.animes_selected.filter(an => an.id !== anime.id);
         this.updateLocalStorage();
-        this.triggerSuccessAlert('¡Eliminado!', 'El elemento fue eliminado con éxito.');
+        this.triggerAlert('success', 'Hecho!', 'Elemento eliminado con éxito');
       }
     });
   }
@@ -121,9 +121,9 @@ export class Mylist implements OnInit {
   //   if (anime.total_episodes == null) {
   //     return 'noDigits';
   //   }
-    
+  
   //   const totalEpisodesLength = anime.total_episodes.toString().length;
-    
+  
   //   if (totalEpisodesLength === 1) {
   //     return 'oneDigit';
   //   } else if (totalEpisodesLength === 2) {
@@ -133,7 +133,7 @@ export class Mylist implements OnInit {
   //   } else if (totalEpisodesLength >= 4) {
   //     return 'fourDigits';
   //   }
-    
+  
   //   return '';
   // }
   
@@ -162,13 +162,8 @@ export class Mylist implements OnInit {
     // this.sortAnimeList();
   }
   
-  // Mostrar alerta de éxito
-  triggerSuccessAlert(title: string, message: string) {
-    this.alerts.showAlert('success', title, message);
-  }
-  
-  // Mostrar alerta de error
-  triggerErrorAlert(title: string, message: string) {
-    this.alerts.showAlert('error', title, message);
+  // Mostrar alertas
+  triggerAlert(type: 'success' | 'error', title: string, message: string) {
+    this.alerts.showAlert(type, title, message);
   }
 }

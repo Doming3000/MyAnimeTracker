@@ -41,6 +41,7 @@
                 <p *ngIf="anime.synopsis" [title]="anime.synopsis">{{ anime.synopsis.slice(0, 1500) }}</p>
                 
                 <div class="buttonContainer">
+                    <!-- Botón para ver en MAL -->
                     <button title="Ver elemento en My Anime List" class="malButton" (click)="viewOnMal(anime.url)">
                         <span class="buttonIcon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -50,6 +51,7 @@
                         <span class="buttonText">Ver en MAL</span>
                     </button>
                     
+                    <!-- Botón para agregar a mi lista -->
                     <button title="Agrega este elemento a tu lista" class="addButton" (click)="addAnime(anime)">
                         <span class="buttonIcon"><i class="fa-regular fa-bookmark"></i></span>
                         <span class="buttonText">Añadir a mi lista</span>

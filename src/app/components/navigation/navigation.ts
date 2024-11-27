@@ -44,16 +44,15 @@ export class Navigation {
   
   // Realizar búsqueda con el término ingresado
   search() {
-    if (this.searchTerm.trim() == '') {
+    if (!this.searchTerm.trim()) {
       this.inputEmpty = true;
-      this.triggerShakeAnimation();
-    } else {
-      window.scrollTo(0, 0);
-      this.inputEmpty = false;
-      this.router.navigate(['/searchresults']);
-      this.searchService.updateSearchTerm(this.searchTerm);
-      this.router.navigate(['/searchresults'], { queryParams: { term: this.searchTerm } });
+      return this.triggerShakeAnimation();
     }
+    
+    this.inputEmpty = false;
+    window.scrollTo(0, 0);
+    this.searchService.updateSearchTerm(this.searchTerm);
+    this.router.navigate(['/searchresults'], { queryParams: { term: this.searchTerm } });    
   }
   
   // Limpiar el buscador
@@ -78,81 +77,89 @@ export class Navigation {
     }
   }
   
-  // Exportar datos a un archivo CSV
+  // Exportar datos a un archivo json
   exportData() {
     const storedData = localStorage.getItem('my_anime');
     if (!storedData || storedData === '[]') {
-      this.triggerErrorAlert('Vaya!', 'No hay nada que descargar');
-      return;
+      return this.triggerAlert('error', 'Vaya!', 'No hay nada que descargar');
     }
+    
     const blob = new Blob([storedData], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'data.csv';
+    a.download = 'data.json';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
   }
   
-  // Importar datos desde un archivo CSV
+  // Importar datos desde un archivo JSON
   importData(event: any) {
-    const storedData = localStorage.getItem('my_anime');
     const file = event.target.files[0];
-    const reader = new FileReader();
+    if (!file || !file.name.endsWith('.json')) {
+      this.triggerAlert('error', 'Error!', 'Por favor, selecciona un archivo JSON válido');
+      this.resetFileInput(event.target);
+      return;
+    }
     
+    const reader = new FileReader();
     reader.onload = (e: any) => {
       const content = e.target.result;
-      try {
-        const data = JSON.parse(content);
-        
-        // Verificar el formato de los datos
-        if (!Array.isArray(data)) {
-          this.triggerErrorAlert('Error!', 'El contenido del archivo no tiene el formato correcto');
-          this.resetFileInput(event.target);
-          return;
-        }
-        
-        // Importar si no hay datos ya existentes en el almacenamiento local
-        else if (!storedData || storedData === '[]') {
-          this.triggerSuccessAlert('Hecho!', 'Datos importados con éxito');
-          localStorage.setItem('my_anime', JSON.stringify(data));
-          this.resetFileInput(event.target);
-        }
-        
-        else {
-          // Cerrar menú de navegación para evitar overlays duplicados
-          this.isOpen = false;
-          
-          // Mostrar confirmación antes de sobrescribir
-          this.alerts.showConfirm({
-            title: 'Confirmar Importación',
-            message: '¿Estás seguro de que deseas importar estos datos?<br>La información actual se perderá si no está respaldada.',
-            yesText: 'Sí, quiero importar',
-            noText: 'No, cambié de opinión',
-            callback: () => {
-              this.triggerSuccessAlert('Hecho!', 'Datos importados con éxito');
-              localStorage.setItem('my_anime', JSON.stringify(data));
-              this.resetFileInput(event.target);
-            },
-            cancelCallback: () => {
-              this.resetFileInput(event.target);
-            }
-          });
-        }
-      } catch (error) {
-        this.triggerErrorAlert('Vaya!', 'El archivo parece estar dañado y no es posible importarlo');
-        this.resetFileInput(event.target);
-      }
+      this.processImportedData(content, event.target);
+    };
+    
+    reader.onerror = () => {
+      this.triggerAlert('error', 'Error!', 'Ha ocurrido un error al leer el contenido del archivo');
+      this.resetFileInput(event.target);
     };
     
     reader.readAsText(file);
   }
   
+  // Procesar los datos importados
+  private processImportedData(content: string, inputElement: HTMLInputElement) {
+    try {
+      const data = JSON.parse(content);
+      if (!Array.isArray(data)) {
+        throw new Error('Formato incorrecto: el archivo JSON debe contener un arreglo de objetos');
+      }
+      
+      const storedData = localStorage.getItem('my_anime');
+      if (!storedData || storedData === '[]') {
+        // Si no hay datos existentes, importar directamente
+        this.saveImportedData(data, inputElement);
+      } else {
+        // Cerrar menú de navegación para evitar overlays duplicados
+        this.isOpen = false;
+        
+        // Mostrar modal de confirmación antes de sobrescribir
+        this.alerts.showConfirm({
+          title: 'Confirmar Importación',
+          message: '¿Estás seguro de que deseas importar estos datos?<br>La información actual se perderá si no está respaldada.',
+          yesText: 'Sí, quiero importar',
+          noText: 'No, cambié de opinión',
+          callback: () => this.saveImportedData(data, inputElement),
+          cancelCallback: () => this.resetFileInput(inputElement),
+        });
+      }
+    } catch (error) {
+      this.triggerAlert('error', 'Error!', `Ha ocurrido un error y no es posible importar el archivo`);
+      this.resetFileInput(inputElement);
+    }
+  }
+  
+  // Guardar los datos importados
+  private saveImportedData(data: any[], inputElement: HTMLInputElement) {
+    localStorage.setItem('my_anime', JSON.stringify(data));
+    this.triggerAlert('success', 'Hecho!', 'Datos importados con éxito');
+    this.resetFileInput(inputElement);
+  }
+  
   nukeData() {
     const storedData = localStorage.getItem('my_anime');
     if (!storedData || storedData === '[]') {
-      this.triggerErrorAlert('Vaya!', 'No hay nada que eliminar');
+      this.triggerAlert('error', 'Error!', 'No hay nada que eliminar');
       return;
     }
     
@@ -167,23 +174,18 @@ export class Navigation {
       noText: 'No, cambié de opinión',
       callback: () => {
         localStorage.clear();
-        this.triggerSuccessAlert('Hecho!', 'Datos eliminados con éxito');
+        this.triggerAlert('success', 'Hecho!', 'Datos eliminados con éxito');
       }
     });
-  }
-  
-  // Mostrar alerta de éxito
-  triggerSuccessAlert(title: string, message: string) {
-    this.alerts.showAlert('success', title, message);
-  }
-  
-  // Mostrar alerta de error
-  triggerErrorAlert(title: string, message: string) {
-    this.alerts.showAlert('error', title, message);
   }
   
   // Resetear el valor del input de archivo
   resetFileInput(inputElement: HTMLInputElement) {
     inputElement.value = '';
+  }
+  
+  // Mostrar alertas
+  triggerAlert(type: 'success' | 'error', title: string, message: string) {
+    this.alerts.showAlert(type, title, message);
   }
 }

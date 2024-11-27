@@ -163,7 +163,7 @@ form input::-ms-input-placeholder {
     display: none;
 }
 
-.dataContainer label {
+.dataContainer label, .dataContainer span {
     background-color: transparent;
     border: none;
     bottom: 20px;
@@ -173,6 +173,6 @@ form input::-ms-input-placeholder {
     user-select: none;
 }
 
-.dataContainer label:hover {
+.dataContainer label:hover, .dataContainer span:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }

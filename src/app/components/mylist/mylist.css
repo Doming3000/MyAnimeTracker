@@ -8,15 +8,12 @@
     z-index: 2;
 }
 
-.mainContent {
+/* .mainContent {
     opacity: 1;
     transition: opacity 0.5s ease-in-out;
-}
 
-.mainContent.visible {
-    opacity: 0;
-    pointer-events: none;
-}
+    Esto no funciona actualmente, considerar usar "@angular/animations" para solucionar animación de entrada.
+} */
 
 .listHeader {
     display: flex;
@@ -128,7 +125,7 @@ hr {
 
 .episodeCountText {
     white-space: nowrap;
-    background-color: white;
+    background-color: white; /* Quitar después de solucionar problemas con el contador */
 }
 
 /* Botones, reordenar más tarde */
