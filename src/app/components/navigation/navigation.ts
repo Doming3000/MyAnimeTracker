@@ -72,7 +72,7 @@ export class Navigation {
     if (inputElement) {
       inputElement.classList.add('shake-placeholder');
       setTimeout(() => {
-        inputElement.classList.remove('shake-placeholder');
+        inputElement.classList.remove('shake-placeholder.');
       }, 500);
     }
   }
@@ -81,10 +81,14 @@ export class Navigation {
   exportData() {
     const storedData = localStorage.getItem('my_anime');
     if (!storedData || storedData === '[]') {
-      return this.triggerAlert('error', 'Vaya!', 'No hay nada que descargar');
+      return this.triggerAlert('error', 'Error!', 'No hay nada que descargar.');
     }
     
-    const blob = new Blob([storedData], { type: 'application/json' });
+    // Parsear los datos y volver a formatearlos con indentación
+    const parsedData = JSON.parse(storedData);
+    const formattedData = JSON.stringify(parsedData, null, 2)
+    
+    const blob = new Blob([formattedData], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
@@ -98,7 +102,7 @@ export class Navigation {
   importData(event: any) {
     const file = event.target.files[0];
     if (!file || !file.name.endsWith('.json')) {
-      this.triggerAlert('error', 'Error!', 'Por favor, selecciona un archivo JSON válido');
+      this.triggerAlert('error', 'Error!', 'Por favor, selecciona un archivo JSON válido.');
       this.resetFileInput(event.target);
       return;
     }
@@ -110,7 +114,7 @@ export class Navigation {
     };
     
     reader.onerror = () => {
-      this.triggerAlert('error', 'Error!', 'Ha ocurrido un error al leer el contenido del archivo');
+      this.triggerAlert('error', 'Error!', 'Ha ocurrido un error al leer el contenido del archivo.');
       this.resetFileInput(event.target);
     };
     
@@ -121,11 +125,8 @@ export class Navigation {
   private processImportedData(content: string, inputElement: HTMLInputElement) {
     try {
       const data = JSON.parse(content);
-      if (!Array.isArray(data)) {
-        throw new Error('Formato incorrecto: el archivo JSON debe contener un arreglo de objetos');
-      }
-      
       const storedData = localStorage.getItem('my_anime');
+      
       if (!storedData || storedData === '[]') {
         // Si no hay datos existentes, importar directamente
         this.saveImportedData(data, inputElement);
@@ -144,7 +145,7 @@ export class Navigation {
         });
       }
     } catch (error) {
-      this.triggerAlert('error', 'Error!', `Ha ocurrido un error y no es posible importar el archivo`);
+      this.triggerAlert('error', 'Error!', `Ha ocurrido un error y no es posible importar el archivo.`);
       this.resetFileInput(inputElement);
     }
   }
@@ -152,14 +153,15 @@ export class Navigation {
   // Guardar los datos importados
   private saveImportedData(data: any[], inputElement: HTMLInputElement) {
     localStorage.setItem('my_anime', JSON.stringify(data));
-    this.triggerAlert('success', 'Hecho!', 'Datos importados con éxito');
+    this.triggerAlert('success', 'Hecho!', 'Datos importados con éxito.');
     this.resetFileInput(inputElement);
   }
   
+  // Eliminar todos los datos
   nukeData() {
     const storedData = localStorage.getItem('my_anime');
     if (!storedData || storedData === '[]') {
-      this.triggerAlert('error', 'Error!', 'No hay nada que eliminar');
+      this.triggerAlert('error', 'Error!', 'No hay nada que eliminar.');
       return;
     }
     
@@ -174,7 +176,7 @@ export class Navigation {
       noText: 'No, cambié de opinión',
       callback: () => {
         localStorage.clear();
-        this.triggerAlert('success', 'Hecho!', 'Datos eliminados con éxito');
+        this.triggerAlert('success', 'Hecho!', 'Datos eliminados con éxito.');
       }
     });
   }

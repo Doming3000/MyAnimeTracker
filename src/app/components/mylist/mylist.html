@@ -30,7 +30,7 @@
     <div *ngIf="animes_selected.length > 0" class="mylist">
         <div *ngFor="let anime of animes_selected" class="anime">            
             <div class="anime-content">
-                <a [href]="anime.url" target="_blank" rel="noopener noreferrer"><img [src]="anime.images['jpg'].large_image_url" alt="Anime Image"></a>
+                <a [href]="anime.url" target="_blank" rel="noopener noreferrer"><img [src]="anime.image" alt="{{ anime.title }}"></a>
                 <h3>{{ truncateAnimeName(anime.title, 50) }}</h3>
             </div>
             

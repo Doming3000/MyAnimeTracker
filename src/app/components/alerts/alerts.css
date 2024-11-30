@@ -9,125 +9,168 @@
     }
 }
 
-@keyframes shakeToast {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); }
+@keyframes showToast {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
-.shakeToast {
-    animation: shakeToast 0.1s;
+@keyframes hideToast {
+    from {
+        transform: translateY(0); 
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+}
+
+@keyframes shakeToast {
+    0%, 100% {
+        transform: translate(1px, -2px) rotate(-1deg);
+    }
+    10% {
+        transform: translate(-1px, -2px) rotate(-1deg);
+    }
+    20% {
+        transform: translate(-3px, 0px) rotate(1deg);
+    }
+    30% {
+        transform: translate(3px, 2px) rotate(0deg);
+    }
+    40% {
+        transform: translate(1px, -1px) rotate(1deg);
+    }
+    50% {
+        transform: translate(-1px, 2px) rotate(-1deg);
+    }
+    60% {
+        transform: translate(-3px, 1px) rotate(0);
+    }
+    70% {
+        transform: translate(3px, 1px) rotate(-1deg);
+    }
+    80% {
+        transform: translate(-1px, -1px) rotate(1deg);
+    }
+    90% {
+        transform: translate(1px, 2px) rotate(0deg);
+    }
 }
 
 .overlay {
     background-color: rgba(0, 0, 0, 0.5);
     height: 100%;
     left: 0;
+    pointer-events: auto;
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 2;
 }
 
-.overlay.active {
-    pointer-events: auto;
-}
-
-/* Wrapper de las alertas */
+/* Alertas tipo toast*/
 .alertWrapper {
-    position: fixed;
     left: 50%;
-    top: 20px;
-    transform: translate(-50%, -100%);
-    user-select: none;
     opacity: 0;
-    transition: transform 0.1s ease-out, opacity 0.1s ease-out;
-    width: 380px;
+    position: fixed;
+    top: 25px;
+    transform: translate(-50%, 0);
+    transition: opacity 0.3s ease-in-out;
+    width: 400px;
     z-index: 3;
 }
 
 .alertWrapper.visible {
-    transform: translate(-50%, 0);
     opacity: 1;
 }
 
+/* Toast */
 .toast {
-    background-color: #ffffff;
-    border-radius: 5px 5px 0 0;
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+    animation: showToast 0.2s ease-out forwards; 
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
     display: grid;
+    gap: 0.5rem;
     grid-template-columns: 1.3fr 6fr 0.5fr;
-    height: 80px;
-    padding: 20px;
+    height: auto;
+    padding: 1rem;
+    position: relative;
     width: 100%;
 }
 
-/* Toast de éxito */
-.toast.success {
-    border-left: 8px solid #47D764;
+.toast .container-1 {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+}
+
+.toast .container-1 i {
+    font-size: 30px;
 }
 
 .toast.success i {
     color: #47D764;
 }
-
-/* Toast de error */
-.toast.error {
-    border-left: 8px solid #ff355b;
-}
-
 .toast.error i {
     color: #ff355b;
 }
 
-/* Contenedores del toast */
-.toast .container-1, .toast .container-2 {
-    align-self: center;
-}
-
 .toast .container-1 i {
-    font-size: 35px;
+    font-size: 40px;
 }
 
-.toast .container-2 p:first-child {
-    color: #101020;
-    font-size: 16px;
+.toast .container-2 p.title {
+    color: black;
+    font-size: 1rem;
     font-weight: 600;
 }
 
-.toast .container-2 p:last-child {
+.toast .container-2 p.message {
     color: #656565;
-    font-size: 12px;
+    font-size: 0.9rem;
     font-weight: 400;
+    margin: 0.25rem 0;
 }
 
-/* Botones del toast */
+/* Botón de cierre */
 .toast button {
     background-color: transparent;
     border: none;
     color: #888;
     cursor: pointer;
-    font-size: 15px;
+    font-size: 1.25rem;
 }
 
 .toast button i {
     color: black;
 }
 
+/* Barra de progreso */
 .progress {
-    background: #ddd;
-    bottom: 0;
-    height: 3px;
-    left: 0;
-    position: absolute;
-    width: 100%;
+    background-color: whitesmoke;
+    border-radius: 3px;
+    height: 5px;
+    margin-top: 0.5rem;
     overflow: hidden;
+    position: relative;
+    width: 100%;
 }
 
 .progress::before {
+    background-color: currentColor;
     content: "";
     height: 100%;
     position: absolute;
+    transition: width 3s linear;
     width: 100%;
 }
 
@@ -143,7 +186,17 @@
     animation: progress 3s linear forwards;
 }
 
-/* Modal de confirmación */
+/* Estados del Toast */
+.toast.hide {
+    animation: hideToast 0.25s ease-in forwards;
+    pointer-events: none;
+}
+
+.shakeToast {
+    animation: shakeToast 0.5s;
+}
+
+/* Alertas tipo modal */
 .confirmWrapper {
     left: 50%;
     position: fixed;
@@ -163,29 +216,27 @@
 }
 
 .confirmModal h2 {
-    margin: 0 0 10px 0;
+    margin-bottom: 10px;
 }
 
 .confirmModal p {
-    margin: 0 0 20px 0;
+    margin-bottom: 20px;
 }
 
-/* Botones del modal de confirmación */
+/* Botones del modal */
 .confirmModal button {
+    border-radius: 3px;
+    border: none;
+    color: white;
+    cursor: pointer;
     margin: 0 5px;
     padding: 10px 20px;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    color: white;
 }
 
 .confirmModal .danger {
     background-color: #d9534f;
-    color: white;
 }
 
-.confirmModal .sucess {
+.confirmModal .success {
     background-color: #5bc0de;
-    color: white;
 }

@@ -43,7 +43,7 @@ export class Mylist implements OnInit {
   // Agregar un elemento a la lista
   addAnimeToMyList(anime: MyAnime) {
     if (this.isAnimeSelected(anime)) {
-      this.triggerAlert('error', 'Error!', 'Este elemento ya está en tu lista');
+      this.triggerAlert('error', 'Error!', 'Este elemento ya está en tu lista.');
     } else {
       this.triggerAlert('success', 'Hecho!', 'Añadido a tu lista.');
       this.animes_selected.push(anime);
@@ -106,7 +106,7 @@ export class Mylist implements OnInit {
       callback: () => {
         this.animes_selected = this.animes_selected.filter(an => an.id !== anime.id);
         this.updateLocalStorage();
-        this.triggerAlert('success', 'Hecho!', 'Elemento eliminado con éxito');
+        this.triggerAlert('success', 'Hecho!', 'Elemento eliminado con éxito.');
       }
     });
   }

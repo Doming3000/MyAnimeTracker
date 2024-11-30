@@ -9,7 +9,7 @@ export interface MyAnime {
   type: string;
   url: string;
   status: string;
-  images: { [key: string]: Image },
+  image: string;
   total_episodes: number | null,
   watched_episodes: number,
   markedAsViewed: boolean;

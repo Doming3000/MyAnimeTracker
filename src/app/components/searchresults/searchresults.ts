@@ -171,7 +171,7 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
       type: anime.type,
       url: anime.url,
       status: anime.status,
-      images: anime.images,
+      image: anime.images["jpg"].large_image_url,
       total_episodes: anime.episodes,
       watched_episodes: 0,
       markedAsViewed: false,

@@ -1,11 +1,11 @@
 # 💀 Pendiente a realizar:
 • Agilizar la forma para organizar los elementos de la lista en tiempo real
 • Aplicar reglas media en imágenes y buscador.
+• Comprobar el estado de cada elemento de la lista al cargar la página en caso de que uno comienze a emitirse o termine de emitirse.
 • Encontrar diseños definitivos (dejar de usar escalas de grises).
 • Encontrar mejor diseño para el contador de episodios, los botones no deben moverse ni tampoco ocupar demasiado espacio.
 • Lógica para modificar el contador de episodios cuando un anime está en emisión o no tiene episodios definidos.
 • Mejorar las animaciones de las alertas tipo Toast al aparecer y desaparecer.
-• Mejorar los diseños de alertas en general (Modal y Toast).
 • Ponerle un nombre a la aplicación.
 
 # 🧠 Ideas:
@@ -17,7 +17,7 @@
   - Dar la opción al usuario de agregar manualmente su propio enlace a cada elemento.
   - No dar la opción y redirigir siempre a MAL.
 
-# 🐞 Errores encontrados:
+# 🐞 Errores/problemas encontrados:
 • Al importar datos, la página debería actualizar el almacenamiento local sin necesidad de recargar la página, del mismo modo o similar a como se hace al
   agregar un elemento a mi lista.
 • El contador de episodios necesita estilos que se adapten al espacio y que a su vez, no se estire dependiendo de la cantidad de episodios que tiene un

@@ -1,33 +1,31 @@
 <app-alerts></app-alerts>
 
-<div class="overlay" *ngIf="resultsVisible"></div>
-
 <!-- Gif de carga -->
 <div class="loadingGif" *ngIf="isLoading">
     <img src="assets/Loading.gif" alt="Gif de carga">
     <p>Buscando...</p>
 </div>
 
+<!-- Contenido si no hay resultados -->
+<div class="noResults" *ngIf="noResultsFound">
+    <p>No se han encontrado resultados.</p>
+</div>
+
 <!-- Contenedor de resultados -->
-<div class="results-container" #resultsContainer id="results-container" [ngClass]="{'results-visible': resultsVisible}">
-    <!-- Barra de progreso -->
-    <div class="progress-container">
-        <div class="progress-bar" id="myBar"></div>
-    </div>
-    
-    <!-- Header -->
-    <div class="resultsHeader">
-        <h3>Resultados de búsqueda para: "{{ searchTerm }}"</h3>
-        <button (click)="goHome()"><i class="fa-solid fa-arrow-left"></i></button>
-    </div>
-    
-    <!-- Contenido si no hay resultados -->
-    <div class="noResults" *ngIf="noResultsFound">
-        <p>No se han encontrado resultados.</p>
-    </div>
-    
+<div class="results-container" #resultsContainer id="results-container" [ngClass]="{'results-visible': resultsVisible}">    
     <!-- Resultados de búsqueda -->
     <ng-container *ngIf="anime_results.length > 0">
+        <!-- Barra de progreso -->
+        <div class="progress-container">
+            <div class="progress-bar" id="myBar"></div>
+        </div>
+        
+        <!-- Header -->
+        <div class="resultsHeader">
+            <h3>Resultados de búsqueda para: "{{ searchTerm }}"</h3>
+            <button (click)="goHome()"><i class="fa-solid fa-arrow-left"></i></button>
+        </div>
+        
         <div class="result" *ngFor="let anime of anime_results">
             <img [src]="anime.images['jpg'].large_image_url" alt="Anime Image">
             <div class="details">

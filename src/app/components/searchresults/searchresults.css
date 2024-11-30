@@ -1,30 +1,30 @@
-.overlay {
-    height: 100%;
-    left: 0;
-    position: fixed;
-    top: 10%;
-    width: 100%;
-    background-color: #EEE;
-}
-
 .results-container {
     background-color: white;
     border-radius: 2px;
-    left: 0;
-    /* margin: 30px 10px 10px; */
-    margin-top: 30px;
-    max-height: 0;
     overflow-x: hidden;
     overflow-y: scroll;
-    position: absolute;
-    right: 0;
-    /* width: calc(100% - 80px); */
 }
 
 .results-visible {
-    max-height: calc(100vh - 80px);
-    transition: max-height 500ms ease-in-out;
+    max-height: calc(100vh - 51px);
+    /* transition: max-height 500ms ease-in-out; */
 }
+
+/*
+.results-container {
+background-color: white;
+border-radius: 2px;
+left: 0;
+margin: 30px 10px 10px;
+margin-top: 30px;
+max-height: 0;
+overflow-x: hidden;
+overflow-y: scroll;
+position: absolute;
+right: 0;
+width: calc(100% - 80px);
+}
+*/
 
 /* Loading gif */
 .loadingGif {
@@ -93,7 +93,7 @@
     background: #ccc;
     position: sticky;
     top: 0;
-    z-index: 1;
+    /* z-index: 1; */
 }
 
 .progress-bar {

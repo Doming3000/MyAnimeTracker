@@ -26,33 +26,76 @@ export class Alerts {
   
   // Mostrar alerta tipo toast
   showAlert(type: string, title: string, message: string) {
-    // Comprobar si ya hay una alerta visible
+    // Limpiar temporizador ya existente
+    clearTimeout(this.timer);
+    
     if (this.isToastVisible) {
+      // Actualizar los datos de la alerta activa
+      this.alertType = type;
+      this.title = title;
+      this.message = message;
+      
+      // Reiniciar la animación
       const toastElement = document.querySelector('.toast') as HTMLElement;
       if (toastElement) {
-        toastElement.classList.remove('shakeToast');
+        toastElement.classList.remove('hide', 'shakeToast');
         void toastElement.offsetWidth;
-        toastElement.classList.add('shakeToast');        
+        toastElement.classList.add('shakeToast');
       }
-      // Mostrar alerta nueva
+      
+      // Reinicia la barra de progreso
+      this.resetProgress();
+      setTimeout(() => {
+        this.startProgress();
+      }, 0);
     } else {
       this.isToastVisible = true;
       this.alertType = type;
       this.title = title;
       this.message = message;
       
+      // Iniciar la barra de progreso
       setTimeout(() => {
-        const progressElement = document.querySelector('.progress') as HTMLElement;
-        if (progressElement) {
-          progressElement.classList.add('active');
-        }
+        this.startProgress();
       }, 0);
+    }
+    
+    // Cerrar alerta después de unos segundos
+    this.timer = setTimeout(() => {
+      this.closeAlert();
+    }, 3000);
+  }
+  
+  // Activar la barra de progreso
+  private startProgress() {
+    const progressElement = document.querySelector('.progress') as HTMLElement;
+    if (progressElement) {
+      progressElement.classList.add('active');
+    }
+  }
+  
+  // Reiniciar la barra de progreso
+  private resetProgress() {
+    const progressElement = document.querySelector('.progress') as HTMLElement;
+    if (progressElement) {
+      progressElement.classList.remove('active');
+      void progressElement.offsetWidth;
+    }
+  }
+  
+  // Cerrar alerta tipo toast
+  closeAlert() {
+    const toastElement = document.querySelector('.toast') as HTMLElement;
+    
+    if (toastElement) {
+      toastElement.classList.add('hide');
       
-      // Cerrar alerta después de unos segundos
-      this.timer = setTimeout(() => {
+      // Esperar el tiempo de la animación antes de ocultar el toast.
+      setTimeout(() => {
         this.isToastVisible = false;
-        this.resetProgress();
-      }, 3000);
+      }, 300);
+    } else {
+      this.isToastVisible = false;
     }
   }
   
@@ -88,21 +131,5 @@ export class Alerts {
       this.confirmCancelCallback();
     }
     this.isConfirmVisible = false;
-  }
-  
-  // Cerrar alerta tipo toast
-  closeAlert() {
-    this.isToastVisible = false;
-    clearTimeout(this.timer);
-    this.resetProgress();
-  }
-  
-  // Reiniciar la barra de progreso
-  private resetProgress() {
-    const progressElement = document.querySelector('.progress') as HTMLElement;
-    if (progressElement) {
-      progressElement.classList.remove('active');
-      void progressElement.offsetWidth;
-    }
   }
 }
