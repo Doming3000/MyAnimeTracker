@@ -36,7 +36,7 @@
                     <li class="status">{{anime.status}}</li>
                     <li class="genres" *ngFor="let genre of anime.genres" [ngClass]="{'hClass': genre.name === 'Hentai'}">{{ genre.name }}</li>
                 </ul>
-                <p *ngIf="anime.synopsis" [title]="anime.synopsis">{{ anime.synopsis.slice(0, 1500) }}</p>
+                <p *ngIf="anime.synopsis" [title]="anime.synopsis">{{ anime.synopsis.slice(0, 2000) }}</p>
                 
                 <div class="buttonContainer">
                     <!-- Botón para ver en MAL -->

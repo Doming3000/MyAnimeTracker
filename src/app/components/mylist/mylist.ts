@@ -100,7 +100,7 @@ export class Mylist implements OnInit {
   DelAnime(anime: MyAnime) {
     this.alerts.showConfirm({
       title: 'Confirmar eliminación',
-      message: '¿Estás seguro de que deseas eliminar este elemento?',
+      message: `¿Estás seguro de que deseas eliminar <span class="animeTitle">${anime.title}</span> de tu lista?`,
       yesText: 'Sí, quiero eliminarlo',
       noText: 'No, cambié de opinión',
       callback: () => {

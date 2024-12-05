@@ -1,11 +1,12 @@
 # 💀 Pendiente a realizar:
+• Agilizar acciones con atajos del teclado
 • Agilizar la forma para organizar los elementos de la lista en tiempo real
 • Aplicar reglas media en imágenes y buscador.
 • Comprobar el estado de cada elemento de la lista al cargar la página en caso de que uno comienze a emitirse o termine de emitirse.
 • Encontrar diseños definitivos (dejar de usar escalas de grises).
 • Encontrar mejor diseño para el contador de episodios, los botones no deben moverse ni tampoco ocupar demasiado espacio.
 • Lógica para modificar el contador de episodios cuando un anime está en emisión o no tiene episodios definidos.
-• Mejorar las animaciones de las alertas tipo Toast al aparecer y desaparecer.
+• Mejorar la animación de sacudida de las alertas tipo Toast
 • Ponerle un nombre a la aplicación.
 
 # 🧠 Ideas:

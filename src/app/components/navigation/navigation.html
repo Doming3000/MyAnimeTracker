@@ -19,15 +19,26 @@
 <div class="sidenav" [class.open]="isOpen">
     <button (click)="closeNav()" class="cerrar"><i class="fa-solid fa-xmark"></i></button>
     
-    <div class="dataContainer">
+    <h3><i class="fa-regular fa-bookmark"></i> Mi Lista</h3>
+    <ul class="dataContainer">
         <!-- Opción para importar datos -->
-        <input type="file" id="fileInput" (change)="importData($event)" accept=".json">
-        <label for="fileInput"><i class="fa-solid fa-cloud-arrow-up"></i> Importar datos</label>
+        <li class="menuItem" (click)="triggerFileInput()">
+            <span class="menuIcon"><i class="fa-solid fa-cloud-arrow-up"></i></span>
+            <span class="menuText">Importar datos</span>
+        </li>
+        
+        <input type="file" id="fileInput" (change)="importData($event)" accept=".json" #fileInput>
         
         <!-- Opción para exportar datos -->
-        <span (click)="exportData()"><i class="fa-solid fa-cloud-arrow-down"></i> Exportar datos</span>
+        <li class="menuItem" (click)="exportData()">
+            <span class="menuIcon"><i class="fa-solid fa-cloud-arrow-down"></i></span>
+            <span class="menuText">Exportar datos</span>
+        </li>
         
         <!-- Opción para eliminar datos -->
-        <span (click)="nukeData()"><i class="fa-regular fa-trash-can"></i> Eliminar datos</span>
-    </div>
+        <li class="menuItem" (click)="nukeData()">
+            <span class="menuIcon"><i class="fa-regular fa-trash-can"></i></span>
+            <span class="menuText">Eliminar datos</span>
+        </li>
+    </ul>
 </div>

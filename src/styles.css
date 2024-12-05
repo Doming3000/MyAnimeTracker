@@ -93,3 +93,7 @@ footer p.issue a:visited {
 ::-webkit-scrollbar-thumb:hover {
     background: #a8a8a8;
 }
+
+.animeTitle {
+    font-style: oblique;
+}

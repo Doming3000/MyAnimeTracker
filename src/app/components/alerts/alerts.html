@@ -3,11 +3,11 @@
 <!-- Tipo toast -->
 <div class="alertWrapper" [ngClass]="{ 'visible': isToastVisible || isConfirmVisible }">
     <div class="toast" *ngIf="isToastVisible" [ngClass]="alertType">
-        <div class="container-1">
+        <div class="container1">
             <i class="fas" [ngClass]="{ 'fa-check-circle': alertType === 'success', 'fa-circle-exclamation': alertType === 'error' }"></i>
         </div>
         
-        <div class="container-2">
+        <div class="container2">
             <p class="title">{{ title }}</p>
             <p class="message">{{ message }}</p>
             
@@ -21,6 +21,7 @@
 <!-- Tipo modal -->
 <div class="confirmWrapper" *ngIf="isConfirmVisible">
     <div class="confirmModal">
+        <i class="fa-regular fa-trash-can"></i>
         <h2>{{ confirmTitle }}</h2>
         <p [innerHTML]="confirmMessage"></p>
         <button class="danger" (click)="confirmAction()">{{ confirmYesText }}</button>

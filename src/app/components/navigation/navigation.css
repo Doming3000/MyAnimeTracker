@@ -20,9 +20,9 @@
     z-index: 2;
 }
 
-.overlay.active {
-    pointer-events: auto;
-}
+/* .overlay.active {
+pointer-events: auto;
+} */
 
 /* Menú de navegación principal */
 .menu {
@@ -133,6 +133,7 @@ form input::-ms-input-placeholder {
     top: 0;
     transform: translateX(-100%);
     transition: 0.5s;
+    user-select: none;
     width: 250px;
     z-index: 2;
 }
@@ -152,27 +153,40 @@ form input::-ms-input-placeholder {
     top: 10px;
 }
 
+.sidenav h3 {
+    color: whitesmoke;
+    margin-left: 5px;
+}
+
 .dataContainer {
     display: flex;
     flex-direction: column;
-    margin: 0 80px 0 20px;
+    margin: 5px 20px 0 10px;
     gap: 5px;
 }
 
-.dataContainer input[type="file"] {
-    display: none;
-}
-
-.dataContainer label, .dataContainer span {
-    background-color: transparent;
-    border: none;
-    bottom: 20px;
-    color: white;
+.menuItem {
+    display: flex;
+    align-items: center;
     cursor: pointer;
-    left: 20px;
-    user-select: none;
+    padding: 5px;
+    border: 1px solid whitesmoke;
+    border-radius: 5px;
 }
 
-.dataContainer label:hover, .dataContainer span:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+.dataContainer input[type="file"] {
+    display: none; /* Considerar implementar el input en lugar de textos para permitir arrastrar y soltar */
+}
+
+.menuIcon, .menuText {
+    align-items: center;
+    color: white;
+    display: inline-flex;
+    height: 100%;
+}
+
+.menuIcon {
+    font-size: 1.1rem;
+    justify-content: center;
+    width: 40px;
 }

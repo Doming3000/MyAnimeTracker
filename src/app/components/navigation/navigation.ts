@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Alerts } from '../alerts/alerts';
 import { SearchService } from 'src/app/services/search.service';
@@ -11,6 +11,7 @@ import { SearchService } from 'src/app/services/search.service';
 
 export class Navigation {
   @ViewChild(Alerts) alerts!: Alerts;
+  @ViewChild('fileInput') fileInput!: ElementRef;
   
   // Variables
   isOpen: boolean = false;
@@ -72,7 +73,7 @@ export class Navigation {
     if (inputElement) {
       inputElement.classList.add('shake-placeholder');
       setTimeout(() => {
-        inputElement.classList.remove('shake-placeholder.');
+        inputElement.classList.remove('shake-placeholder');
       }, 500);
     }
   }
@@ -99,8 +100,12 @@ export class Navigation {
   }
   
   // Importar datos desde un archivo JSON
+  triggerFileInput() {
+    this.fileInput.nativeElement.click();
+  }
+  
   importData(event: any) {
-    const file = event.target.files[0];
+    const file = (event.target as HTMLInputElement).files?.[0];
     if (!file || !file.name.endsWith('.json')) {
       this.triggerAlert('error', 'Error!', 'Por favor, selecciona un archivo JSON válido.');
       this.resetFileInput(event.target);
