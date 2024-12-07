@@ -1,44 +1,62 @@
 <app-alerts></app-alerts>
 
-<!-- Menú de navegación principal (header) -->
-<div class="menu">
-    <span (click)="openNav()"><i class="fa-solid fa-bars"></i></span>
-    <span class="title" (click)="goHome()">My Anime Tracker</span>
-</div>
-
-<!-- Formulario de búsqueda -->
-<form (ngSubmit)="search()">
-    <button type="button" class="searchButton" (click)="search()"><i class="fa-solid fa-magnifying-glass"></i></button>
-    <input type="text" name="search" class="search-input" [(ngModel)]="searchTerm" spellcheck="false" placeholder="Realiza una búsqueda..." required [ngClass]="{'input-error': inputEmpty}" />
-    <button type="button" class="clearInput" (click)="clearInput()"><i class="fa-solid fa-xmark"></i></button>
-</form>
-
-<!-- Menú de navegación lateral -->
-<div class="overlay" *ngIf="isOpen" (click)="closeNav()"></div>
-
-<div class="sidenav" [class.open]="isOpen">
-    <button (click)="closeNav()" class="cerrar"><i class="fa-solid fa-xmark"></i></button>
+<header>
+    <!-- Menú de navegación principal -->
+    <div class="menu">
+        <span class="openNav" (click)="openNav()"><i class="fa-solid fa-bars"></i></span>
+        <span class="title" (click)="goHome()">My Anime Tracker</span>
+    </div>
     
-    <h3><i class="fa-regular fa-bookmark"></i> Mi Lista</h3>
-    <ul class="dataContainer">
-        <!-- Opción para importar datos -->
-        <li class="menuItem" (click)="triggerFileInput()">
-            <span class="menuIcon"><i class="fa-solid fa-cloud-arrow-up"></i></span>
-            <span class="menuText">Importar datos</span>
-        </li>
+    <!-- Formulario de búsqueda -->
+    <form (ngSubmit)="search()">
+        <button type="button" class="searchButton" (click)="search()"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <input type="text" name="search" class="search-input" [(ngModel)]="searchTerm" spellcheck="false" placeholder="Realiza una búsqueda..." required [ngClass]="{'input-error': inputEmpty}" />
+        <button type="button" class="clearInput" (click)="clearInput()"><i class="fa-solid fa-xmark"></i></button>
+    </form>
+    
+    <!-- Menú de navegación lateral -->
+    <div class="overlay" *ngIf="isOpen" (click)="closeNav()"></div>
+    
+    <div class="sidenav" [class.open]="isOpen">
+        <div class="header">
+            <button (click)="closeNav()" class="cerrar"><i class="fa-solid fa-xmark"></i></button> 
+        </div>
         
-        <input type="file" id="fileInput" (change)="importData($event)" accept=".json" #fileInput>
+        <h3><i class="fa-regular fa-bookmark"></i> Mi Lista</h3>
+        <ul class="dataContainer">
+            <!-- Opción para importar datos -->
+            <li class="menuItem" (click)="triggerFileInput()">
+                <input type="file" id="fileInput" (change)="importData($event)" accept=".json" #fileInput>
+                <span class="menuIcon"><i class="fa-solid fa-cloud-arrow-up"></i></span>
+                <span class="menuText">Importar datos</span>
+            </li>
+            
+            <!-- Opción para exportar datos -->
+            <li class="menuItem" (click)="exportData()">
+                <span class="menuIcon"><i class="fa-solid fa-cloud-arrow-down"></i></span>
+                <span class="menuText">Exportar datos</span>
+            </li>
+            
+            <!-- Opción para eliminar datos -->
+            <li class="menuItem" (click)="nukeData()">
+                <span class="menuIcon"><i class="fa-solid fa-trash-can"></i></span>
+                <span class="menuText">Eliminar datos</span>
+            </li>
+        </ul>
         
-        <!-- Opción para exportar datos -->
-        <li class="menuItem" (click)="exportData()">
-            <span class="menuIcon"><i class="fa-solid fa-cloud-arrow-down"></i></span>
-            <span class="menuText">Exportar datos</span>
-        </li>
-        
-        <!-- Opción para eliminar datos -->
-        <li class="menuItem" (click)="nukeData()">
-            <span class="menuIcon"><i class="fa-regular fa-trash-can"></i></span>
-            <span class="menuText">Eliminar datos</span>
-        </li>
-    </ul>
-</div>
+        <h3>Sitio</h3>
+        <ul class="dataContainer">    
+            <!-- About -->
+            <li class="menuItem">
+                <span class="menuIcon"><i class="fa-solid fa-book"></i></span>
+                <span class="menuText">Sobre el sitio</span>
+            </li>
+            
+            <!-- Reportar un problema vía GitHub -->
+            <a class="menuItem" href="https://github.com/Doming3000/MyAnimeTracker/issues" target="_blank" rel="noopener noreferrer">
+                <span class="menuIcon"><i class="fa-solid fa-triangle-exclamation"></i></span>
+                <span class="menuText">Reportar un problema</span>
+            </a>
+        </ul>
+    </div>
+</header>

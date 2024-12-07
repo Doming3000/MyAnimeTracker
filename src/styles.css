@@ -7,13 +7,6 @@
 }
 
 /* Página principal */
-header, footer {
-    align-items: center;
-    background-color: #444444;
-    display: flex;
-    height: 50px;
-}
-
 body {
     background-color: #EEE;
     display: flex;
@@ -28,22 +21,14 @@ main {
 }
 
 footer {
+    background-color: #444444;
+    display: flex;
+    height: 50px;
+}
+
+footer {
     justify-content: flex-end;
     padding: 10px;
-}
-
-footer p.issue {
-    color: white;
-    user-select: none;
-}
-
-footer p.issue a {
-    text-decoration: none;
-    color: white;
-}
-
-footer p.issue a:visited {
-    color: white;
 }
 
 /* Custom Tittle */

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-alerts',
@@ -131,5 +131,29 @@ export class Alerts {
       this.confirmCancelCallback();
     }
     this.isConfirmVisible = false;
+  }
+  
+  // Escuchar eventos de teclado mediante HostListener
+  @HostListener('document:keydown', ['$event'])
+  
+  handleKeyboardEvent(event: KeyboardEvent) {
+    switch (event.key) {
+      // Cancelar con ESC
+      case 'Escape':
+      if (this.isConfirmVisible) {
+        this.cancelAction();
+      }
+      break;
+      
+      // Confirmar con Enter
+      case 'Enter':
+      if (this.isConfirmVisible) {
+        this.confirmAction();
+      }
+      break;
+      
+      default:
+      break;
+    }
   }
 }

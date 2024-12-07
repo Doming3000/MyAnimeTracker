@@ -10,6 +10,13 @@
     }
 }
 
+header {
+    align-items: center; 
+    background-color: #444444;
+    display: flex;
+    height: 50px;
+}
+
 .overlay {
     background-color: rgba(0, 0, 0, 0.5);
     height: 100%;
@@ -20,30 +27,31 @@
     z-index: 2;
 }
 
-/* .overlay.active {
-pointer-events: auto;
-} */
-
 /* Menú de navegación principal */
 .menu {
-    color: white;
+    color: whitesmoke;
+    display: flex;
     font-size: 25px;
-    margin-left: 20px;
-    position: absolute;
-    top: 12px;
+    height: 100%;
     user-select: none;
 }
 
 .menu span {
+    align-items: center;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+}
+
+.openNav {
+    padding: 0 15px;
 }
 
 .title {
     font-family: 'Poppins', sans-serif;
     font-size: 25px;
     line-height: 25px;
-    margin-left: 15px;
-    text-decoration: none;
+    padding: 0;
 }
 
 /* Formulario de búsqueda */
@@ -124,11 +132,10 @@ form input::-ms-input-placeholder {
 
 /* Menú de navegación lateral */
 .sidenav {
-    background-color: #555;
+    background-color: #5b5b5b;
+    color: whitesmoke;
     height: 100%;
-    left: 0;
-    overflow-x: hidden;
-    padding-top: 40px;
+    left: -1px; 
     position: fixed;
     top: 0;
     transform: translateX(-100%);
@@ -140,38 +147,51 @@ form input::-ms-input-placeholder {
 
 .sidenav.open {
     transform: translateX(0);
+    left: 0;
+}
+
+.header {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .cerrar {
     background-color: transparent;
     border: none;
-    color: white;
+    color: whitesmoke;
     cursor: pointer;
-    font-size: 20px;
-    position: absolute;
-    right: 10px;
-    top: 10px;
+    font-size: 1.5rem;
+    height: 50px;
+    width: 50px;
 }
 
 .sidenav h3 {
-    color: whitesmoke;
-    margin-left: 5px;
+    margin-left: 15px;
 }
 
 .dataContainer {
     display: flex;
     flex-direction: column;
-    margin: 5px 20px 0 10px;
-    gap: 5px;
+    margin: 5px 10px 20px 10px;
+    gap: 2px;
 }
 
 .menuItem {
-    display: flex;
     align-items: center;
-    cursor: pointer;
-    padding: 5px;
-    border: 1px solid whitesmoke;
     border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    padding: 5px;
+    text-decoration: none;
+    transition: all 100ms ease-in-out;
+}
+
+.menuItem:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.menuItem:visited {
+    color: whitesmoke;
 }
 
 .dataContainer input[type="file"] {
@@ -180,7 +200,6 @@ form input::-ms-input-placeholder {
 
 .menuIcon, .menuText {
     align-items: center;
-    color: white;
     display: inline-flex;
     height: 100%;
 }
@@ -188,5 +207,5 @@ form input::-ms-input-placeholder {
 .menuIcon {
     font-size: 1.1rem;
     justify-content: center;
-    width: 40px;
+    width: 35px;
 }

@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, HostListener , ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Alerts } from '../alerts/alerts';
 import { SearchService } from 'src/app/services/search.service';
@@ -194,5 +194,40 @@ export class Navigation {
   // Mostrar alertas
   triggerAlert(type: 'success' | 'error', title: string, message: string) {
     this.alerts.showAlert(type, title, message);
+  }
+  
+  // Escuchar eventos de teclado mediante HostListener
+  @HostListener('document:keydown', ['$event'])
+  
+  handleKeyboardEvent(event: KeyboardEvent) {
+    const target = event.target as HTMLElement;
+    
+    // Ignorar eventos de teclado si se está en un input 
+    if (target.tagName === 'INPUT') {
+      return;
+    }
+    
+    switch (event.key) {
+      case 'Escape':
+      if (this.isOpen) {
+        this.closeNav();
+      }
+      break;
+      
+      case 'ArrowRight':
+      if (!this.isOpen) {
+        this.openNav();
+      }
+      break;
+      
+      case 'ArrowLeft':
+      if (this.isOpen) {
+        this.closeNav();
+      }
+      break;
+      
+      default:
+      break;
+    }
   }
 }
