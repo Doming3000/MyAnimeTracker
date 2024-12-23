@@ -11,7 +11,7 @@
 }
 
 header {
-    align-items: center; 
+    align-items: center;
     background-color: #444444;
     display: flex;
     height: 50px;
@@ -75,12 +75,13 @@ form {
 form input {
     background: none;
     border: none;
+    border-radius: 40px;
     color: #888;
-    flex-grow: 1;
     font-size: 14px;
-    margin: 0 20px 0 20px;
     outline: none;
-    padding: 10px;
+    padding: 5px;
+    width: 100%;
+    /* margin: 0 20px 0 20px; */
 }
 
 /* Google Chrome, Safari, Edge */
@@ -109,13 +110,9 @@ form input::-ms-input-placeholder {
     border: none;
     color: #555;
     cursor: pointer;
-    display: flex;
     font-size: 16px;
-    height: 20px;
-    justify-content: center;
-    position: absolute;
-    user-select: none;
-    width: 20px;
+    height: 40px;
+    width: 30px;
 }
 
 .searchButton {
@@ -146,8 +143,8 @@ form input::-ms-input-placeholder {
 }
 
 .sidenav.open {
-    transform: translateX(0);
     left: 0;
+    transform: translateX(0);
 }
 
 .header {
@@ -166,14 +163,14 @@ form input::-ms-input-placeholder {
 }
 
 .sidenav h3 {
-    margin-left: 15px;
+    margin-left: 20px;
 }
 
 .dataContainer {
     display: flex;
     flex-direction: column;
-    margin: 5px 10px 20px 10px;
     gap: 2px;
+    margin: 5px 10px 20px 10px;
 }
 
 .menuItem {
@@ -190,7 +187,7 @@ form input::-ms-input-placeholder {
     background-color: rgba(0, 0, 0, 0.2);
 }
 
-.menuItem:visited {
+.menuItem a, a:visited {
     color: whitesmoke;
 }
 

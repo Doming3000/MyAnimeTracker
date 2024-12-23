@@ -22,17 +22,20 @@
         <div class="modal-content">
             <span class="close" (click)="closeDetails()">&times;</span>
             <h3>{{ selectedAnime.title }}</h3>
-            <p> {{ selectedAnime.type }} </p>
+            <p>{{ selectedAnime.type }}</p>
         </div>
     </div>
     
     <!-- Lista -->
     <div *ngIf="animes_selected.length > 0" class="mylist">
         <div *ngFor="let anime of animes_selected" class="anime">            
-            <div class="anime-content">
-                <a [href]="anime.url" target="_blank" rel="noopener noreferrer"><img [src]="anime.image" alt="{{ anime.title }}"></a>
-                <h3>{{ truncateAnimeName(anime.title, 50) }}</h3>
+            <div class="imageContainer">
+                <a [href]="anime.url" target="_blank">
+                    <img [src]="anime.image" alt="Anime">
+                </a>
             </div>
+            
+            <h3>{{ truncateAnimeName(anime.title, 50) }}</h3>
             
             <!-- Contenedor de botones -->
             <div class="buttonContainer"> 

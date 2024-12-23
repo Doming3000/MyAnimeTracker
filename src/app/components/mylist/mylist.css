@@ -9,10 +9,10 @@
 }
 
 /* .mainContent {
-    opacity: 1;
-    transition: opacity 0.5s ease-in-out;
+opacity: 1;
+transition: opacity 0.5s ease-in-out;
 
-    Esto no funciona actualmente, considerar usar "@angular/animations" para solucionar animación de entrada.
+Esto no funciona actualmente, considerar usar "@angular/animations" para solucionar animación de entrada.
 } */
 
 .listHeader {
@@ -77,10 +77,11 @@ hr {
 }
 
 .anime {
-    align-items: center;
+    aspect-ratio: 3 / 5; 
     background-color: white;
     border-radius: 0.5rem;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex; 
     flex-direction: column;
     justify-content: center;
     padding: 1rem;
@@ -93,22 +94,35 @@ hr {
     z-index: 1;
 }
 
-.anime img {
+.imageContainer {
+    align-items: center;
+    border-radius: 0.5rem;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    margin: 5px 5px 0 5px;
+    overflow: hidden;
+    position: relative;
+}
+
+.imageContainer a {
+    display: inline-block;
+}
+
+.imageContainer img {
     border-radius: 0.5rem;
     display: block;
-    height: 250px;
-    margin: 0 auto;
-    object-fit: cover;
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
     object-position: center;
-    user-select: none;
-    width: 180px;
 }
 
 .anime h3 {
     color: #777;
-    font-size: 14px;
+    font-size: 15px;
     height: 30px;
-    margin: 10px 0 10px 0;
+    margin: 10px 0 20px 0;
     text-align: center;
     transition: all linear 200ms;
 }
@@ -129,28 +143,13 @@ hr {
 }
 
 /* Botones, reordenar más tarde */
-/* .increaseButton, .decreaseButton {
-    background: none;
-    border: none;
-    color: #666;
-    cursor: pointer;
-    font-size: 18px;
-    height: 25px;
-    width: 25px;
-} */
-
 /* .increaseButton {
-    margin-right: auto;
+margin-right: auto;
 }
 
 .decreaseButton {
-    margin-left: auto;
+margin-left: auto;
 }
-
-.increaseButton:disabled, .decreaseButton:disabled {
-    cursor: default;
-    opacity: 0.5;
-} */
 
 /* .episodeTipContainer {
 display: flex;
@@ -175,15 +174,24 @@ color: #555;
 cursor: pointer;
 font-size: 18px;
 } */
-
+/* ----- Botones ----- */
 .ViewCheckText {
     margin-right: auto; 
 }
 
-/* ----- Botones ----- */
+.increaseButton, .decreaseButton {
+    cursor: pointer;
+}
+
+.increaseButton:disabled, .decreaseButton:disabled {
+    cursor: default;
+    opacity: 0.5;
+}
+
 .buttonContainer {
     display: flex;
     justify-content: flex-end;
+    margin-top: auto;
     visibility: hidden;
 }
 
@@ -199,13 +207,14 @@ font-size: 18px;
     border: none;
     color: white;
     cursor: pointer;
+    font-size: 0.9rem;
+    height: 1.7rem;
     text-align: center;
-    height: 25px;
-    width: 25px;
+    width: 1.7rem;
 }
 
 .viewButton {
-    background-color: lightgreen;
+    background-color: #86dc86;
 }
 
 .detailsButton{
@@ -213,7 +222,7 @@ font-size: 18px;
 }
 
 .delButton {
-    background-color: #ff5c7a;
+    background-color: #e26161;
 }
 
 /* Enecoger tamaño del contenedor según cantidad de episodios */

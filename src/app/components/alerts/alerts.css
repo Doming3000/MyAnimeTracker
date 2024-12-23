@@ -120,10 +120,11 @@
 }
 
 .toast.success i {
-    color: #47D764;
+    color: #68d268;
 }
+
 .toast.error i {
-    color: #ff355b;
+    color: #eb5252;
 }
 
 .toast .container1 i {
@@ -177,11 +178,11 @@
 }
 
 .progress-success::before {
-    background-color: #47D764;
+    background-color: #68d268;
 }
 
 .progress-error::before {
-    background-color: #ff355b;
+    background-color: #eb5252;
 }
 
 .progress.active::before {
