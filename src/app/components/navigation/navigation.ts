@@ -1,7 +1,7 @@
 import { Component, HostListener , ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { Alerts } from '../alerts/alerts';
 import { SearchService } from 'src/app/services/search.service';
+import { AlertService } from 'src/app/services/alerts.service';
 
 @Component({
   selector: 'app-navigation',
@@ -10,7 +10,6 @@ import { SearchService } from 'src/app/services/search.service';
 })
 
 export class Navigation {
-  @ViewChild(Alerts) alerts!: Alerts;
   @ViewChild('fileInput') fileInput!: ElementRef;
   
   // Variables
@@ -19,13 +18,20 @@ export class Navigation {
   searchTerm: string = '';
   
   // Inyección de dependencias
-  constructor(private router: Router, private searchService: SearchService) {}
+  constructor(private router: Router, private searchService: SearchService, private alertService: AlertService) {}
   
   // Navegar a la página principal
   goHome() {
     this.router.navigate(['/']);
     this.searchService.updateSearchTerm("");
     document.documentElement.style.overflowY = 'visible';
+  }
+  
+  // Navegar a mi lista
+  goMyList() {
+    this.router.navigate(['/mylist']);
+    this.searchService.updateSearchTerm("");
+    this.isOpen = false;
   }
   
   // Abrir/Cerrar el menú lateral
@@ -82,7 +88,7 @@ export class Navigation {
   exportData() {
     const storedData = localStorage.getItem('my_anime');
     if (!storedData || storedData === '[]') {
-      return this.triggerAlert('error', 'Error!', 'No hay nada que descargar.');
+      return this.alertService.triggerAlert('error', 'Error!', 'No hay nada que descargar.');
     }
     
     // Parsear los datos y volver a formatearlos con indentación
@@ -107,7 +113,7 @@ export class Navigation {
   importData(event: any) {
     const file = (event.target as HTMLInputElement).files?.[0];
     if (!file || !file.name.endsWith('.json')) {
-      this.triggerAlert('error', 'Error!', 'Por favor, selecciona un archivo JSON válido.');
+      this.alertService.triggerAlert('error', 'Error!', 'Por favor, selecciona un archivo JSON válido.');
       this.resetFileInput(event.target);
       return;
     }
@@ -119,7 +125,7 @@ export class Navigation {
     };
     
     reader.onerror = () => {
-      this.triggerAlert('error', 'Error!', 'Ha ocurrido un error al leer el contenido del archivo.');
+      this.alertService.triggerAlert('error', 'Error!', 'Ha ocurrido un error al leer el contenido del archivo.');
       this.resetFileInput(event.target);
     };
     
@@ -140,7 +146,7 @@ export class Navigation {
         this.isOpen = false;
         
         // Mostrar modal de confirmación antes de sobrescribir
-        this.alerts.showConfirm({
+        this.alertService.triggerConfirm({
           title: 'Confirmar Importación',
           message: '¿Estás seguro de que deseas importar estos datos?<br>La información actual se perderá si no está respaldada.',
           yesText: 'Sí, quiero importar',
@@ -150,7 +156,7 @@ export class Navigation {
         });
       }
     } catch (error) {
-      this.triggerAlert('error', 'Error!', `Ha ocurrido un error y no es posible importar el archivo.`);
+      this.alertService.triggerAlert('error', 'Error!', `Ha ocurrido un error y no es posible importar el archivo.`);
       this.resetFileInput(inputElement);
     }
   }
@@ -158,7 +164,7 @@ export class Navigation {
   // Guardar los datos importados
   private saveImportedData(data: any[], inputElement: HTMLInputElement) {
     localStorage.setItem('my_anime', JSON.stringify(data));
-    this.triggerAlert('success', 'Hecho!', 'Datos importados con éxito.');
+    this.alertService.triggerAlert('success', 'Hecho!', 'Datos importados con éxito.');
     this.resetFileInput(inputElement);
   }
   
@@ -166,7 +172,7 @@ export class Navigation {
   nukeData() {
     const storedData = localStorage.getItem('my_anime');
     if (!storedData || storedData === '[]') {
-      this.triggerAlert('error', 'Error!', 'No hay nada que eliminar.');
+      this.alertService.triggerAlert('error', 'Error!', 'No hay nada que eliminar.');
       return;
     }
     
@@ -174,14 +180,14 @@ export class Navigation {
     this.isOpen = false;
     
     // Mostrar confirmación antes de eliminar
-    this.alerts.showConfirm({
+    this.alertService.triggerConfirm({
       title: 'Confirmar eliminación',
       message: '¿Estás seguro de que deseas eliminar todos tus datos?<br>Esta acción es irreversible.',
       yesText: 'Sí, eliminar datos',
       noText: 'No, cambié de opinión',
       callback: () => {
         localStorage.clear();
-        this.triggerAlert('success', 'Hecho!', 'Datos eliminados con éxito.');
+        this.alertService.triggerAlert('success', 'Hecho!', 'Datos eliminados con éxito.');
       }
     });
   }
@@ -189,11 +195,6 @@ export class Navigation {
   // Resetear el valor del input de archivo
   resetFileInput(inputElement: HTMLInputElement) {
     inputElement.value = '';
-  }
-  
-  // Mostrar alertas
-  triggerAlert(type: 'success' | 'error', title: string, message: string) {
-    this.alerts.showAlert(type, title, message);
   }
   
   // Escuchar eventos de teclado mediante HostListener

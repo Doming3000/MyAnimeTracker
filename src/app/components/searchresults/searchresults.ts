@@ -1,4 +1,3 @@
-// searchresults.component.ts
 import { Anime, MyAnime } from "src/app/interfaces/api-movies";
 import { AnimeService } from "src/app/services/anime.service";
 import { Component, OnInit, AfterViewInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
@@ -6,7 +5,6 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Subscription } from "rxjs";
 import { ActivatedRoute, Router } from '@angular/router';
 import { SearchService } from 'src/app/services/search.service';
-import { Alerts } from '../alerts/alerts';
 import { debounceTime, switchMap } from 'rxjs/operators';
 
 @Component({
@@ -16,7 +14,6 @@ import { debounceTime, switchMap } from 'rxjs/operators';
 })
 export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('resultsContainer') resultsContainer!: ElementRef;
-  @ViewChild(Alerts) alerts!: Alerts;
   
   anime_results: Anime[] = [];
   isLoading: boolean = false;
@@ -35,7 +32,7 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
     private formBuilder: FormBuilder,
     private searchService: SearchService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {
     this.searchForm = this.formBuilder.group({
       searchTerm: ["", Validators.required],

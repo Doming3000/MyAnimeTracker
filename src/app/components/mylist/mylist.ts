@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { MyAnime } from 'src/app/interfaces/api-movies';
 import { AnimeService } from 'src/app/services/anime.service';
-import { Alerts } from '../alerts/alerts';
+import { AlertService } from 'src/app/services/alerts.service';
 
 @Component({
   selector: 'app-mylist',
@@ -9,10 +9,7 @@ import { Alerts } from '../alerts/alerts';
   styleUrls: ['./mylist.css']
 })
 
-export class Mylist implements OnInit {
-  @ViewChild(Alerts) alerts!: Alerts;
-  @Input() showMainContent = true;
-  
+export class Mylist implements OnInit {  
   // Variables
   selectedAnime: MyAnime | null = null;
   animes_selected: MyAnime[] = [];
@@ -20,7 +17,7 @@ export class Mylist implements OnInit {
   isListEmpty = true;
   
   // Inyección de dependencias
-  constructor(private animeService: AnimeService) { }
+  constructor(private animeService: AnimeService, private alertService: AlertService) { }
   
   ngOnInit(): void {
     this.loadMyAnimeList();
@@ -43,9 +40,9 @@ export class Mylist implements OnInit {
   // Agregar un elemento a la lista
   addAnimeToMyList(anime: MyAnime) {
     if (this.isAnimeSelected(anime)) {
-      this.triggerAlert('error', 'Error!', 'Este elemento ya está en tu lista.');
+      this.alertService.triggerAlert('error', 'Error!', 'Este elemento ya está en tu lista.');
     } else {
-      this.triggerAlert('success', 'Hecho!', 'Añadido a tu lista.');
+      this.alertService.triggerAlert('success', 'Hecho!', 'Añadido a tu lista.');
       this.animes_selected.push(anime);
       this.updateLocalStorage();
       anime.isModalOpen = false;
@@ -98,7 +95,7 @@ export class Mylist implements OnInit {
   
   // Eliminar un anime de la lista
   DelAnime(anime: MyAnime) {
-    this.alerts.showConfirm({
+    this.alertService.triggerConfirm({
       title: 'Confirmar eliminación',
       message: `¿Estás seguro de que deseas eliminar <span class="animeTitle">${anime.title}</span> de tu lista?`,
       yesText: 'Sí, quiero eliminarlo',
@@ -106,7 +103,7 @@ export class Mylist implements OnInit {
       callback: () => {
         this.animes_selected = this.animes_selected.filter(an => an.id !== anime.id);
         this.updateLocalStorage();
-        this.triggerAlert('success', 'Hecho!', 'Elemento eliminado con éxito.');
+        this.alertService.triggerAlert('success', 'Hecho!', 'Elemento eliminado con éxito.');
       }
     });
   }
@@ -160,10 +157,5 @@ export class Mylist implements OnInit {
     this.isListEmpty = this.animes_selected.length === 0;
     // Revisar esto después, quizás sea mejor no reordenar de forma dinámica.
     // this.sortAnimeList();
-  }
-  
-  // Mostrar alertas
-  triggerAlert(type: 'success' | 'error', title: string, message: string) {
-    this.alerts.showAlert(type, title, message);
   }
 }

@@ -12,6 +12,7 @@ import { SearchResults } from './components/searchresults/searchresults';
 import { Mylist } from './components/mylist/mylist';
 import { Navigation } from './components/navigation/navigation';
 import { Alerts } from './components/alerts/alerts';
+import { Home } from './components/home/home';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { Alerts } from './components/alerts/alerts';
     Mylist,
     Navigation,
     Alerts,
+    Home,
   ],
   imports: [
     BrowserModule,

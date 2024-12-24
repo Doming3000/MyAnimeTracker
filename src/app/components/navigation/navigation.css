@@ -166,7 +166,7 @@ form input::-ms-input-placeholder {
     margin-left: 20px;
 }
 
-.dataContainer {
+.liContainer {
     display: flex;
     flex-direction: column;
     gap: 2px;
@@ -191,7 +191,7 @@ form input::-ms-input-placeholder {
     color: whitesmoke;
 }
 
-.dataContainer input[type="file"] {
+.liContainer input[type="file"] {
     display: none; /* Considerar implementar el input en lugar de textos para permitir arrastrar y soltar */
 }
 

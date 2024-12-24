@@ -1,5 +1,3 @@
-<app-alerts></app-alerts>
-
 <header>
     <!-- Menú de navegación principal -->
     <div class="menu">
@@ -22,8 +20,17 @@
             <button (click)="closeNav()" class="cerrar"><i class="fa-solid fa-xmark"></i></button> 
         </div>
         
-        <h3><i class="fa-regular fa-bookmark"></i> Mi Lista</h3>
-        <ul class="dataContainer">
+        <h3>Navegar</h3>
+        <ul class="liContainer">
+            <!-- Opción para ir a mi lista desde el menú lateral -->
+            <li class="menuItem" (click)="goMyList()">
+                <span class="menuIcon"><i class="fa-solid fa-book-bookmark"></i></span>
+                <span class="menuText">Ir a mi lista</span>
+            </li>
+        </ul>
+        
+        <h3>Mi Lista</h3>
+        <ul class="liContainer">
             <!-- Opción para importar datos -->
             <li class="menuItem" (click)="triggerFileInput()">
                 <input type="file" id="fileInput" (change)="importData($event)" accept=".json" #fileInput>
@@ -45,7 +52,7 @@
         </ul>
         
         <h3>Sitio</h3>
-        <ul class="dataContainer">    
+        <ul class="liContainer">    
             <!-- About -->
             <li class="menuItem">
                 <span class="menuIcon"><i class="fa-solid fa-book"></i></span>

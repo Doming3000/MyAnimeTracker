@@ -1,11 +1,16 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { AlertService } from 'src/app/services/alerts.service';
 
 @Component({
   selector: 'app-alerts',
   templateUrl: './alerts.html',
   styleUrls: ['./alerts.css']
 })
-export class Alerts {
+export class Alerts implements OnInit {
+  // Referencias a los elementos del DOM para manipular las alertas y la barra de progreso
+  @ViewChild('toast') toastElement!: ElementRef<HTMLElement>;
+  @ViewChild('progress') progressElement!: ElementRef<HTMLElement>;
+  
   // Propiedades para manejar el estado de las alertas tipo toast
   isToastVisible: boolean = false;
   alertType: string = '';
@@ -22,7 +27,19 @@ export class Alerts {
   confirmCallback!: () => void;
   confirmCancelCallback!: () => void;
   
-  constructor() {}
+  constructor(private alertService: AlertService) {}
+  
+  ngOnInit() {
+    // Suscripción al servicio para manejar alertas tipo toast
+    this.alertService.getAlert$().subscribe((alert) => {
+      this.showAlert(alert.type, alert.title, alert.message);
+    });
+    
+    // Suscripción al servicio para manejar confirmaciones globales
+    this.alertService.getConfirm$().subscribe((options) => {
+      this.showConfirm(options);
+    });
+  }
   
   // Mostrar alerta tipo toast
   showAlert(type: string, title: string, message: string) {
