@@ -10,8 +10,8 @@ export interface MyAnime {
   url: string;
   status: string;
   image: string;
-  total_episodes: number | null,
-  watched_episodes: number,
+  totalEpisodes: number | null,
+  watchedEpisodes: number,
   markedAsViewed: boolean;
   isModalOpen: boolean;
 }

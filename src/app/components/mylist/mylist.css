@@ -8,13 +8,6 @@
     z-index: 2;
 }
 
-/* .mainContent {
-opacity: 1;
-transition: opacity 0.5s ease-in-out;
-
-Esto no funciona actualmente, considerar usar "@angular/animations" para solucionar animación de entrada.
-} */
-
 .listHeader {
     display: flex;
     margin: 20px 0 10px 0;

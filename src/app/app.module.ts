@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Modulos
 import { FormsModule } from "@angular/forms";
@@ -27,7 +28,8 @@ import { Home } from './components/home/home';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule 
+    AppRoutingModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

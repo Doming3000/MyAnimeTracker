@@ -3,28 +3,8 @@
     border-radius: 2px;
     overflow-x: hidden;
     overflow-y: scroll;
+    max-height: calc(100vh - 50px);
 }
-
-.results-visible {
-    max-height: calc(100vh - 51px);
-    /* transition: max-height 500ms ease-in-out; */
-}
-
-/*
-.results-container {
-background-color: white;
-border-radius: 2px;
-left: 0;
-margin: 30px 10px 10px;
-margin-top: 30px;
-max-height: 0;
-overflow-x: hidden;
-overflow-y: scroll;
-position: absolute;
-right: 0;
-width: calc(100% - 80px);
-}
-*/
 
 /* Loading gif */
 .loadingGif {
@@ -189,7 +169,7 @@ p[title] {
     user-select: none;
 }
 
-.buttonContainer button  {
+.buttonContainer button {
     border-radius: 5px;
     border: none;
     cursor: pointer;
@@ -197,18 +177,27 @@ p[title] {
     font-size: 14px;
     height: 30px;
     outline: none;
+    position: relative;
     transition: all linear 200ms;
     white-space: nowrap;
 }
 
+.buttonContainer button a {
+    align-items: center;
+    color: inherit;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    text-decoration: none;
+    width: 100%;
+}
+
 .buttonContainer .malButton {
-    background: #2e51a2;
-    color: white;
+    background-color: #2e51a2;
 }
 
 .buttonContainer .addButton {
-    background: #009578;
-    color: white;
+    background-color: #009578;
 }
 
 .buttonContainer button:hover {
@@ -224,15 +213,16 @@ p[title] {
 }
 
 .buttonIcon {
-    background: rgba(0, 0, 0, 0.08);
+    background-color: rgba(0, 0, 0, 0.08);
+    border-radius: 5px;
     font-size: 1rem;
     justify-content: center;
     width: 40px;
 }
 
 .buttonIcon svg {
-    width: 50px;
-    height: 30px;
+    flex-shrink: 0;
+    margin: 5px;
 }
 
 .buttonText {

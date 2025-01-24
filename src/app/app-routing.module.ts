@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: '', component: Home },
   { path: 'mylist', component: Mylist },
   { path: 'searchresults', component: SearchResults },
-  { path: '**', redirectTo: '' }, // Ruta comodín para redirigir a Home
+  { path: '**', redirectTo: '' }, // Ruta comodín para redirigir a Home, considerar usar un componente de error.
 ];
 
 @NgModule({

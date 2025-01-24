@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 import { MyAnime } from 'src/app/interfaces/api-movies';
 import { AnimeService } from 'src/app/services/anime.service';
 import { AlertService } from 'src/app/services/alerts.service';
@@ -6,62 +7,54 @@ import { AlertService } from 'src/app/services/alerts.service';
 @Component({
   selector: 'app-mylist',
   templateUrl: './mylist.html',
-  styleUrls: ['./mylist.css']
+  styleUrls: ['./mylist.css'],
+  animations: [
+    trigger('fadeInOut', [
+      state('void', style({ opacity: 0 })), transition(':enter', [ animate('600ms ease-in') ])
+    ])
+  ]
 })
 
 export class Mylist implements OnInit {  
   // Variables
-  selectedAnime: MyAnime | null = null;
-  animes_selected: MyAnime[] = [];
+  animes: MyAnime[] = [];
   isModalOpen = false;
   isListEmpty = true;
+  selectedAnime: MyAnime | null = null;
   
   // Inyección de dependencias
   constructor(private animeService: AnimeService, private alertService: AlertService) { }
   
-  ngOnInit(): void {
+  ngOnInit() {
+    // Cargar datos iniciales desde el almacenamiento local
     this.loadMyAnimeList();
-    this.animeService.getAnimeSelected().subscribe(anime => {
-      this.addAnimeToMyList(anime);
+    
+    // Suscribirse a los cambios en el servicio
+    this.animeService.getList$().subscribe((list) => {
+      this.animes = list;
+      this.isListEmpty = this.animes.length === 0;
     });
   }
   
   // Cargar lista de elementos desde el almacenamiento local
   loadMyAnimeList() {
-    const storedData = localStorage.getItem('my_anime');
+    const storedData = localStorage.getItem('myAnimes');
     if (storedData) {
-      this.animes_selected = JSON.parse(storedData) || [];
-      this.animes_selected.forEach(anime => anime.isModalOpen = false); 
-      this.isListEmpty = this.animes_selected.length === 0;
+      this.animes = JSON.parse(storedData) || [];
+      this.animes.forEach(anime => anime.isModalOpen = false); 
+      this.isListEmpty = this.animes.length === 0;
       this.sortAnimeList();
     }
-  }
-  
-  // Agregar un elemento a la lista
-  addAnimeToMyList(anime: MyAnime) {
-    if (this.isAnimeSelected(anime)) {
-      this.alertService.triggerAlert('error', 'Error!', 'Este elemento ya está en tu lista.');
-    } else {
-      this.alertService.triggerAlert('success', 'Hecho!', 'Añadido a tu lista.');
-      this.animes_selected.push(anime);
-      this.updateLocalStorage();
-      anime.isModalOpen = false;
-    }
-  }
-  
-  // Verificar si el elemento ya está en la lista
-  private isAnimeSelected(anime: MyAnime): boolean {
-    return this.animes_selected.some(selectedAnime => selectedAnime.id === anime.id);
   }
   
   // Aumentar el número de episodios vistos
   increaseWatch(anime: MyAnime, event: MouseEvent) {
     const increment = event.ctrlKey ? 10 : 1;
     
-    if (anime.watched_episodes + increment <= (anime.total_episodes || Infinity)) {
-      anime.watched_episodes += increment;
+    if (anime.watchedEpisodes + increment <= (anime.totalEpisodes || Infinity)) {
+      anime.watchedEpisodes += increment;
     } else {
-      anime.watched_episodes = anime.total_episodes || anime.watched_episodes;
+      anime.watchedEpisodes = anime.totalEpisodes || anime.watchedEpisodes;
     }
     this.updateLocalStorage();
   }
@@ -69,9 +62,9 @@ export class Mylist implements OnInit {
   // Disminuir el número de episodios vistos
   decreaseWatch(anime: MyAnime, event: MouseEvent) {
     if (event.ctrlKey) {
-      anime.watched_episodes = Math.max(anime.watched_episodes - 10, 0);
+      anime.watchedEpisodes = Math.max(anime.watchedEpisodes - 10, 0);
     } else {
-      anime.watched_episodes = Math.max(anime.watched_episodes - 1, 0);
+      anime.watchedEpisodes = Math.max(anime.watchedEpisodes - 1, 0);
     }
     this.updateLocalStorage();
   }
@@ -101,7 +94,8 @@ export class Mylist implements OnInit {
       yesText: 'Sí, quiero eliminarlo',
       noText: 'No, cambié de opinión',
       callback: () => {
-        this.animes_selected = this.animes_selected.filter(an => an.id !== anime.id);
+        this.animes = this.animes.filter(an => an.id !== anime.id);
+        this.animeService.removeFromList(anime.id); 
         this.updateLocalStorage();
         this.alertService.triggerAlert('success', 'Hecho!', 'Elemento eliminado con éxito.');
       }
@@ -113,30 +107,9 @@ export class Mylist implements OnInit {
     return name.length <= maxLength ? name : `${name.substr(0, maxLength - 3)}...`;
   }
   
-  // Objetener cantidad de episodios para ajustar estilos css
-  // getEpisodeCountClass(anime: any): string {
-  //   if (anime.total_episodes == null) {
-  //     return 'noDigits';
-  //   }
-  
-  //   const totalEpisodesLength = anime.total_episodes.toString().length;
-  
-  //   if (totalEpisodesLength === 1) {
-  //     return 'oneDigit';
-  //   } else if (totalEpisodesLength === 2) {
-  //     return 'twoDigits';
-  //   } else if (totalEpisodesLength === 3) {
-  //     return 'threeDigits';
-  //   } else if (totalEpisodesLength >= 4) {
-  //     return 'fourDigits';
-  //   }
-  
-  //   return '';
-  // }
-  
   // Ordenar la lista de animes por nombre y estado
   private sortAnimeList() {
-    this.animes_selected.sort((a, b) => {
+    this.animes.sort((a, b) => {
       if (!a.markedAsViewed && b.markedAsViewed) {
         return -1;
       }
@@ -153,8 +126,8 @@ export class Mylist implements OnInit {
   
   // Actualizar el almacenamiento local con la lista de animes
   private updateLocalStorage() {
-    localStorage.setItem('my_anime', JSON.stringify(this.animes_selected));
-    this.isListEmpty = this.animes_selected.length === 0;
+    localStorage.setItem('myAnimes', JSON.stringify(this.animes));
+    this.isListEmpty = this.animes.length === 0;
     // Revisar esto después, quizás sea mejor no reordenar de forma dinámica.
     // this.sortAnimeList();
   }

@@ -6,25 +6,26 @@ import { Subscription } from "rxjs";
 import { ActivatedRoute, Router } from '@angular/router';
 import { SearchService } from 'src/app/services/search.service';
 import { debounceTime, switchMap } from 'rxjs/operators';
+import { Location } from '@angular/common';
 
 @Component({
   selector: "app-searchresults",
   templateUrl: "./searchresults.html",
   styleUrls: ["./searchresults.css"],
 })
+
 export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('resultsContainer') resultsContainer!: ElementRef;
-  
-  anime_results: Anime[] = [];
+
+  // Variables
+  animeResults: Anime[] = [];
   isLoading: boolean = false;
   noResultsFound: boolean = false;
-  resultsVisible: boolean = false;
   searchForm: FormGroup;
   searchTerm: string = '';
   
   private searchTermSubscription!: Subscription;
   private animeSubscription!: Subscription;
-  private currentScrollY = 0;
   
   // Inyección de dependencias
   constructor(
@@ -33,6 +34,7 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
     private searchService: SearchService,
     private router: Router,
     private route: ActivatedRoute,
+    private location: Location,
   ) {
     this.searchForm = this.formBuilder.group({
       searchTerm: ["", Validators.required],
@@ -41,35 +43,25 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
   
   // Inicialización del componente
   ngOnInit(): void {
-    // Suscripción a los parámetros de consulta de la ruta
     this.searchTermSubscription = this.route.queryParams.pipe(
       switchMap(params => {
-        // Mostrar cursor de progreso y deshabilitar el desplazamiento
-        document.body.style.cursor = "progress";
-        document.documentElement.style.overflowY = 'hidden';
-        this.currentScrollY = window.scrollY;
-        
-        // Mantener la posición de scroll fija durante la carga
-        window.onscroll = () => window.scrollTo(0, this.currentScrollY);
+        this.setCursor(true);
         
         const term = params['term'];
         this.isLoading = true;
         
-        // Si existe un término de búsqueda en los parámetros de la URL
         if (term) {
           this.searchTerm = term;
-          return this.animeService.getAnimes(term); // Realizar la búsqueda basada en el término
+          return this.animeService.getAnimes(term);
         } else {
-          // Si no existe un término en la URL, escuchar los cambios en searchTerm$
           return this.searchService.searchTerm$.pipe(
-            debounceTime(300), // Retrasar la búsqueda para evitar múltiples solicitudes rápidas
+            debounceTime(300),
             switchMap(searchTerm => {
-              // Validar si el término de búsqueda no está vacío
               if (searchTerm.trim()) {
                 this.searchTerm = searchTerm;
-                return this.animeService.getAnimes(searchTerm); // Realizar la búsqueda
+                return this.animeService.getAnimes(searchTerm);
               } else {
-                return this.animeService.getAnimes(''); // Manejar la búsqueda con un término vacío
+                return this.animeService.getAnimes('');
               }
             })
           );
@@ -77,69 +69,41 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
       })
     ).subscribe(
       result => {
-        // Manejar la respuesta exitosa de la búsqueda
-        this.anime_results = result.data;
-        this.resultsVisible = true;
-        this.noResultsFound = this.anime_results.length === 0;
-        this.isLoading = false;
-        document.body.style.cursor = "default";
-        
-        // Comprobar si el contenedor de resultados existe antes de desplazar el scroll
-        if (this.resultsContainer && this.resultsContainer.nativeElement) {
-          this.resultsContainer.nativeElement.scrollTo(0, 0);
-          this.updateProgressBar();
+        if (result && result.data) {
+          this.animeResults = result.data;
+        } else {
+          this.animeResults = [];
         }
+        this.noResultsFound = this.animeResults.length === 0;
+        this.isLoading = false;
+        this.setCursor(false)
       },
       error => {
-        // Manejar errores en la solicitud de búsqueda
-        this.isLoading = false;
-        document.body.style.cursor = "default";
-        
-        // Manejo específico de errores HTTP
-        if (error.status) {
-          switch (error.status) {
-            case 400:
-            alert("(Error 400) La solicitud es inválida. Por favor, verifique correctamente los términos de búsqueda e inténtelo nuevamente.");
-            this.router.navigate(['/']);
-            break;
-            
-            case 408:
-            alert("(Error 408) La solicitud tardó demasiado tiempo en completarse, seguramente debido a un error de red o conexión con el servidor. Por favor, vuelva a intentarlo más tarde.");
-            this.router.navigate(['/']);
-            break;
-            
-            case 429:
-            alert("(Error 429) Demasiadas peticiones. Por favor, espere un momento antes de volver a realizar una búsqueda y evite realizar búsquedas demasiado rápido.");
-            this.router.navigate(['/']);
-            break;
-            
-            case 500:
-            alert("(Error 500) Ha ocurrido un problema con el servidor. Por favor, vuelva a intentarlo más tarde.");
-            this.router.navigate(['/']);
-            break;
-            
-            case 502:
-            alert("(Error 502) Ha ocurrido un problema con la comunicación entre servidores. Por favor, vuelva a intentarlo más tarde.");
-            this.router.navigate(['/']);
-            break;
-            
-            case 503:
-            alert("(Error 503) El servicio no está disponible en este momento. Por favor, vuelva a intentarlo más tarde.");
-            this.router.navigate(['/']);
-            break;
-            
-            default:
-            alert(`Ha ocurrido un error inesperado (Error ${error.status}): ${error.message}.`);
-            this.router.navigate(['/']);
-            break;
-          }
-        } else {
-          // Manejo de errores inesperados sin código de estado HTTP
-          alert('Ha ocurrido un error inesperado. Por favor, vuelva a intentarlo más tarde.');
-          this.router.navigate(['/']);
-        }
+        this.handleError(error);
       }
     );
+  }
+  
+  // Manejar errores en la solicitud de búsqueda
+  private handleError(error: any): void {
+    this.isLoading = false;
+    this.setCursor(false)
+    
+    if (error.status) {
+      const errorMessages: { [key: number]: string } = {
+        400: "(Error 400) La solicitud es inválida. Por favor, verifique correctamente los términos de búsqueda e inténtelo nuevamente.",
+        408: "(Error 408) La solicitud tardó demasiado tiempo en completarse. Por favor, vuelva a intentarlo más tarde.",
+        429: "(Error 429) Demasiadas peticiones. Por favor, espere un momento antes de volver a realizar una búsqueda.",
+        500: "(Error 500) Ha ocurrido un problema con el servidor. Por favor, vuelva a intentarlo más tarde.",
+        502: "(Error 502) Ha ocurrido un problema con la comunicación entre servidores.",
+        503: "(Error 503) El servicio no está disponible en este momento."
+      };
+      
+      alert(errorMessages[error.status] || `Ha ocurrido un error inesperado (Error ${error.status}): ${error.message}.`);
+    } else {
+      alert('Ha ocurrido un error inesperado. Por favor, vuelva a intentarlo más tarde.');
+    }
+    this.router.navigate(['/']);
   }
   
   // Configuración después de que la vista ha sido inicializada
@@ -152,16 +116,19 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
     this.cleanup();
   }
   
-  // Navegar a la página de inicio
-  goHome(): void {
-    this.router.navigate(['/']);
-    this.restoreScrollAndOverflow();
-    document.body.style.cursor = "default";
+  // Navegar a la página anterior
+  goBack(): void {
+    if (window.history.length > 1) {
+      this.location.back();
+    } else {
+      this.router.navigate(['/']);
+    }
+    this.setCursor(false)
     this.searchService.updateSearchTerm(""); 
   }
   
   // Agregar un anime a mi lista
-  addAnime(anime: Anime): void {
+  addAnimeToList(anime: Anime) {
     const addAnime: MyAnime = {
       id: anime.mal_id,
       title: anime.title,
@@ -169,17 +136,13 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
       url: anime.url,
       status: anime.status,
       image: anime.images["jpg"].large_image_url,
-      total_episodes: anime.episodes,
-      watched_episodes: 0,
+      totalEpisodes: anime.episodes,
+      watchedEpisodes: 0,
       markedAsViewed: false,
       isModalOpen: false,
     };
-    this.animeService.animeSelected(addAnime);
-  }
-  
-  // Ver anime en My Anime List (MAL)
-  viewOnMal(url: string): void {
-    window.open(url, '_blank');
+    
+    this.animeService.addToList(addAnime);
   }
   
   // Actualizar la barra de desplazamiento horizontal
@@ -199,19 +162,16 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
     this.updateProgressBar();
   }
   
-  // Restaurar el comportamiento de desplazamiento
-  private restoreScrollAndOverflow(): void {
-    document.documentElement.style.overflowY = 'visible';
-    document.body.style.cursor = "default"; 
-    window.onscroll = null;
-  }
-  
   // Limpiar suscripciones y restaurar el comportamiento de desplazamiento
   private cleanup(): void {
-    document.documentElement.style.overflowY = 'visible';
-    window.onscroll = null;
     if (this.searchTermSubscription) this.searchTermSubscription.unsubscribe();
-    if (this.animeSubscription) this.animeSubscription.unsubscribe();
-    document.body.style.cursor = "default"; 
+    else if (this.animeSubscription) this.animeSubscription.unsubscribe();
+    this.setCursor(false)
+  }
+  
+  // Alternar el estado del cursor dependiendo del estado de carga
+  setCursor(isLoading: boolean): void {
+    this.isLoading = isLoading;
+    document.body.style.cursor = isLoading ? "progress" : "default";
   }
 }

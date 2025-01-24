@@ -22,4 +22,5 @@
 • Al importar datos, la página debería actualizar el almacenamiento local sin necesidad de recargar la página, del mismo modo o similar a como se hace al agregar un elemento a mi lista.
 • El contador de episodios necesita estilos que se adapten al espacio y que a su vez, no se estire dependiendo de la cantidad de episodios que tiene un anime.
 • Si se está en la página de resultados y se realiza una búsqueda, los resultados deberían limpiarse u ocultarse para que el gif de carga se vea bien.
-• Si se retrocede a la página anterior mediante el menú de navegación o botones del mouse, el término de búsqueda no se limpia del buscador.
+• Si se retrocede a la página anterior mediante el menú de navegación o botones del mouse, el término de búsqueda no se limpia del buscador
+• Es posible realizar una búsqueda vacía mediante la url

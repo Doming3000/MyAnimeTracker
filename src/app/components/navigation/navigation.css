@@ -76,12 +76,17 @@ form input {
     background: none;
     border: none;
     border-radius: 40px;
-    color: #888;
+    color: #555;
     font-size: 14px;
     outline: none;
     padding: 5px;
     width: 100%;
-    /* margin: 0 20px 0 20px; */
+}
+
+/* Estilos para el autocompletado */
+form input:-webkit-autofill {
+    -webkit-text-fill-color: #555;
+    transition: background-color 5000s ease-in-out 0s;
 }
 
 /* Google Chrome, Safari, Edge */

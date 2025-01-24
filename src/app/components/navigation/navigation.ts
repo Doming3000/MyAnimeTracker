@@ -86,7 +86,7 @@ export class Navigation {
   
   // Exportar datos a un archivo json
   exportData() {
-    const storedData = localStorage.getItem('my_anime');
+    const storedData = localStorage.getItem('myAnimes');
     if (!storedData || storedData === '[]') {
       return this.alertService.triggerAlert('error', 'Error!', 'No hay nada que descargar.');
     }
@@ -136,7 +136,7 @@ export class Navigation {
   private processImportedData(content: string, inputElement: HTMLInputElement) {
     try {
       const data = JSON.parse(content);
-      const storedData = localStorage.getItem('my_anime');
+      const storedData = localStorage.getItem('myAnimes');
       
       if (!storedData || storedData === '[]') {
         // Si no hay datos existentes, importar directamente
@@ -163,14 +163,14 @@ export class Navigation {
   
   // Guardar los datos importados
   private saveImportedData(data: any[], inputElement: HTMLInputElement) {
-    localStorage.setItem('my_anime', JSON.stringify(data));
+    localStorage.setItem('myAnimes', JSON.stringify(data));
     this.alertService.triggerAlert('success', 'Hecho!', 'Datos importados con éxito.');
     this.resetFileInput(inputElement);
   }
   
   // Eliminar todos los datos
   nukeData() {
-    const storedData = localStorage.getItem('my_anime');
+    const storedData = localStorage.getItem('myAnimes');
     if (!storedData || storedData === '[]') {
       this.alertService.triggerAlert('error', 'Error!', 'No hay nada que eliminar.');
       return;
