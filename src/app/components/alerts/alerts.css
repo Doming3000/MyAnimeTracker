@@ -217,3 +217,53 @@
     text-align: center;  
     width: 500px;
 }
+
+hr {
+    margin: 10px 0 10px 0;
+}
+
+.buttonContainer {
+    display: flex;
+    gap: 5px;
+}
+
+.buttonContainer button {
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    font-size: 14px;
+    height: 30px;
+    outline: none;
+    position: relative;
+    transition: all linear 200ms;
+    white-space: nowrap;
+}
+
+.buttonContainer button:hover {
+    filter: brightness(0.9);
+}
+
+.buttonIcon, .buttonText {
+    align-items: center;
+    color: white;
+    display: inline-flex;
+    height: 100%;
+    padding: 10px;
+}
+
+.buttonIcon {
+    background-color: rgba(0, 0, 0, 0.08);
+    border-radius: 5px;
+    font-size: 1rem;
+    justify-content: center;
+    width: 40px;
+}
+
+.confirmActionButton {
+    background-color: #e84e4e;
+}
+
+.cancelActionButton {
+    background-color: lightskyblue;
+}

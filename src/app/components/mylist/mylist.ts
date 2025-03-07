@@ -19,8 +19,8 @@ export class Mylist implements OnInit {
   // Variables
   animes: MyAnime[] = [];
   isModalOpen = false;
-  isListEmpty = true;
   selectedAnime: MyAnime | null = null;
+  categorizedAnime: { title: string; list: MyAnime[] }[] = [];
   
   // Inyección de dependencias
   constructor(private animeService: AnimeService, private alertService: AlertService) { }
@@ -32,7 +32,7 @@ export class Mylist implements OnInit {
     // Suscribirse a los cambios en el servicio
     this.animeService.getList$().subscribe((list) => {
       this.animes = list;
-      this.isListEmpty = this.animes.length === 0;
+      this.sortAnimeList();
     });
   }
   
@@ -42,37 +42,21 @@ export class Mylist implements OnInit {
     if (storedData) {
       this.animes = JSON.parse(storedData) || [];
       this.animes.forEach(anime => anime.isModalOpen = false); 
-      this.isListEmpty = this.animes.length === 0;
       this.sortAnimeList();
     }
   }
   
-  // Aumentar el número de episodios vistos
-  increaseWatch(anime: MyAnime, event: MouseEvent) {
-    const increment = event.ctrlKey ? 10 : 1;
-    
-    if (anime.watchedEpisodes + increment <= (anime.totalEpisodes || Infinity)) {
-      anime.watchedEpisodes += increment;
-    } else {
-      anime.watchedEpisodes = anime.totalEpisodes || anime.watchedEpisodes;
-    }
-    this.updateLocalStorage();
-  }
-  
-  // Disminuir el número de episodios vistos
-  decreaseWatch(anime: MyAnime, event: MouseEvent) {
-    if (event.ctrlKey) {
-      anime.watchedEpisodes = Math.max(anime.watchedEpisodes - 10, 0);
-    } else {
-      anime.watchedEpisodes = Math.max(anime.watchedEpisodes - 1, 0);
-    }
-    this.updateLocalStorage();
+  // Aumentar o disminuir el número de episodios vistos
+  updateWatchCount(anime: MyAnime, change: number, event?: MouseEvent) {
+    const step = event?.ctrlKey ? 10 : 1;
+    anime.watchedEpisodes = Math.max(0, Math.min((anime.totalEpisodes || Infinity), anime.watchedEpisodes + change * step));
+    this.animeService.updateAnimeList(this.animes);
   }
   
   // Marcar anime como visto o no visto
   ViewAnime(anime: MyAnime) {
     anime.markedAsViewed = !anime.markedAsViewed;
-    this.updateLocalStorage();
+    this.animeService.updateAnimeList(this.animes);
   }
   
   // Abrir modal y overlay
@@ -86,6 +70,10 @@ export class Mylist implements OnInit {
     this.isModalOpen = false;
   }
   
+  openSettings() {
+    this.alertService.triggerAlert('error', 'Proximamente!', 'lorem Ipsum dolor sit amet');
+  }
+  
   // Eliminar un anime de la lista
   DelAnime(anime: MyAnime) {
     this.alertService.triggerConfirm({
@@ -94,10 +82,11 @@ export class Mylist implements OnInit {
       yesText: 'Sí, quiero eliminarlo',
       noText: 'No, cambié de opinión',
       callback: () => {
-        this.animes = this.animes.filter(an => an.id !== anime.id);
-        this.animeService.removeFromList(anime.id); 
-        this.updateLocalStorage();
         this.alertService.triggerAlert('success', 'Hecho!', 'Elemento eliminado con éxito.');
+        this.animes = this.animes.filter(an => an.id !== anime.id);
+        this.animeService.updateAnimeList(this.animes);
+        this.animeService.removeFromList(anime.id); 
+        this.sortAnimeList();
       }
     });
   }
@@ -107,8 +96,9 @@ export class Mylist implements OnInit {
     return name.length <= maxLength ? name : `${name.substr(0, maxLength - 3)}...`;
   }
   
-  // Ordenar la lista de animes por nombre y estado
+  // Ordenar la lista de animes
   private sortAnimeList() {
+    // Ordenar alfabéticamente y por estado
     this.animes.sort((a, b) => {
       if (!a.markedAsViewed && b.markedAsViewed) {
         return -1;
@@ -122,13 +112,12 @@ export class Mylist implements OnInit {
         return a.title.localeCompare(b.title);
       }
     });
-  }
-  
-  // Actualizar el almacenamiento local con la lista de animes
-  private updateLocalStorage() {
-    localStorage.setItem('myAnimes', JSON.stringify(this.animes));
-    this.isListEmpty = this.animes.length === 0;
-    // Revisar esto después, quizás sea mejor no reordenar de forma dinámica.
-    // this.sortAnimeList();
+    
+    // Agregar categorías a la lista de animes
+    this.categorizedAnime = [
+      { title: 'Viendo', list: this.animes.filter(anime => anime.watchedEpisodes > 1 && !anime.markedAsViewed) },
+      { title: 'En espera', list: this.animes.filter(anime => anime.watchedEpisodes === 0 && !anime.markedAsViewed) },
+      { title: 'Terminado', list: this.animes.filter(anime => anime.markedAsViewed) }
+    ];
   }
 }

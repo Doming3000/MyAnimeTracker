@@ -1,6 +1,7 @@
 import { Component, HostListener , ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { SearchService } from 'src/app/services/search.service';
+import { AnimeService } from 'src/app/services/anime.service';
 import { AlertService } from 'src/app/services/alerts.service';
 
 @Component({
@@ -18,13 +19,14 @@ export class Navigation {
   searchTerm: string = '';
   
   // Inyección de dependencias
-  constructor(private router: Router, private searchService: SearchService, private alertService: AlertService) {}
+  constructor(private router: Router, private searchService: SearchService, private animeService: AnimeService, private alertService: AlertService) {}
   
   // Navegar a la página principal
   goHome() {
     this.router.navigate(['/']);
     this.searchService.updateSearchTerm("");
     document.documentElement.style.overflowY = 'visible';
+    this.isOpen = false;
   }
   
   // Navegar a mi lista
@@ -141,20 +143,20 @@ export class Navigation {
       if (!storedData || storedData === '[]') {
         // Si no hay datos existentes, importar directamente
         this.saveImportedData(data, inputElement);
-      } else {
-        // Cerrar menú de navegación para evitar overlays duplicados
-        this.isOpen = false;
-        
-        // Mostrar modal de confirmación antes de sobrescribir
-        this.alertService.triggerConfirm({
-          title: 'Confirmar Importación',
-          message: '¿Estás seguro de que deseas importar estos datos?<br>La información actual se perderá si no está respaldada.',
-          yesText: 'Sí, quiero importar',
-          noText: 'No, cambié de opinión',
-          callback: () => this.saveImportedData(data, inputElement),
-          cancelCallback: () => this.resetFileInput(inputElement),
-        });
+        return;
       }
+      // Cerrar menú de navegación para evitar overlays duplicados
+      this.isOpen = false;
+      
+      // Mostrar modal de confirmación antes de sobrescribir
+      this.alertService.triggerConfirm({
+        title: 'Confirmar Importación',
+        message: '¿Estás seguro de que deseas importar estos datos?<br>La información actual se perderá si no está respaldada.',
+        yesText: 'Sí, quiero importar',
+        noText: 'No, cambié de opinión',
+        callback: () => this.saveImportedData(data, inputElement),
+        cancelCallback: () => this.resetFileInput(inputElement),
+      });
     } catch (error) {
       this.alertService.triggerAlert('error', 'Error!', `Ha ocurrido un error y no es posible importar el archivo.`);
       this.resetFileInput(inputElement);
@@ -165,7 +167,9 @@ export class Navigation {
   private saveImportedData(data: any[], inputElement: HTMLInputElement) {
     localStorage.setItem('myAnimes', JSON.stringify(data));
     this.alertService.triggerAlert('success', 'Hecho!', 'Datos importados con éxito.');
+    this.animeService.updateAnimeList(data);
     this.resetFileInput(inputElement);
+    this.isOpen = false;
   }
   
   // Eliminar todos los datos
@@ -186,8 +190,8 @@ export class Navigation {
       yesText: 'Sí, eliminar datos',
       noText: 'No, cambié de opinión',
       callback: () => {
-        localStorage.clear();
         this.alertService.triggerAlert('success', 'Hecho!', 'Datos eliminados con éxito.');
+        this.animeService.updateAnimeList([]);
       }
     });
   }
@@ -195,6 +199,11 @@ export class Navigation {
   // Resetear el valor del input de archivo
   resetFileInput(inputElement: HTMLInputElement) {
     inputElement.value = '';
+  }
+  
+  // Navegar a about (pendiente)
+  goAbout() {
+    this.alertService.triggerAlert('error', 'Proximamente!', 'lorem Ipsum dolor sit amet');
   }
   
   // Escuchar eventos de teclado mediante HostListener

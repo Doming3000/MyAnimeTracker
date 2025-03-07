@@ -22,6 +22,12 @@
         
         <h3>Navegar</h3>
         <ul class="liContainer">
+            <!-- Opción para ir a inicio desde el menú lateral-->
+            <li class="menuItem" (click)="goHome()">
+                <span class="menuIcon"><i class="fa-solid fa-house"></i></span>
+                <span class="menuText">Ir a inicio</span>
+            </li>
+
             <!-- Opción para ir a mi lista desde el menú lateral -->
             <li class="menuItem" (click)="goMyList()">
                 <span class="menuIcon"><i class="fa-solid fa-book-bookmark"></i></span>
@@ -54,7 +60,7 @@
         <h3>Sitio</h3>
         <ul class="liContainer">    
             <!-- About -->
-            <li class="menuItem">
+            <li class="menuItem" (click)="goAbout()">
                 <span class="menuIcon"><i class="fa-solid fa-book"></i></span>
                 <span class="menuText">Sobre el sitio</span>
             </li>

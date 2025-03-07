@@ -10,7 +10,7 @@
 
 .listHeader {
     display: flex;
-    margin: 20px 0 10px 0;
+    margin: 30px 0 10px 0;
 }
 
 .listHeader h2 {
@@ -20,8 +20,51 @@
     user-select: none;
 }
 
+.settings {
+    margin: 0 20px 0 auto;
+    font-size: 15px;
+}
+
 hr {
-    margin: 0 20px 0 20px;
+    margin: 0 20px 10px 20px;
+}
+
+.menu {
+    display: none;
+    margin-left: 30px;
+    margin-top: 15px;
+}
+
+.modeButton {
+    background-color: white;
+    color: #555;
+    border: none;
+    width: 2rem;
+    height: 2rem;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.modeButton:hover {
+    background-color: red !important;
+}
+
+.modeButton svg {
+    width: 20px;
+    height: 20px;
+}
+
+.listTitle {
+    color: #888;
+    font-size: 20px;
+    height: 30px;
+    margin-left: 30px;
+    user-select: none;
+}
+
+.listTitle span {
+    font-size: 15px;
 }
 
 .detailsModal {
@@ -66,7 +109,11 @@ hr {
     display: grid;
     grid-gap: 1.5rem;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    margin: 20px 30px 20px 30px;
+    margin: 0 30px 20px 30px;
+}
+
+.mylist:empty {
+    margin-bottom: 0;
 }
 
 .anime {
@@ -107,7 +154,7 @@ hr {
     display: block;
     max-height: 100%;
     max-width: 100%;
-    object-fit: contain;
+    object-fit: cover;
     object-position: center;
     user-select: none;
 }
@@ -118,7 +165,6 @@ hr {
     height: 30px;
     margin: 10px 0 20px 0;
     text-align: center;
-    transition: all linear 200ms;
 }
 
 .episodeCount {
@@ -136,38 +182,6 @@ hr {
     background-color: white; /* Quitar después de solucionar problemas con el contador */
 }
 
-/* Botones, reordenar más tarde */
-/* .increaseButton {
-margin-right: auto;
-}
-
-.decreaseButton {
-margin-left: auto;
-}
-
-/* .episodeTipContainer {
-display: flex;
-align-items: center;
-justify-content: center;
-width: 80px;
-} */
-
-/* .episodeCountText, .ViewCheckText {
-font-size: 15px;
-
-user-select: none;
-pointer-events: none;
-text-align: center;
-width: 100%;
-} */
-
-/* .increaseButton, .decreaseButton {
-background: none;
-border: none;
-color: #555;
-cursor: pointer;
-font-size: 18px;
-} */
 /* ----- Botones ----- */
 .ViewCheckText {
     margin-right: auto; 
@@ -218,23 +232,6 @@ font-size: 18px;
 .delButton {
     background-color: #e26161;
 }
-
-/* Enecoger tamaño del contenedor según cantidad de episodios */
-/* .episodeCount.noDigits {
-width: 40%;
-}
-
-.episodeCount.oneDigit {
-width: 40%;
-}
-
-.episodeCount.twoDigits {
-width: 45%;
-}
-
-.episodeCount.threeDigits {
-width: 50%;
-} */
 
 /* ----- Tooltips ----- */
 

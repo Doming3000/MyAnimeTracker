@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Subscription } from "rxjs";
 import { ActivatedRoute, Router } from '@angular/router';
 import { SearchService } from 'src/app/services/search.service';
-import { debounceTime, switchMap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { Location } from '@angular/common';
 
 @Component({
@@ -16,7 +16,7 @@ import { Location } from '@angular/common';
 
 export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('resultsContainer') resultsContainer!: ElementRef;
-
+  
   // Variables
   animeResults: Anime[] = [];
   isLoading: boolean = false;
@@ -46,42 +46,30 @@ export class SearchResults implements OnInit, AfterViewInit, OnDestroy {
     this.searchTermSubscription = this.route.queryParams.pipe(
       switchMap(params => {
         this.setCursor(true);
-        
-        const term = params['term'];
+        const term = params['term']?.trim();
         this.isLoading = true;
         
-        if (term) {
-          this.searchTerm = term;
-          return this.animeService.getAnimes(term);
-        } else {
-          return this.searchService.searchTerm$.pipe(
-            debounceTime(300),
-            switchMap(searchTerm => {
-              if (searchTerm.trim()) {
-                this.searchTerm = searchTerm;
-                return this.animeService.getAnimes(searchTerm);
-              } else {
-                return this.animeService.getAnimes('');
-              }
-            })
-          );
+        if (!term) { 
+          this.isLoading = false;
+          this.setCursor(false);
+          this.router.navigate(['/']);
+          return [];
         }
+        
+        this.searchTerm = term;
+        return this.animeService.getAnimes(term);
       })
-    ).subscribe(
-      result => {
-        if (result && result.data) {
-          this.animeResults = result.data;
-        } else {
-          this.animeResults = [];
-        }
+    ).subscribe({
+      next: result => {
+        this.animeResults = result.data || [];
         this.noResultsFound = this.animeResults.length === 0;
         this.isLoading = false;
-        this.setCursor(false)
+        this.setCursor(false);
       },
-      error => {
+      error: error => {
         this.handleError(error);
       }
-    );
+    });
   }
   
   // Manejar errores en la solicitud de búsqueda

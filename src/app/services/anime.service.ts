@@ -51,6 +51,12 @@ export class AnimeService {
     }
   }
   
+  updateAnimeList(newList: MyAnime[]): void {
+    this.myAnimes = newList;
+    this.myAnimes$.next(this.myAnimes);
+    localStorage.setItem('myAnimes', JSON.stringify(this.myAnimes));
+  }
+  
   removeFromList(animeId: number): void {
     this.myAnimes = this.myAnimes.filter((anime) => anime.id !== animeId);
     this.myAnimes$.next(this.myAnimes);

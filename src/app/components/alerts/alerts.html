@@ -24,7 +24,17 @@
         <i class="fa-regular fa-trash-can"></i>
         <h2>{{ confirmTitle }}</h2>
         <p [innerHTML]="confirmMessage"></p>
-        <button class="danger" (click)="confirmAction()">{{ confirmYesText }}</button>
-        <button class="success" (click)="cancelAction()">{{ confirmNoText }}</button>
+        <hr>
+        <div class="buttonContainer">
+            <button class="confirmActionButton" (click)="confirmAction()">
+                <span class="buttonIcon"><i class="fa-solid fa-trash-can"></i></span>
+                <span class="buttonText">{{ confirmYesText }}</span>
+            </button>
+            
+            <button class="cancelActionButton" (click)="cancelAction()">
+                <span class="buttonIcon"><i class="fa-solid fa-arrow-left"></i></span>
+                <span class="buttonText">{{ confirmNoText }}</span>
+            </button>
+        </div>
     </div>
 </div>
