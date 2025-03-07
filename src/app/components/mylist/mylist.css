@@ -29,32 +29,6 @@ hr {
     margin: 0 20px 10px 20px;
 }
 
-.menu {
-    display: none;
-    margin-left: 30px;
-    margin-top: 15px;
-}
-
-.modeButton {
-    background-color: white;
-    color: #555;
-    border: none;
-    width: 2rem;
-    height: 2rem;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.modeButton:hover {
-    background-color: red !important;
-}
-
-.modeButton svg {
-    width: 20px;
-    height: 20px;
-}
-
 .listTitle {
     color: #888;
     font-size: 20px;
@@ -179,7 +153,6 @@ hr {
 
 .episodeCountText {
     white-space: nowrap;
-    background-color: white; /* Quitar después de solucionar problemas con el contador */
 }
 
 /* ----- Botones ----- */
@@ -188,7 +161,12 @@ hr {
 }
 
 .increaseButton, .decreaseButton {
+    background: none;
+    border: none;
     cursor: pointer;
+    font-size: 15px;
+    height: 20px;
+    width: 20px;
 }
 
 .increaseButton:disabled, .decreaseButton:disabled {

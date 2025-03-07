@@ -115,7 +115,7 @@ export class Mylist implements OnInit {
     
     // Agregar categorías a la lista de animes
     this.categorizedAnime = [
-      { title: 'Viendo', list: this.animes.filter(anime => anime.watchedEpisodes > 1 && !anime.markedAsViewed) },
+      { title: 'Viendo', list: this.animes.filter(anime => anime.watchedEpisodes >= 1 && !anime.markedAsViewed) },
       { title: 'En espera', list: this.animes.filter(anime => anime.watchedEpisodes === 0 && !anime.markedAsViewed) },
       { title: 'Terminado', list: this.animes.filter(anime => anime.markedAsViewed) }
     ];

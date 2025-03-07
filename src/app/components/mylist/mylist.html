@@ -10,33 +10,6 @@
 <!-- Barra lateral -->
 <hr>
 
-<!-- Menú para alternar la vista -->
-<div class="menu">
-    <button class="listMode modeButton">
-        <span class="buttonIcon">
-            <svg viewBox="0 0 32 32" width="24px" height="24px">
-                <g id="Grid">
-                    <path d="M28,0H2C0.895,0,0,0.895,0,2v10c0,1.104,0.895,2,2,2h26c1.105,0,2-0.896,2-2V2C30,0.895,29.105,0,28,0zM28,12H2V2h26V12z" fill="currentColor"/>
-                    <path d="M28,18H2c-1.105,0-2,0.896-2,2v10c0,1.105,0.895,2,2,2h26c1.105,0,2-0.895,2-2V20C30,18.895,29.105,18,28,18z M28,30H2V20h26V30z" fill="currentColor"/>
-                </g>
-            </svg>
-        </span>
-    </button>
-    
-    <button class="gridMode modeButton">
-        <span class="buttonIcon">
-            <svg viewBox="0 0 32 32" width="24px" height="24px">
-                <g id="Grid">
-                    <path d="M12,0H2C0.895,0,0,0.895,0,2v10c0,1.104,0.895,2,2,2h10c1.105,0,2-0.896,2-2V2C14,0.895,13.105,0,12,0zM12,12H2V2h10V12z" fill="currentColor"/>
-                    <path d="M30,0H20c-1.105,0-2,0.895-2,2v10c0,1.104,0.895,2,2,2h10c1.104,0,2-0.896,2-2V2C32,0.895,31.104,0,30,0zM30,12H20V2h10V12z" fill="currentColor"/>
-                    <path d="M30,18H20c-1.105,0-2,0.896-2,2v10c0,1.105,0.895,2,2,2h10c1.104,0,2-0.895,2-2V20C32,18.895,31.104,18,30,18zM30,30H20V20h10V30z" fill="currentColor"/>
-                    <path d="M12,18H2c-1.105,0-2,0.896-2,2v10c0,1.105,0.895,2,2,2h10c1.105,0,2-0.895,2-2V20C14,18.895,13.105,18,12,18zM12,30H2V20h10V30z" fill="currentColor"/>
-                </g>
-            </svg>
-        </span>
-    </button>
-</div>
-
 <!-- Lista si está vacía -->
 <div *ngIf="animes.length === 0" class="noElements">
     <span>Tal parece que aquí no hay nada.<br>¿Por qué no agregas algo a tu lista?</span>
