@@ -169,7 +169,7 @@ hr {
     width: 20px;
 }
 
-.increaseButton:disabled, .decreaseButton:disabled {
+.increaseButton:disabled, .decreaseButton:disabled, .viewButton:disabled {
     cursor: default;
     opacity: 0.5;
 }

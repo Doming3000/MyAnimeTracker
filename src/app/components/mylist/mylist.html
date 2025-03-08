@@ -21,6 +21,7 @@
         <span (click)="closeDetails()" class="close">&times;</span>
         <h3>{{ selectedAnime.title }}</h3>
         <p>{{ selectedAnime.type }}</p>
+        <p>{{ selectedAnime.status }}</p>
     </div>
 </div>
 
@@ -70,7 +71,7 @@
                     
                     <!-- Botón "Marcar como visto" -->
                     <div class="ViewAnimeTip">
-                        <button (click)="ViewAnime(anime)" class="viewButton"><i class="fa-regular" [ngClass]="{'fa-eye': !anime.markedAsViewed, 'fa-eye-slash': anime.markedAsViewed}"></i></button>
+                        <button (click)="ViewAnime(anime)" class="viewButton" [disabled]="anime.status === 'Not yet aired'"><i class="fa-regular" [ngClass]="{'fa-eye': !anime.markedAsViewed, 'fa-eye-slash': anime.markedAsViewed}"></i></button>
                         <span class="ViewAnimeTipText">{{ anime.markedAsViewed ? 'Marcar como no visto' : 'Marcar como visto' }}</span>
                     </div>
                     
